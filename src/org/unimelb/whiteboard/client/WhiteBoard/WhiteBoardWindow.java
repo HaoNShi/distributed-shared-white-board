@@ -15,7 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WhiteBoardView {
+public class WhiteBoardWindow {
     // Default color display in the left bottom.
     private static final Color[] DEFAULTCOLORS = {Color.BLACK, Color.BLUE, Color.WHITE, Color.GRAY, Color.RED, Color.GREEN,
             Color.ORANGE, Color.YELLOW, Color.PINK, Color.DARK_GRAY, Color.LIGHT_GRAY, Color.CYAN, Color.MAGENTA,
@@ -46,7 +46,7 @@ public class WhiteBoardView {
     /**
      * Create the view with Paint Manager.
      */
-    public WhiteBoardView(Client client, PaintManager paintManager, UserManager userManager, String title) {
+    public WhiteBoardWindow(Client client, PaintManager paintManager, UserManager userManager, String title) {
         this.title = title;
         this.client = client;
         currentColor = Color.BLACK;

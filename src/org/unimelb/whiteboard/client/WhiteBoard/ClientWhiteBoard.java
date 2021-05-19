@@ -17,7 +17,7 @@ public class ClientWhiteBoard extends SharedWhiteBoard {
 
     private void initView() {
         String title = "Client-" + client.getIp() + ":" + client.getRegistryPort();
-        ui = new WhiteBoardView(client, this.paintManager, userManager, title);
+        ui = new WhiteBoardWindow(client, this.paintManager, userManager, title);
     }
 
     public void createChatClient(String hostIp, int chatPort) {

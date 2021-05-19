@@ -11,7 +11,7 @@ import org.unimelb.whiteboard.client.RMI.RemoteUM;
 public abstract class SharedWhiteBoard {
     protected PaintManager paintManager;
     protected UserManager userManager;
-    protected WhiteBoardView ui;
+    protected WhiteBoardWindow ui;
     protected Client client;
     private IRemotePaint remotePaint;
     private IRemoteUM remoteUM;
@@ -31,7 +31,7 @@ public abstract class SharedWhiteBoard {
         this.roomId = roomId;
     }
 
-    public WhiteBoardView getView() {
+    public WhiteBoardWindow getView() {
         return ui;
     }
 

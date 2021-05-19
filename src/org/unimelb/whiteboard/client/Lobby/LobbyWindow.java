@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 
-public class LobbyView {
+public class LobbyWindow {
 
     protected JFrame frame;
     protected JTextField roomNameTextField;
@@ -40,7 +40,7 @@ public class LobbyView {
     /**
      * Create the application.
      */
-    public LobbyView(Client client) {
+    public LobbyWindow(Client client) {
         this.client = client;
         roomsBtnVec = new Vector<JButton>();
         initialize();
@@ -97,7 +97,7 @@ public class LobbyView {
     private void initialize() {
         frame = new JFrame();
         frame.setResizable(false);
-        frame.setTitle("SharedWhiteBoard - Lobby");
+        frame.setTitle("Lobby");
         frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addWindowListener(new LobbyCloseListener(client));
@@ -113,7 +113,7 @@ public class LobbyView {
         scrollPane.setViewportView(roomsListPanel);
         roomsListPanel.setLayout(null);
 
-        // FirstPanel In Roomslist Panel INIT
+        // FirstPanel In RoomList Panel INIT
         firstPanel = new JPanel();
         firstPanel.setBounds(5, 5, 570, 160);
         firstPanel.setLayout(new GridLayout(1, 2, 5, 0));

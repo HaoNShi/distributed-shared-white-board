@@ -1,7 +1,7 @@
 package org.unimelb.whiteboard.client.Menus;
 
 import org.unimelb.whiteboard.client.WhiteBoard.PaintManager;
-import org.unimelb.whiteboard.client.WhiteBoard.WhiteBoardView;
+import org.unimelb.whiteboard.client.WhiteBoard.WhiteBoardWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,12 +13,12 @@ import java.awt.event.KeyEvent;
  * Edit menu in the menu bar.
  */
 public class EditMenu extends JMenu {
-    private final WhiteBoardView wbv;
+    private final WhiteBoardWindow wbv;
     private final PaintManager paintManager;
     private final JMenuItem redoItem;
     private final JMenuItem undoItem;
 
-    public EditMenu(WhiteBoardView wbv) {
+    public EditMenu(WhiteBoardWindow wbv) {
         super("Edit(E)");
         this.wbv = wbv;
         paintManager = wbv.getPaintManager();

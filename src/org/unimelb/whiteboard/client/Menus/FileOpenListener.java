@@ -2,7 +2,7 @@ package org.unimelb.whiteboard.client.Menus;
 
 import org.unimelb.whiteboard.client.Client;
 import org.unimelb.whiteboard.client.Shape.MyShape;
-import org.unimelb.whiteboard.client.WhiteBoard.WhiteBoardView;
+import org.unimelb.whiteboard.client.WhiteBoard.WhiteBoardWindow;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -15,11 +15,11 @@ import java.util.Vector;
 
 public class FileOpenListener implements ActionListener {
     private final JFileChooser chooser;
-    private final WhiteBoardView wbv;
+    private final WhiteBoardWindow wbv;
     private final Client client;
     private String currentPath;
 
-    public FileOpenListener(WhiteBoardView wbv, Client client) {
+    public FileOpenListener(WhiteBoardWindow wbv, Client client) {
         super();
         this.wbv = wbv;
         this.client = client;

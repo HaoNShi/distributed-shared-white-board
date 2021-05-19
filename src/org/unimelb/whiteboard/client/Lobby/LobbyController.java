@@ -17,13 +17,13 @@ import java.util.Map;
 
 public class LobbyController {
     private final Client client;
-    private final LobbyView ui;
+    private final LobbyWindow ui;
 
     private String tempHostId;
     private String tempHostIp;
     private int tempHostRegistorPort;
 
-    public LobbyController(Client client, LobbyView ui) {
+    public LobbyController(Client client, LobbyWindow ui) {
         this.client = client;
         this.ui = ui;
     }

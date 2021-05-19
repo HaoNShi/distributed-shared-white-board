@@ -23,8 +23,8 @@ public class ServerWhiteBoard extends SharedWhiteBoard {
     }
 
     public void initView() {
-        String title = "Server-" + client.getIp() + ":" + client.getRegistryPort();
-        ui = new WhiteBoardView(client, this.paintManager, userManager, title);
+        String title = "White Board-" + client.getIp() + ":" + client.getRegistryPort();
+        ui = new WhiteBoardWindow(client, this.paintManager, userManager, title);
         ui.setChatPanel(chatServer.getPanel());
     }
 

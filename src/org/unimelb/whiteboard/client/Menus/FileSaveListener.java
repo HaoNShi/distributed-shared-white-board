@@ -2,7 +2,7 @@ package org.unimelb.whiteboard.client.Menus;
 
 import org.unimelb.whiteboard.client.Client;
 import org.unimelb.whiteboard.client.Shape.MyShape;
-import org.unimelb.whiteboard.client.WhiteBoard.WhiteBoardView;
+import org.unimelb.whiteboard.client.WhiteBoard.WhiteBoardWindow;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,11 +18,11 @@ import java.io.ObjectOutputStream;
 import java.util.Vector;
 
 public class FileSaveListener implements ActionListener {
-    private final WhiteBoardView wbv;
+    private final WhiteBoardWindow wbv;
     private final Client client;
     private String action = null;
 
-    public FileSaveListener(WhiteBoardView wbv, Client client, String action) {
+    public FileSaveListener(WhiteBoardWindow wbv, Client client, String action) {
         super();
         this.wbv = wbv;
         this.client = client;

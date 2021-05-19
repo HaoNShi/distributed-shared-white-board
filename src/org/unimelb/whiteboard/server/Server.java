@@ -1,8 +1,8 @@
 package org.unimelb.whiteboard.server;
 
-import org.unimelb.whiteboard.server.CentralServer.CentralServerView;
-import org.unimelb.whiteboard.server.CentralServer.RequestHandler;
+import org.unimelb.whiteboard.server.Request.RequestHandler;
 import org.unimelb.whiteboard.server.Room.RoomManager;
+import org.unimelb.whiteboard.server.UI.ServerWindow;
 import org.unimelb.whiteboard.util.RealIp;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class Server {
     private final RoomManager rm;
     private int port;
     private ServerSocket server;
-    private CentralServerView ui;
+    private ServerWindow ui;
     private String ip;
     private Map<String, String> userList;
 
@@ -96,7 +96,7 @@ public class Server {
     public void printOnBoth(String str) {
         System.out.println(str);
         if (ui != null)
-            ui.getlogArea().append(str + '\n');
+            ui.getLogArea().append(str + '\n');
     }
 
     /**
@@ -123,7 +123,7 @@ public class Server {
         userList = new HashMap<String, String>();
 
         printInitialStats();
-        this.ui = new CentralServerView(ip, String.valueOf(port));
+        this.ui = new ServerWindow(ip, String.valueOf(port));
     }
 
     private void printInitialStats() throws UnknownHostException {

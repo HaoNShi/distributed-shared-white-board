@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class LoginView {
+public class LoginWindow {
     protected JTextField userIdTextField;
     protected JTextField addressTextField;
     protected JTextField portTextField;
@@ -25,7 +25,7 @@ public class LoginView {
     /**
      * Create the application.
      */
-    public LoginView(Client client) {
+    public LoginWindow(Client client) {
         this.client = client;
         initialize();
         this.controller = new LoginController(this);
@@ -55,7 +55,7 @@ public class LoginView {
         frame.setTitle("Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JLabel titleJLabel = new JLabel("Distribute Shared White Board");
-        titleJLabel.setBounds(105, 6, 246, 25);
+        titleJLabel.setBounds(70, 20, 300, 25);
         titleJLabel.setFont(new Font("Lucida Grande", Font.BOLD, 20));
 
         JPanel infoPanel = new JPanel();
@@ -67,10 +67,10 @@ public class LoginView {
         tipsLabel.setBounds(108, 173, 234, 16);
         frame.getContentPane().add(tipsLabel);
 
-        JButton btnJoin = new JButton("Join");
-        btnJoin.setBounds(155, 201, 147, 45);
-        // Join logic here.
-        btnJoin.addActionListener(new ActionListener() {
+        JButton btnLogin = new JButton("Login");
+        btnLogin.setBounds(155, 201, 147, 45);
+        // Login logic here.
+        btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (controller.validateFormat()) {
                     tipsLabel.setText("Loading...");
@@ -144,7 +144,7 @@ public class LoginView {
         lblPortWarn.setVisible(false);
         frame.getContentPane().setLayout(null);
         frame.getContentPane().add(titleJLabel);
-        frame.getContentPane().add(btnJoin);
+        frame.getContentPane().add(btnLogin);
         frame.getContentPane().add(infoPanel);
         infoPanel.setLayout(null);
         infoPanel.add(lblServerAddress);

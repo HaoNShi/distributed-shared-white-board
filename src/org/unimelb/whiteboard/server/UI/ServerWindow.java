@@ -1,4 +1,4 @@
-package org.unimelb.whiteboard.server.CentralServer;
+package org.unimelb.whiteboard.server.UI;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
@@ -7,7 +7,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 
-public class CentralServerView {
+public class ServerWindow {
 
     private JFrame frame;
     private JTextArea logArea;
@@ -17,7 +17,7 @@ public class CentralServerView {
     /**
      * Create the application.
      */
-    public CentralServerView(String address, String port) {
+    public ServerWindow(String address, String port) {
         initialize(address, port);
     }
 
@@ -25,7 +25,7 @@ public class CentralServerView {
         return frame;
     }
 
-    public JTextArea getlogArea() {
+    public JTextArea getLogArea() {
         return logArea;
     }
 
@@ -34,7 +34,7 @@ public class CentralServerView {
      */
     private void initialize(String address, String port) {
         frame = new JFrame();
-        frame.setTitle("Trusted third party user ports storage server");
+        frame.setTitle("Server");
         frame.setMinimumSize(new Dimension(450, 300));
         frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

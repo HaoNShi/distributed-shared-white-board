@@ -3,7 +3,7 @@ package org.unimelb.whiteboard.client.Menus;
 import org.unimelb.whiteboard.client.Client;
 import org.unimelb.whiteboard.client.ClientUser.UserManager;
 import org.unimelb.whiteboard.client.WhiteBoard.PaintManager;
-import org.unimelb.whiteboard.client.WhiteBoard.WhiteBoardView;
+import org.unimelb.whiteboard.client.WhiteBoard.WhiteBoardWindow;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +16,7 @@ import java.rmi.RemoteException;
  */
 public class FileMenu extends JMenu {
 
-    public FileMenu(Client client, WhiteBoardView wbv, PaintManager paintManager, UserManager userManager) {
+    public FileMenu(Client client, WhiteBoardWindow wbv, PaintManager paintManager, UserManager userManager) {
         super("File(F)");
 
         JMenuItem newMenuItem = new JMenuItem("New", KeyEvent.VK_N);
@@ -44,7 +44,7 @@ public class FileMenu extends JMenu {
         this.add(saveAsMenuItem);
 
         this.addSeparator();
-        JMenuItem exitMenuItem = new JMenuItem("Exit to org.unimelb.whiteboard.client.Lobby", KeyEvent.VK_E);
+        JMenuItem exitMenuItem = new JMenuItem("Exit to Lobby", KeyEvent.VK_E);
         exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
         exitMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

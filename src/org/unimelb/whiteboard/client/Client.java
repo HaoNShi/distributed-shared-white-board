@@ -1,8 +1,8 @@
 package org.unimelb.whiteboard.client;
 
 import com.alibaba.fastjson.JSONObject;
-import org.unimelb.whiteboard.client.Lobby.LobbyView;
-import org.unimelb.whiteboard.client.Login.LoginView;
+import org.unimelb.whiteboard.client.Lobby.LobbyWindow;
+import org.unimelb.whiteboard.client.Login.LoginWindow;
 import org.unimelb.whiteboard.client.RMI.IRemoteApp;
 import org.unimelb.whiteboard.client.RMI.IRemoteDoor;
 import org.unimelb.whiteboard.client.RMI.RemoteApp;
@@ -31,8 +31,8 @@ public class Client {
     // RoomList
     public Map<Integer, String> roomList = null;
     // Views
-    private LoginView loginView = null;
-    private LobbyView lobbyView = null;
+    private LoginWindow loginWindow = null;
+    private LobbyWindow lobbyWindow = null;
     // User information
     private String ip;
     private String userId = "";
@@ -70,7 +70,7 @@ public class Client {
      * Run the program.
      */
     public void run() {
-        loginView.getFrame().setVisible(true);
+        loginWindow.getFrame().setVisible(true);
         System.out.println("App running");
     }
 
@@ -153,18 +153,18 @@ public class Client {
      */
     public void switch2Lobby() {
         System.out.println("User: " + userId + " enter Lobby.");
-        if (lobbyView == null)
-            lobbyView = new LobbyView(this);
+        if (lobbyWindow == null)
+            lobbyWindow = new LobbyWindow(this);
 
-        lobbyView.setWaitDialogVisible(false);
-        lobbyView.setBeKickedDialogVisible(false);
+        lobbyWindow.setWaitDialogVisible(false);
+        lobbyWindow.setBeKickedDialogVisible(false);
 
-        loginView.getFrame().setVisible(false);
+        loginWindow.getFrame().setVisible(false);
 
         unbindAndSetNull();
 
-        lobbyView.getController().refreshRoomsList();
-        lobbyView.getFrame().setVisible(true);
+        lobbyWindow.getController().refreshRoomsList();
+        lobbyWindow.getFrame().setVisible(true);
     }
 
     /**
@@ -193,11 +193,11 @@ public class Client {
      * Switch to whiteBoard.
      */
     public void switch2WhiteBoard() {
-        lobbyView.setWaitDialogVisible(false);
-        lobbyView.setBeKickedDialogVisible(false);
+        lobbyWindow.setWaitDialogVisible(false);
+        lobbyWindow.setBeKickedDialogVisible(false);
 
-        lobbyView.getFrame().setVisible(false);
-        loginView.getFrame().setVisible(false);
+        lobbyWindow.getFrame().setVisible(false);
+        loginWindow.getFrame().setVisible(false);
         sharedWhiteBoard.getView().getFrame().setVisible(true);
     }
 
@@ -205,19 +205,19 @@ public class Client {
      * Switch to Login window.
      */
     public void switch2SignIn(Boolean isCentralServerCrush) {
-        if (lobbyView != null) {
-            lobbyView.getFrame().setVisible(false);
+        if (lobbyWindow != null) {
+            lobbyWindow.getFrame().setVisible(false);
         }
 
         if (sharedWhiteBoard != null) {
             sharedWhiteBoard.getView().getFrame().setVisible(false);
         }
 
-        loginView.getFrame().setVisible(true);
+        loginWindow.getFrame().setVisible(true);
 
         if (isCentralServerCrush) {
-            loginView.setTipsLabel("");
-            JOptionPane.showMessageDialog(loginView.getFrame(),
+            loginWindow.setTipsLabel("");
+            JOptionPane.showMessageDialog(loginWindow.getFrame(),
                     "Can not connect to Central Server. Please reconnect.");
         }
     }
@@ -264,8 +264,8 @@ public class Client {
     /**
      * Get the Lobby view.
      */
-    public LobbyView getLobbyView() {
-        return lobbyView;
+    public LobbyWindow getLobbyView() {
+        return lobbyWindow;
     }
 
     /**
@@ -361,7 +361,7 @@ public class Client {
 
     private void init() throws UnknownHostException {
         initRMI();
-        loginView = new LoginView(this);
+        loginWindow = new LoginWindow(this);
     }
 
     private void initRMI() {

@@ -10,7 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class DrawListener extends MouseAdapter implements ActionListener {
-    private final WhiteBoardView wbv;
+    private final WhiteBoardWindow wbv;
     private MyPoint startP, endP;
     private String toolName = "pen";
     private Color color = null;
@@ -18,7 +18,7 @@ public class DrawListener extends MouseAdapter implements ActionListener {
     private int thickness = 2;
     private MyFreeDraw currentFreeDraw = null;
 
-    DrawListener(WhiteBoardView wbv) {
+    DrawListener(WhiteBoardWindow wbv) {
         currentFreeDraw = null;
         this.wbv = wbv;
         color = wbv.getCurrentColor();
