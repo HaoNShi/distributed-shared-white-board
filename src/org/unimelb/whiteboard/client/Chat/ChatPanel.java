@@ -35,10 +35,9 @@ public class ChatPanel extends JPanel {
         JPanel pnlFoot = new JPanel();
         pnlFoot.setLayout(new BorderLayout(0, 0));
         txtInput = new JTextField("", 10);
-        txtInput.setToolTipText("Please input.");
         pnlFoot.add(txtInput, BorderLayout.CENTER);
         btnSend = new JButton("Send");
-        btnSend.setPreferredSize(new Dimension(60, 0));
+        btnSend.setPreferredSize(new Dimension(70, 0));
         pnlFoot.add(btnSend, BorderLayout.EAST);
         add(pnlFoot, BorderLayout.SOUTH);
     }

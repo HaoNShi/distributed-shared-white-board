@@ -17,9 +17,7 @@ import java.awt.event.ActionListener;
 
 public class WhiteBoardWindow {
     // Default color display in the left bottom.
-    private static final Color[] DEFAULT_COLORS = {Color.BLACK, Color.BLUE, Color.WHITE, Color.GRAY, Color.RED, Color.GREEN,
-            Color.ORANGE, Color.YELLOW, Color.PINK, Color.DARK_GRAY, Color.LIGHT_GRAY, Color.CYAN, Color.MAGENTA,
-            new Color(250, 128, 114), new Color(210, 105, 30), new Color(160, 32, 240)};
+    private static final Color[] DEFAULT_COLORS = {Color.WHITE, Color.BLACK, Color.LIGHT_GRAY, Color.GRAY, Color.PINK, Color.RED, Color.ORANGE, Color.YELLOW, Color.CYAN, Color.MAGENTA, Color.BLUE, Color.GREEN};
     // Use to create tool button.
     private static final String[] TOOL_NAME = {"pen", "line", "circle", "eraser", "rect", "oval", "roundrect", "text"};
     private final JColorChooser colorChooser;
@@ -112,7 +110,7 @@ public class WhiteBoardWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // When close the window, it should remove its information in the system.
         frame.addWindowListener(new WhiteBoardCloseListener(client, paintManager, userManager));
-        frame.setSize(1000, 700);
+        frame.setSize(1000, 760);
         frame.setTitle(title);
         frame.setResizable(true);
 

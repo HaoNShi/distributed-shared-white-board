@@ -1,5 +1,6 @@
 package org.unimelb.whiteboard.client.Login;
 
+import javax.swing.*;
 import java.util.regex.Pattern;
 
 public class LoginController {
@@ -13,53 +14,40 @@ public class LoginController {
     }
 
     public Boolean validateFormat() {
-        Boolean checkId = false;
-        Boolean checkAddress = false;
-        Boolean checkPort = false;
-        String idPatten = "^\\w{1,8}$";
+        String addressPatten = "((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})(\\.((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})){3}";
         String portPatten = "^\\d+$";
-        String addressPatten = "^.{1,20}$";
-        // check userId
-        userId = ui.userIdTextField.getText();
-        if (!Pattern.matches(idPatten, userId)) {
-            ui.lblIdWarn.setVisible(true);
-            checkId = false;
-        } else {
-            ui.lblIdWarn.setVisible(false);
-            checkId = true;
-        }
+        String idPatten = "^\\w{1,8}$";
 
         // check address
         address = ui.addressTextField.getText();
         if (!Pattern.matches(addressPatten, address)) {
-            ui.lblAddressWarn.setVisible(true);
-            checkAddress = false;
-        } else {
-            ui.lblAddressWarn.setVisible(false);
-            checkAddress = true;
+            JOptionPane.showMessageDialog(ui.getFrame(), "Address illegal!", "Warning", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
-
-        //check port
+        // check port
         String portStr = ui.portTextField.getText();
         if (!Pattern.matches(portPatten, portStr)) {
-            ui.lblPortWarn.setVisible(true);
-            checkPort = false;
+            JOptionPane.showMessageDialog(ui.getFrame(), "Port illegal!", "Warning", JOptionPane.ERROR_MESSAGE);
+            return false;
         } else {
             try {
                 port = Integer.parseInt(portStr);
                 if (port <= 1024 || port >= 49151) {
-                    ui.lblPortWarn.setVisible(true);
-                    checkPort = false;
-                } else {
-                    ui.lblPortWarn.setVisible(false);
-                    checkPort = true;
+                    JOptionPane.showMessageDialog(ui.getFrame(), "Port out of bounds!", "Warning", JOptionPane.ERROR_MESSAGE);
+                    return false;
                 }
             } catch (Exception e) {
-                ui.lblPortWarn.setVisible(true);
-                checkPort = false;
+                JOptionPane.showMessageDialog(ui.getFrame(), "Port illegal!", "Warning", JOptionPane.ERROR_MESSAGE);
+                return false;
             }
         }
-        return checkId && checkPort && checkAddress;
+        // check userId
+        userId = ui.userIdTextField.getText();
+        if (!Pattern.matches(idPatten, userId)) {
+            JOptionPane.showMessageDialog(ui.getFrame(), "User ID contains illegal characters!", "Warning", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
 }

@@ -122,7 +122,7 @@ public class LobbyWindow {
         addIcon.setImage(addIcon.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
         btnCreateRoom.setIcon(addIcon);
 
-        // init Blank Panel
+        // Initialize Blank Panel
         blankPanel = new JPanel();
 
         JLabel lblRoomName = new JLabel("Room Name:");

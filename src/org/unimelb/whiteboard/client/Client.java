@@ -215,9 +215,7 @@ public class Client {
         loginWindow.getFrame().setVisible(true);
 
         if (isCentralServerCrush) {
-            loginWindow.setTipsLabel("");
-            JOptionPane.showMessageDialog(loginWindow.getFrame(),
-                    "Can not connect to Central Server. Please reconnect.");
+            JOptionPane.showMessageDialog(loginWindow.getFrame(), "Can not connect to Central Server. Please reconnect.");
         }
     }
 
