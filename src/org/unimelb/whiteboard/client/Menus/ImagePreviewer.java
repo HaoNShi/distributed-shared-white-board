@@ -15,7 +15,7 @@ class ImagePreviewer extends JLabel {
 
         chooser.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
-                if (event.getPropertyName() == JFileChooser.SELECTED_FILE_CHANGED_PROPERTY) {
+                if (event.getPropertyName().equals(JFileChooser.SELECTED_FILE_CHANGED_PROPERTY)) {
                     File f = (File) event.getNewValue();
                     if (f == null) {
                         setIcon(null);

@@ -11,7 +11,7 @@ public class RoomManager {
     private int nextID;
 
     public RoomManager() {
-        rooms = new HashMap<Integer, Room>();
+        rooms = new HashMap<>();
         nextID = 0;
         updateTimes = 0;
     }
@@ -28,7 +28,7 @@ public class RoomManager {
     }
 
     public synchronized Map<Integer, String> getRoomList() {
-        Map<Integer, String> reqRooms = new HashMap<Integer, String>();
+        Map<Integer, String> reqRooms = new HashMap<>();
         for (Map.Entry<Integer, Room> entry : rooms.entrySet()) {
             Room room = entry.getValue();
             reqRooms.put(entry.getKey(), room.getRoomName() + ' ' + room.getHostName());

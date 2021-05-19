@@ -6,10 +6,10 @@ import javax.swing.filechooser.FileView;
 
 class FileImageView extends FileView {
     private final Icon icon;
-    private FileNameExtensionFilter filter;
+    private final FileNameExtensionFilter filter;
 
     public FileImageView(FileNameExtensionFilter filter, Icon anIcon) {
-        filter = filter;
-        icon = anIcon;
+        this.filter = filter;
+        this.icon = anIcon;
     }
 }

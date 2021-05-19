@@ -21,7 +21,7 @@ public class LobbyController {
 
     private String tempHostId;
     private String tempHostIp;
-    private int tempHostRegistorPort;
+    private int tempHostRegisterPort;
 
     public LobbyController(Client client, LobbyWindow ui) {
         this.client = client;
@@ -32,10 +32,10 @@ public class LobbyController {
      * Get rooms list from central server.
      */
     public void refreshRoomsList() {
-        // sent request to central server to gain roomlist.
+        // sent request to central server to gain roomList.
         client.pullRemoteRoomList();
 
-        // repaint the roomlist panel.
+        // repaint the roomList panel.
         ui.roomsBtnVec.clear();
         reFreshRoomsListPanel();
 
@@ -56,7 +56,7 @@ public class LobbyController {
                  */
                 public void actionPerformed(ActionEvent e) {
                     String password = JOptionPane.showInputDialog(ui.frame, "Please Enter Password:",
-                            "Room: " + roomName, JOptionPane.OK_CANCEL_OPTION);
+                            "Room: " + roomName, JOptionPane.INFORMATION_MESSAGE);
                     if (password != null) {
                         // So wired! Should learn more about entrySet().
                         int roomId = Integer.parseInt(entry.getKey() + "");
@@ -69,15 +69,15 @@ public class LobbyController {
                         if (state == StateCode.SUCCESS) {
                             tempHostId = resJSON.getString("hostId");
                             tempHostIp = resJSON.getString("ip");
-                            tempHostRegistorPort = resJSON.getInteger("port");
+                            tempHostRegisterPort = resJSON.getInteger("port");
                             // When create here, the window's position right.
                             ui.createWaitDialog();
-                            System.out.println("Klock the host's door.");
+                            System.out.println("Knock the host's door.");
                             try {
-//								Registry registry = LimitedTimeRegistry.getLimitedTimeRegistry(tempHostIp, tempHostRegistorPort, 1000);
-                                Registry registry = LocateRegistry.getRegistry(tempHostIp, tempHostRegistorPort);
+                                // Registry registry = LimitedTimeRegistry.getLimitedTimeRegistry(tempHostIp, tempHostRegisterPort, 1000);
+                                Registry registry = LocateRegistry.getRegistry(tempHostIp, tempHostRegisterPort);
                                 client.setTempRemoteDoor((IRemoteDoor) registry.lookup("door"));
-                                client.createTempClientWhiteBoard(tempHostId, tempHostIp, tempHostRegistorPort);
+                                client.createTempClientWhiteBoard(tempHostId, tempHostIp, tempHostRegisterPort);
                                 client.getTempRemoteDoor().knock(client.getUserId(), client.getIp(), client.getRegistryPort());
                                 // The follow code would block all code.
                                 ui.setWaitDialogVisible(true);
@@ -117,11 +117,11 @@ public class LobbyController {
     }
 
     public void cancelKnock() {
-        System.out.println("Cancel klock.");
+        System.out.println("Cancel knock.");
         try {
             client.getTempRemoteDoor().cancelKnock(client.getUserId());
             tempHostIp = null;
-            tempHostRegistorPort = -1;
+            tempHostRegisterPort = -1;
             client.unbindAndSetNull();
         } catch (Exception e) {
             e.printStackTrace();

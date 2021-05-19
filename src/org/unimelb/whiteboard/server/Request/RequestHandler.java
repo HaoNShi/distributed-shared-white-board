@@ -61,7 +61,7 @@ public class RequestHandler extends Thread {
                     Map<Integer, String> roomList = controller.getRoomManager().getRoomList();
                     resJSON.put("state", StateCode.SUCCESS);
                     resJSON.put("roomList", roomList);
-                    System.out.println("A client request for roomlist info.");
+                    System.out.println("A client request for room list info.");
                     break;
                 case StateCode.GET_ROOM_INFO:
                     roomId = reqJSON.getInteger("roomId");
@@ -76,27 +76,27 @@ public class RequestHandler extends Thread {
                         controller.printOnBoth("A client asks room " + roomId + " with correct password.");
                     } else {
                         resJSON.put("state", StateCode.FAIL);
-                        controller.printOnBoth("A client asks room " + roomId + " with worng password.");
+                        controller.printOnBoth("A client asks room " + roomId + " with wrong password.");
                     }
                     break;
                 case StateCode.ADD_USER:
                     userId = reqJSON.get("userId").toString();
-                    if (controller.getUserlist().containsKey(userId)) {
+                    if (controller.getUserList().containsKey(userId)) {
                         controller.printOnBoth("A user try to join but " + userId + " exist!");
                         resJSON.put("state", StateCode.FAIL);
                     } else {
-                        controller.getUserlist().put(userId, userId);
+                        controller.getUserList().put(userId, userId);
                         controller.printOnBoth(
-                                "User-" + userId + " join. " + "Current user number: " + controller.getUserlist().size());
+                                "User-" + userId + " join. " + "Current user number: " + controller.getUserList().size());
                         resJSON.put("state", StateCode.SUCCESS);
                     }
                     break;
                 case StateCode.REMOVE_USER:
                     userId = reqJSON.get("userId").toString();
-                    if (controller.getUserlist().containsKey(userId)) {
-                        controller.getUserlist().remove(userId);
+                    if (controller.getUserList().containsKey(userId)) {
+                        controller.getUserList().remove(userId);
                         controller.printOnBoth(
-                                "Delete " + userId + ". " + "Current user number: " + controller.getUserlist().size());
+                                "Delete " + userId + ". " + "Current user number: " + controller.getUserList().size());
                         controller.getRoomManager().removeRoom(userId);
                         controller.printOnBoth("Delete " + userId + "'s room. " + "Current user number: "
                                 + controller.getRoomManager().getRoomNum());

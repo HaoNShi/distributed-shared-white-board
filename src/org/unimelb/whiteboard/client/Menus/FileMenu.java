@@ -8,6 +8,7 @@ import org.unimelb.whiteboard.client.WhiteBoard.WhiteBoardWindow;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.rmi.RemoteException;
 
@@ -20,7 +21,7 @@ public class FileMenu extends JMenu {
         super("File(F)");
 
         JMenuItem newMenuItem = new JMenuItem("New", KeyEvent.VK_N);
-        newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+        newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
         newMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 paintManager.clearAll();
@@ -30,12 +31,12 @@ public class FileMenu extends JMenu {
         this.add(newMenuItem);
 
         JMenuItem openMenuItem = new JMenuItem("Open", KeyEvent.VK_O);
-        openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+        openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
         openMenuItem.addActionListener(new FileOpenListener(wbv, client));
         this.add(openMenuItem);
 
         JMenuItem saveMenuItem = new JMenuItem("Save", KeyEvent.VK_S);
-        saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+        saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
         saveMenuItem.addActionListener(new FileSaveListener(wbv, client, "save"));
         this.add(saveMenuItem);
 
@@ -45,7 +46,7 @@ public class FileMenu extends JMenu {
 
         this.addSeparator();
         JMenuItem exitMenuItem = new JMenuItem("Exit to Lobby", KeyEvent.VK_E);
-        exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
+        exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
         exitMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (paintManager.getMode() == PaintManager.CLIENT_MODE) {

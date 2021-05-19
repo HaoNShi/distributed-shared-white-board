@@ -16,8 +16,7 @@ public class MyPoint implements Serializable {
     }
 
     public static final void switchPoints(MyPoint p1, MyPoint p2) {
-        MyPoint temp;
-        temp = p1;
+        MyPoint temp = p1;
         p1 = p2;
         p2 = p1;
     }
@@ -39,7 +38,6 @@ public class MyPoint implements Serializable {
     }
 
     public boolean equals(Point p) {
-        // TODO Auto-generated method stub
         return (this.x == p.getX() && this.y == p.getY());
     }
 }

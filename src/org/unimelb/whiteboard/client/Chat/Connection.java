@@ -46,7 +46,6 @@ class Connection extends Thread {
             message = new String(cipher.doFinal(Base64.getDecoder().decode(message.getBytes())));
             System.err.println("Decrypted message: " + message);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -60,7 +59,6 @@ class Connection extends Thread {
             client.close();
             interrupt();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -101,7 +99,7 @@ class Connection extends Thread {
             return msg;
         } catch (IOException e) {
             disconnect();
-            //e.printStackTrace();
+            // e.printStackTrace();
         }
         return "";
     }

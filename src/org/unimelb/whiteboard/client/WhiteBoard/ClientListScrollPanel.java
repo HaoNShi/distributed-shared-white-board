@@ -14,7 +14,7 @@ import java.util.Vector;
 
 public class ClientListScrollPanel extends JPanel {
     private final UserManager userManager;
-    private JScrollPane scrollpane;
+    private JScrollPane scrollPane;
     private JList<String> userList;
     private JButton btnAgree;
     private JButton btnKickOut;
@@ -34,7 +34,7 @@ public class ClientListScrollPanel extends JPanel {
      * Update user list UI.
      */
     public void updateUserList() {
-        Vector<String> listData = new Vector<String>();
+        Vector<String> listData = new Vector<>();
         // 1. add host.
         listData.add("[host] " + userManager.getHost().getUserId());
         // 2. add guest.
@@ -56,8 +56,8 @@ public class ClientListScrollPanel extends JPanel {
         // initialize
         setLayout(new BorderLayout());
         JPanel userListPanel = new JPanel();
-        scrollpane = new JScrollPane();
-        scrollpane.setPreferredSize(new Dimension(200, 200));
+        scrollPane = new JScrollPane();
+        scrollPane.setPreferredSize(new Dimension(200, 200));
 
         // visitor
         visitorControlPanel = new JPanel(new GridLayout(1, 2));
@@ -65,7 +65,7 @@ public class ClientListScrollPanel extends JPanel {
         btnAgree.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 userManager.addGuest(selectUserId);
-                removeBtns();
+                removeBtn();
             }
         });
         visitorControlPanel.add(btnAgree);
@@ -74,7 +74,7 @@ public class ClientListScrollPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 userManager.kickVisitor(selectUserId);
-                removeBtns();
+                removeBtn();
             }
         });
         visitorControlPanel.add(btnDisagree);
@@ -85,13 +85,13 @@ public class ClientListScrollPanel extends JPanel {
         btnKickOut.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 userManager.kickGuest(selectUserId);
-                removeBtns();
+                removeBtn();
             }
         });
         guestControlPanel.add(btnKickOut);
 
         // The user list should be create after the control panel.
-        userList = new JList<String>();
+        userList = new JList<>();
         userList.setForeground(Color.black);
         userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         // select client(s)
@@ -106,7 +106,7 @@ public class ClientListScrollPanel extends JPanel {
                             if (userManager.isHost()) {
                                 int identity = userManager.getIdentity(selectUserId);
                                 if (identity == User.HOST) {
-                                    removeBtns();
+                                    removeBtn();
                                 } else if (identity == User.GUEST) {
                                     remove(visitorControlPanel);
                                     add(guestControlPanel, BorderLayout.SOUTH);
@@ -120,23 +120,23 @@ public class ClientListScrollPanel extends JPanel {
                                 }
                             }
                         } else {
-                            removeBtns();
+                            removeBtn();
                         }
                     } else {
-                        removeBtns();
+                        removeBtn();
                     }
                 }
             }
         });
         userListPanel.setLayout(new BorderLayout(0, 0));
 
-        scrollpane.add(userList);
-        scrollpane.setViewportView(userList);
-        userListPanel.add(scrollpane);
+        scrollPane.add(userList);
+        scrollPane.setViewportView(userList);
+        userListPanel.add(scrollPane);
         add(userListPanel, BorderLayout.CENTER);
     }
 
-    private void removeBtns() {
+    private void removeBtn() {
         remove(guestControlPanel);
         remove(visitorControlPanel);
         revalidate();

@@ -109,7 +109,7 @@ public class Server {
     /**
      * Get the user list.
      */
-    public Map<String, String> getUserlist() {
+    public Map<String, String> getUserList() {
         return userList;
     }
 
@@ -120,7 +120,7 @@ public class Server {
         server = new ServerSocket(this.port);
 
         // Use to record the user add into the server.
-        userList = new HashMap<String, String>();
+        userList = new HashMap<>();
 
         printInitialStats();
         this.ui = new ServerWindow(ip, String.valueOf(port));

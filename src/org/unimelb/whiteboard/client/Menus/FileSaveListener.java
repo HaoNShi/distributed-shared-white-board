@@ -39,16 +39,16 @@ public class FileSaveListener implements ActionListener {
     }
 
     private void savePic() throws IOException {
-        System.out.println("Opeartion: Save-" + action);
+        System.out.println("Operation: Save-" + action);
 
-        Dimension imagesize = wbv.getPaintBoardPanel().getSize();
-        BufferedImage image = new BufferedImage(imagesize.width, imagesize.height, BufferedImage.TYPE_INT_RGB);
+        Dimension imageSize = wbv.getPaintBoardPanel().getSize();
+        BufferedImage image = new BufferedImage(imageSize.width, imageSize.height, BufferedImage.TYPE_INT_RGB);
 
         Graphics2D graphics = image.createGraphics();
         wbv.getPaintBoardPanel().paint(graphics);
         graphics.dispose();
 
-        if (action == "saveAs") {
+        if (action.equals("saveAs")) {
             saveAsPic(image);
 
         } else {
@@ -70,16 +70,16 @@ public class FileSaveListener implements ActionListener {
     private void saveAsPic(BufferedImage image) throws IOException {
         JFileChooser jf = new JFileChooser(".");
         jf.setAcceptAllFileFilterUsed(false);
-        jf.addChoosableFileFilter(new FileNameExtensionFilter("org.unimelb.whiteboard.client.WhiteBoard files", "wb"));
+        jf.addChoosableFileFilter(new FileNameExtensionFilter("WhiteBoard files", "wb"));
         jf.addChoosableFileFilter(new FileNameExtensionFilter("JPG files", "jpg"));
         jf.addChoosableFileFilter(new FileNameExtensionFilter("PNG files", "png"));
 
         int value = jf.showSaveDialog(null);
         if (value == JFileChooser.APPROVE_OPTION) {
-            File imagefile = jf.getSelectedFile(); // get the image file
+            File imageFile = jf.getSelectedFile(); // get the image file
             FileNameExtensionFilter fileFilter = (FileNameExtensionFilter) jf.getFileFilter();
             String format = fileFilter.getExtensions()[0];
-            String savePath = imagefile.getPath() + "." + format;
+            String savePath = imageFile.getPath() + "." + format;
             if (format.equals("wb")) {
                 Vector<MyShape> history = wbv.getPaintManager().getPaintHistory();
                 ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(savePath));

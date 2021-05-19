@@ -17,11 +17,11 @@ import java.awt.event.ActionListener;
 
 public class WhiteBoardWindow {
     // Default color display in the left bottom.
-    private static final Color[] DEFAULTCOLORS = {Color.BLACK, Color.BLUE, Color.WHITE, Color.GRAY, Color.RED, Color.GREEN,
+    private static final Color[] DEFAULT_COLORS = {Color.BLACK, Color.BLUE, Color.WHITE, Color.GRAY, Color.RED, Color.GREEN,
             Color.ORANGE, Color.YELLOW, Color.PINK, Color.DARK_GRAY, Color.LIGHT_GRAY, Color.CYAN, Color.MAGENTA,
             new Color(250, 128, 114), new Color(210, 105, 30), new Color(160, 32, 240)};
     // Use to create tool button.
-    private static final String[] TOOLNAME = {"pen", "line", "circle", "eraser", "rect", "oval", "roundrect", "text"};
+    private static final String[] TOOL_NAME = {"pen", "line", "circle", "eraser", "rect", "oval", "roundrect", "text"};
     private final JColorChooser colorChooser;
     // Title of the window
     private final String title;
@@ -31,6 +31,7 @@ public class WhiteBoardWindow {
     private final UserManager userManager;
     // Client
     private final Client client;
+    private final Color backgroundColor;
     private JFrame frame;
     private DrawListener drawListener;
     private PaintBoardPanel paintBoardPanel;
@@ -38,7 +39,6 @@ public class WhiteBoardWindow {
     private JButton btnCurrentColor;
     // Color
     private Color currentColor;
-    private Color backgroundColor = null;
     // Thickness
     private int thickness;
     private JTextField thicknessTextField;
@@ -168,9 +168,9 @@ public class WhiteBoardWindow {
         drawToolPanel.add(toolPanel, BorderLayout.NORTH);
 
         // Add tool bar button
-        JButton btnTools = null;
-        for (int i = 0; i < TOOLNAME.length; i++) {
-            btnTools = new JButton(TOOLNAME[i]);
+        JButton btnTools;
+        for (String s : TOOL_NAME) {
+            btnTools = new JButton(s);
             btnTools.setCursor(new Cursor(Cursor.HAND_CURSOR));
             toolPanel.add(btnTools);
             btnTools.addActionListener(drawListener);
@@ -242,11 +242,11 @@ public class WhiteBoardWindow {
         thicknessTextField.setColumns(2);
 
         // Add default colors
-        JButton btnDefaultColors = null;
-        for (int i = 0; i < DEFAULTCOLORS.length; i++) {
+        JButton btnDefaultColors;
+        for (Color defaultColor : DEFAULT_COLORS) {
             btnDefaultColors = new JButton();
             btnDefaultColors.setBorderPainted(false);
-            btnDefaultColors.setBackground(DEFAULTCOLORS[i]);
+            btnDefaultColors.setBackground(defaultColor);
             btnDefaultColors.setOpaque(true);
             btnDefaultColors.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btnDefaultColors.setPreferredSize(new Dimension(40, 40));

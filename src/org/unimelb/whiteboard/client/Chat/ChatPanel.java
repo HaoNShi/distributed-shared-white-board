@@ -22,7 +22,7 @@ public class ChatPanel extends JPanel {
         textArea.append(text);
     }
 
-    private void init() throws Exception {
+    private void init() {
         setLayout(new BorderLayout(0, 0));
         JScrollPane chatScrollPane = new JScrollPane();
         chatScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

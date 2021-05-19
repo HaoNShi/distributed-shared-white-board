@@ -42,7 +42,7 @@ public class UserManager {
         if (!isHost) {
             try {
                 Registry registry = LocateRegistry.getRegistry(hostIp, registerPort);
-//				Registry registry = LimitedTimeRegistry.getLimitedTimeRegistry(hostIp, registerPort, 1000);
+                // Registry registry = LimitedTimeRegistry.getLimitedTimeRegistry(hostIp, registerPort, 1000);
                 hostRemotePaint = (IRemotePaint) registry.lookup("paint");
                 hostRemoteUM = (IRemoteUM) registry.lookup("um");
                 hostRemoteApp = (IRemoteApp) registry.lookup("app");
@@ -51,13 +51,13 @@ public class UserManager {
             }
         }
 
-        guests = new HashMap<String, User>();
-        guestRemotePaints = new HashMap<String, IRemotePaint>();
-        guestRemoteUMs = new HashMap<String, IRemoteUM>();
-        guestRemoteApps = new HashMap<String, IRemoteApp>();
+        guests = new HashMap<>();
+        guestRemotePaints = new HashMap<>();
+        guestRemoteUMs = new HashMap<>();
+        guestRemoteApps = new HashMap<>();
 
-        visitors = new HashMap<String, User>();
-        visitorRemoteApps = new HashMap<String, IRemoteApp>();
+        visitors = new HashMap<>();
+        visitorRemoteApps = new HashMap<>();
     }
 
     /**
@@ -140,7 +140,7 @@ public class UserManager {
         guestRemoteApps.put(guestId, visitorRemoteApps.get(guestId));
         try {
             Registry clientRegistry = LocateRegistry.getRegistry(guest.getIp(), guest.getRegisterPort());
-//			Registry clientRegistry = LimitedTimeRegistry.getLimitedTimeRegistry(guest.getIp(), guest.getRegisterPort(), 1000);
+            // Registry clientRegistry = LimitedTimeRegistry.getLimitedTimeRegistry(guest.getIp(), guest.getRegisterPort(), 1000);
             IRemoteApp guestRemoteApp = (IRemoteApp) clientRegistry.lookup("app");
             guestRemoteApp.askIn(host.getIp(), hostChatPort);
 
@@ -162,7 +162,7 @@ public class UserManager {
             visitorRemoteApps.remove(guestId);
             chatPanel.appendText("Can't connect to guest " + guestId + ", Remove.\n");
             System.err.println("Can't connect to guest " + guestId + ", Remove.");
-//			e.printStackTrace();
+            // e.printStackTrace();
         }
 
         // set remote user manager
@@ -221,7 +221,7 @@ public class UserManager {
             remoteApp.askOut();
         } catch (Exception e) {
             System.err.println("Can't connect to guest " + guestId + ", Remove.");
-            //e.printStackTrace();
+            // e.printStackTrace();
         }
         removeGuest(guestId);
     }
@@ -236,16 +236,16 @@ public class UserManager {
     /**
      * Add a visitor to the visitor list, when the visitor knock the door.
      */
-    public void addVistor(String userId, String ip, int registerPort) {
-        visitors.put(userId, new User(userId, User.VISTOR, ip, registerPort, -1));
+    public void addVisitor(String userId, String ip, int registerPort) {
+        visitors.put(userId, new User(userId, User.VISITOR, ip, registerPort, -1));
         try {
             Registry clientRegistry = LocateRegistry.getRegistry(ip, registerPort);
-//			Registry clientRegistry = LimitedTimeRegistry.getLimitedTimeRegistry(ip, registerPort, 1000);
-            IRemoteApp remoteVistorApp = (IRemoteApp) clientRegistry.lookup("app");
-            visitorRemoteApps.put(userId, remoteVistorApp);
+            // Registry clientRegistry = LimitedTimeRegistry.getLimitedTimeRegistry(ip, registerPort, 1000);
+            IRemoteApp remoteVisitorApp = (IRemoteApp) clientRegistry.lookup("app");
+            visitorRemoteApps.put(userId, remoteVisitorApp);
         } catch (Exception e) {
             System.err.println("Can not get the client registry.");
-            //e.printStackTrace();
+            // e.printStackTrace();
         }
 
         if (chatPanel != null)
@@ -277,7 +277,7 @@ public class UserManager {
             remoteApp.askOut();
         } catch (Exception e) {
             System.err.println("Can not get the client registry.");
-            //e.printStackTrace();
+            // e.printStackTrace();
         }
 
         removeVisitor(userId);
@@ -338,7 +338,15 @@ public class UserManager {
         } else if (guests.containsKey(userId)) {
             return User.GUEST;
         } else {
-            return User.VISTOR;
+            return User.VISITOR;
         }
+    }
+
+    public IRemoteApp getHostRemoteApp() {
+        return hostRemoteApp;
+    }
+
+    public void setHostRemoteApp(IRemoteApp hostRemoteApp) {
+        this.hostRemoteApp = hostRemoteApp;
     }
 }

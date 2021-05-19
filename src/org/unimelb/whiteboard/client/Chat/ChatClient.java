@@ -50,7 +50,6 @@ public class ChatClient implements Runnable {
             System.err.println("Encrypted text: " + new String(encrypted));
             out.writeUTF(Base64.getEncoder().encodeToString(encrypted));
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -59,7 +58,7 @@ public class ChatClient implements Runnable {
         return chatPanel;
     }
 
-    private void init() throws Exception {
+    private void init() {
         chatPanel = new ChatPanel();
         chatPanel.btnSend.addActionListener(e -> {
             if (chatPanel.txtInput.getText().length() != 0) {
@@ -70,7 +69,6 @@ public class ChatClient implements Runnable {
                     processMsg(e2.toString());
                 }
             }
-
         });
     }
 
@@ -99,7 +97,6 @@ public class ChatClient implements Runnable {
             socket.close();
             thread.interrupt();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -110,12 +107,11 @@ public class ChatClient implements Runnable {
             try {
                 String msg = receiveMsg();
                 Thread.sleep(100L); //
-                if (msg != "") {
+                if (!msg.equals("")) {
                     processMsg(msg);
                 }
-            } catch (IOException e) {
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
-            } catch (InterruptedException ei) {
             }
         }
     }
@@ -130,8 +126,7 @@ public class ChatClient implements Runnable {
     public String receiveMsg() throws IOException {
         try {
             if (in.available() > 0) {
-                String msg = in.readUTF();
-                return msg;
+                return in.readUTF();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -141,8 +136,6 @@ public class ChatClient implements Runnable {
 
     // 处理信息（显示信息）
     public void processMsg(String str) {
-        SwingUtilities.invokeLater(() -> {
-            chatPanel.textArea.append(str + '\n');
-        });
+        SwingUtilities.invokeLater(() -> chatPanel.textArea.append(str + '\n'));
     }
 }

@@ -22,9 +22,9 @@ public class PaintManager {
     private final int mode;
     // Use to record all the shapes.
     private Vector<MyShape> paintHistory = null;
-    // Use to handel redo and undo, only host can use.
+    // Use to handle redo and undo, only host can use.
     private Stack<MyShape> redoHistory = null;
-    // Use to store the current paintint area
+    // Use to store the current painting area
     private PaintBoardPanel paintArea;
     // Use to control the editMenu UI.
     private EditMenu editMenu;
@@ -35,9 +35,9 @@ public class PaintManager {
     public PaintManager(int mode, UserManager userManager) {
         this.mode = mode;
         this.userManager = userManager;
-        paintHistory = new Vector<MyShape>();
+        paintHistory = new Vector<>();
         if (mode == SERVER_MODE)
-            redoHistory = new Stack<MyShape>();
+            redoHistory = new Stack<>();
     }
 
     /**
@@ -128,7 +128,7 @@ public class PaintManager {
             }
             paintArea.repaint();
         } else if (mode == CLIENT_MODE) {
-            System.out.println("Err: No clear opeartion access!");
+            System.out.println("Err: No clear operation access!");
         }
     }
 

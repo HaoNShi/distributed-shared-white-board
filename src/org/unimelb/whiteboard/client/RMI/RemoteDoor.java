@@ -17,7 +17,7 @@ public class RemoteDoor extends UnicastRemoteObject implements IRemoteDoor {
     @Override
     public void knock(String userId, String ip, int registerPort) throws RemoteException {
         System.out.println("A visitor knocks the door.");
-        userManager.addVistor(userId, ip, registerPort);
+        userManager.addVisitor(userId, ip, registerPort);
     }
 
     @Override

@@ -77,7 +77,7 @@ public class DrawListener extends MouseAdapter implements ActionListener {
             currentFreeDraw = null;
         } else if (toolName.equals("text")) {
             String text = JOptionPane.showInputDialog(wbv.getFrame(), "Text:");
-            if (text != null && text != "") {
+            if (text != null && !text.equals("")) {
                 myShape = new MyText(endP, text, thickness * 10, color);
             }
         } else {
@@ -118,7 +118,7 @@ public class DrawListener extends MouseAdapter implements ActionListener {
         } else if (toolName.equals("text")) {
             bufferShape = null;
         } else {
-            System.out.println("Error: Unkown Tool Name!");
+            System.out.println("Error: Unknown Tool Name!");
         }
         // When working on RMI, no need to upload bufferShape. Only show in client window.
         wbv.getPaintBoardPanel().setBufferShape(bufferShape);

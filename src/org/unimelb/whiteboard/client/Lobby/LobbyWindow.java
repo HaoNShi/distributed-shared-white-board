@@ -42,7 +42,7 @@ public class LobbyWindow {
      */
     public LobbyWindow(Client client) {
         this.client = client;
-        roomsBtnVec = new Vector<JButton>();
+        roomsBtnVec = new Vector<>();
         initialize();
         controller = new LobbyController(client, this);
     }

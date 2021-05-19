@@ -36,7 +36,7 @@ public class ChatServer implements Runnable {
         return chatPanel;
     }
 
-    private void init() throws Exception {
+    private void init() {
         chatPanel = new ChatPanel();
         clients = new Vector<>();// Vector是clients的集合，是线程安全的！
         chatPanel.btnSend.addActionListener((e) -> {
@@ -47,9 +47,7 @@ public class ChatServer implements Runnable {
 
     // 处理信息：1.把信息显示到列表框里。2.广播信息
     public void processMsg(String str) {
-        SwingUtilities.invokeLater(() -> {
-            chatPanel.textArea.append(str + '\n');
-        });
+        SwingUtilities.invokeLater(() -> chatPanel.textArea.append(str + '\n'));
 
         broadcastMsg(str);
     }
@@ -66,7 +64,7 @@ public class ChatServer implements Runnable {
                 client.disconnect();
                 iter.remove();
                 System.err.println("A guest exit in an abnormal way");
-                //e.printStackTrace();
+                // e.printStackTrace();
             }
 
         }

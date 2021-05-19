@@ -6,11 +6,11 @@ import java.awt.*;
  * My Image
  */
 public class MyImage implements MyShape {
-    private final MyPoint stratP;
+    private final MyPoint startP;
     private Image image = null;
 
     public MyImage(MyPoint startP, Image image) {
-        this.stratP = startP;
+        this.startP = startP;
         this.image = image;
     }
 

@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -272,7 +271,7 @@ public class Client {
      * Use to pull remote room list from the central server.
      */
     public void pullRemoteRoomList() {
-        // sent request to central server to gain roomlists
+        // sent request to central server to gain roomList
         JSONObject reqJSON = new JSONObject();
         reqJSON.put("command", StateCode.GET_ROOM_LIST);
         System.out.println("Request for rooms list...");
@@ -359,7 +358,7 @@ public class Client {
         this.CurrentSavePath = path;
     }
 
-    private void init() throws UnknownHostException {
+    private void init() {
         initRMI();
         loginWindow = new LoginWindow(this);
     }
@@ -411,7 +410,7 @@ public class Client {
         }
     }
 
-    private void printInitialStates() throws UnknownHostException {
+    private void printInitialStates() {
         System.out.println("IP address : " + ip);
         System.out.println("Registry Port = " + registryPort);
     }

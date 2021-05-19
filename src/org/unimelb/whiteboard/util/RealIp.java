@@ -15,9 +15,8 @@ public class RealIp {
                 Enumeration<InetAddress> addresses = netInterface.getInetAddresses();
                 while (addresses.hasMoreElements()) {
                     InetAddress ip = addresses.nextElement();
-                    if (ip != null && ip instanceof Inet4Address && !ip.isLoopbackAddress()
-                            && ip.getHostAddress().indexOf(":") == -1) {
-//						System.out.println("本机的IP = " + ip.getHostAddress());
+                    if (ip instanceof Inet4Address && !ip.isLoopbackAddress() && !ip.getHostAddress().contains(":")) {
+                        // System.out.println("本机的IP = " + ip.getHostAddress());
                         return ip.getHostAddress();
                     }
                 }

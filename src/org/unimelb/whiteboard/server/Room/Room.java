@@ -37,5 +37,7 @@ public class Room {
         return port;
     }
 
-
+    public int getRoomId() {
+        return roomId;
+    }
 }

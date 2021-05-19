@@ -16,9 +16,9 @@ public class RoomCreateDialog extends JDialog {
     private final JTextField roomNameTextField;
     private final JTextField PasswordTextField;
     private final Client client;
+    private final JLabel lblError;
     private String roomName = "";
     private String password = "";
-    private JLabel lblError = null;
 
     /**
      * Create the dialog.
@@ -102,11 +102,11 @@ public class RoomCreateDialog extends JDialog {
     }
 
     private Boolean roomInfoCheck() {
-        String roomnamePatten = "^\\w{1,8}$";
+        String roomNamePatten = "^\\w{1,8}$";
         String passwordPatten = "^\\w{0,8}$";
-        String err = "";
+        String err;
 
-        if (!Pattern.matches(roomnamePatten, roomName)) {
+        if (!Pattern.matches(roomNamePatten, roomName)) {
             err = "Room Name Format: \\w{1,8}";
             lblError.setText(err);
             lblError.setVisible(true);
@@ -119,5 +119,9 @@ public class RoomCreateDialog extends JDialog {
             return false;
         }
         return true;
+    }
+
+    public Client getClient() {
+        return client;
     }
 }

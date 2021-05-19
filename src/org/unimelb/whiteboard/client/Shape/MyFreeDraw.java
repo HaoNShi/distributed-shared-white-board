@@ -19,7 +19,7 @@ public class MyFreeDraw implements MyShape {
 
     public MyFreeDraw(int mode, MyPoint firstP, MyPoint nextP, Color color, int thickness) {
         this.mode = mode;
-        this.points = new Vector<MyPoint>();
+        this.points = new Vector<>();
         this.points.add(firstP);
         this.points.add(nextP);
         this.color = color;
