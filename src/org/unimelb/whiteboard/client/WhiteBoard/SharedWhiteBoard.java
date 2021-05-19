@@ -1,11 +1,11 @@
 package org.unimelb.whiteboard.client.WhiteBoard;
 
 import org.unimelb.whiteboard.client.Client;
-import org.unimelb.whiteboard.client.ClientUser.UserManager;
 import org.unimelb.whiteboard.client.RMI.IRemotePaint;
 import org.unimelb.whiteboard.client.RMI.IRemoteUM;
 import org.unimelb.whiteboard.client.RMI.RemotePaint;
 import org.unimelb.whiteboard.client.RMI.RemoteUM;
+import org.unimelb.whiteboard.client.User.UserManager;
 
 
 public abstract class SharedWhiteBoard {

@@ -1,9 +1,9 @@
 package org.unimelb.whiteboard.client.WhiteBoard;
 
-import org.unimelb.whiteboard.client.ClientUser.UserManager;
 import org.unimelb.whiteboard.client.Menus.EditMenu;
 import org.unimelb.whiteboard.client.RMI.IRemotePaint;
 import org.unimelb.whiteboard.client.Shape.MyShape;
+import org.unimelb.whiteboard.client.User.UserManager;
 
 import java.rmi.RemoteException;
 import java.util.Map;

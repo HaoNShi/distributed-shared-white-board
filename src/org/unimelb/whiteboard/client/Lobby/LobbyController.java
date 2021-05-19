@@ -37,7 +37,7 @@ public class LobbyController {
 
         // repaint the roomList panel.
         ui.roomsBtnVec.clear();
-        reFreshRoomsListPanel();
+        refreshRoomsListPanel();
 
         int i = 0;
         JPanel currentPanel = ui.firstPanel;
@@ -74,23 +74,21 @@ public class LobbyController {
                             ui.createWaitDialog();
                             System.out.println("Knock the host's door.");
                             try {
-                                // Registry registry = LimitedTimeRegistry.getLimitedTimeRegistry(tempHostIp, tempHostRegisterPort, 1000);
                                 Registry registry = LocateRegistry.getRegistry(tempHostIp, tempHostRegisterPort);
                                 client.setTempRemoteDoor((IRemoteDoor) registry.lookup("door"));
                                 client.createTempClientWhiteBoard(tempHostId, tempHostIp, tempHostRegisterPort);
                                 client.getTempRemoteDoor().knock(client.getUserId(), client.getIp(), client.getRegistryPort());
                                 // The follow code would block all code.
                                 ui.setWaitDialogVisible(true);
-                            } catch (Exception exception) {
+                            } catch (Exception e2) {
                                 client.unbindAndSetNull();
                                 System.out.println("The host's network has problem!");
                                 JOptionPane.showMessageDialog(ui.getFrame(), "The host's network has problem!");
-                                //exception.printStackTrace();
                             }
                         } else if (state == StateCode.FAIL) {
                             JOptionPane.showMessageDialog(ui.frame, "Password wrong or the room is removed, please refresh!", "Warning",
                                     JOptionPane.WARNING_MESSAGE);
-                        } else if (state != StateCode.SUCCESS) {
+                        } else {
                             JOptionPane.showMessageDialog(ui.frame, "Can not connect to central server!", "Error",
                                     JOptionPane.ERROR_MESSAGE);
                         }
@@ -100,12 +98,12 @@ public class LobbyController {
             ui.roomsBtnVec.add(tempBtn);
 
             if (i % 2 != 0) {
-                ui.roomsListPanel.setPreferredSize(new Dimension(0, (i / 2 + 2) * 170));
+                ui.scrollPane.setPreferredSize(new Dimension(0, (i / 2 + 2) * 170));
                 JPanel temp = new JPanel();
                 temp.setBounds(5, (i / 2 + 1) * 170, 570, 160);
                 temp.setLayout(new GridLayout(1, 2, 5, 0));
                 currentPanel = temp;
-                ui.roomsListPanel.add(temp);
+                ui.scrollPane.add(temp);
             }
 
             currentPanel.add(tempBtn);
@@ -128,28 +126,28 @@ public class LobbyController {
         }
     }
 
-    protected void reFreshRoomsListPanel() {
-        ui.roomsListPanel.removeAll();
-        ui.roomsListPanel.setPreferredSize(new Dimension(0, 170));
+    protected void refreshRoomsListPanel() {
+        ui.scrollPane.removeAll();
+        ui.scrollPane.setPreferredSize(new Dimension(0, 170));
         ui.firstPanel.removeAll();
-        ui.roomsListPanel.revalidate();
-        ui.roomsListPanel.repaint();
-        ui.roomsListPanel.add(ui.firstPanel);
+        ui.scrollPane.revalidate();
+        ui.scrollPane.repaint();
+        ui.scrollPane.add(ui.firstPanel);
         ui.firstPanel.add(ui.btnCreateRoom);
     }
 
-    protected void filtRoomsList() {
-        reFreshRoomsListPanel();
+    protected void findRoomsList() {
+        refreshRoomsListPanel();
         JPanel currentPanel = ui.firstPanel;
         int i = 0;
         for (JButton btn : ui.roomsBtnVec) {
             if (i % 2 != 0) {
-                ui.roomsListPanel.setPreferredSize(new Dimension(0, (i / 2 + 2) * 170));
+                ui.scrollPane.setPreferredSize(new Dimension(0, (i / 2 + 2) * 170));
                 JPanel temp = new JPanel();
                 temp.setBounds(5, (i / 2 + 1) * 170, 570, 160);
                 temp.setLayout(new GridLayout(1, 2, 5, 0));
                 currentPanel = temp;
-                ui.roomsListPanel.add(temp);
+                ui.scrollPane.add(temp);
             }
             String[] roomInfo = btn.getText().split(" - ");
             if ((ui.roomNameTextField.getText().equals(roomInfo[0]) || ui.roomNameTextField.getText().equals(""))

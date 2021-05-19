@@ -1,4 +1,4 @@
-package org.unimelb.whiteboard.client.ClientUser;
+package org.unimelb.whiteboard.client.User;
 
 import org.unimelb.whiteboard.client.Chat.ChatPanel;
 import org.unimelb.whiteboard.client.RMI.IRemoteApp;

@@ -1,7 +1,7 @@
 package org.unimelb.whiteboard.client.WhiteBoard;
 
-import org.unimelb.whiteboard.client.ClientUser.User;
-import org.unimelb.whiteboard.client.ClientUser.UserManager;
+import org.unimelb.whiteboard.client.User.User;
+import org.unimelb.whiteboard.client.User.UserManager;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;

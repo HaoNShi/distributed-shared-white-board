@@ -5,13 +5,10 @@ import org.unimelb.whiteboard.util.LobbyCloseListener;
 import org.unimelb.whiteboard.util.WaitDialogCloseListener;
 
 import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
-
 
 public class LobbyWindow {
 
@@ -19,7 +16,6 @@ public class LobbyWindow {
     protected JTextField roomNameTextField;
     protected JTextField hostNameTextField;
 
-    protected JPanel roomsListPanel;
     protected JButton btnCreateRoom;
     protected JPanel firstPanel;
     protected JPanel blankPanel;
@@ -102,16 +98,13 @@ public class LobbyWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addWindowListener(new LobbyCloseListener(client));
         frame.setMinimumSize(new Dimension(600, 500));
-        frame.getContentPane().setLayout(new BorderLayout(0, 0));
+        frame.getContentPane().setLayout(null);
 
-        roomsListPanel = new JPanel();
-        // panel.setPreferredSize(new Dimension(0, 500));
         scrollPane = new JScrollPane();
+        scrollPane.setBounds(0, 0, 596, 372);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
-        scrollPane.setViewportView(roomsListPanel);
-        roomsListPanel.setLayout(null);
+        frame.getContentPane().add(scrollPane);
 
         // FirstPanel In RoomList Panel INIT
         firstPanel = new JPanel();
@@ -132,67 +125,41 @@ public class LobbyWindow {
         // init Blank Panel
         blankPanel = new JPanel();
 
-        JPanel controlBarPanel = new JPanel();
-        controlBarPanel.setPreferredSize(new Dimension(0, 100));
-        frame.getContentPane().add(controlBarPanel, BorderLayout.SOUTH);
-        controlBarPanel.setLayout(new BorderLayout(0, 0));
+        JLabel lblRoomName = new JLabel("Room Name:");
+        lblRoomName.setBounds(20, 393, 84, 15);
+        frame.getContentPane().add(lblRoomName);
 
-        JButton btnRefresh = new JButton("REFRESH");
+        JLabel lblHostName = new JLabel("Host Name:");
+        lblHostName.setBounds(20, 418, 84, 15);
+        frame.getContentPane().add(lblHostName);
+
+        roomNameTextField = new JTextField();
+        roomNameTextField.setBounds(100, 390, 250, 21);
+        roomNameTextField.setColumns(10);
+        frame.getContentPane().add(roomNameTextField);
+
+        hostNameTextField = new JTextField();
+        hostNameTextField.setBounds(100, 415, 250, 21);
+        hostNameTextField.setColumns(10);
+        frame.getContentPane().add(hostNameTextField);
+
+        JButton btnFind = new JButton("Find");
+        btnFind.setBounds(380, 400, 80, 30);
+        btnFind.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                controller.findRoomsList();
+            }
+        });
+        frame.getContentPane().add(btnFind);
+
+        JButton btnRefresh = new JButton("Refresh");
+        btnRefresh.setBounds(470, 400, 80, 30);
         btnRefresh.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 controller.refreshRoomsList();
             }
         });
-        controlBarPanel.add(btnRefresh, BorderLayout.EAST);
-
-        // filterPanel
-        JPanel filterPanel = new JPanel();
-        controlBarPanel.add(filterPanel, BorderLayout.CENTER);
-        filterPanel.setLayout(new BorderLayout(0, 0));
-
-        JButton btnFilt = new JButton("FILT");
-        btnFilt.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                controller.filtRoomsList();
-            }
-        });
-
-        filterPanel.add(btnFilt, BorderLayout.EAST);
-        JPanel filterTextPanel = new JPanel();
-        filterPanel.add(filterTextPanel, BorderLayout.CENTER);
-        JLabel lblRoomName = new JLabel("Room Name:");
-        JLabel lblHostName = new JLabel("Host Name:");
-
-        roomNameTextField = new JTextField();
-        roomNameTextField.setColumns(10);
-
-        hostNameTextField = new JTextField();
-        hostNameTextField.setColumns(10);
-        GroupLayout gl_filterTextPanel = new GroupLayout(filterTextPanel);
-        gl_filterTextPanel.setHorizontalGroup(gl_filterTextPanel.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_filterTextPanel.createSequentialGroup().addGap(50).addGroup(gl_filterTextPanel
-                        .createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_filterTextPanel.createSequentialGroup()
-                                .addComponent(lblRoomName, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-                                .addGap(13).addComponent(roomNameTextField))
-                        .addGroup(gl_filterTextPanel.createSequentialGroup().addGap(7)
-                                .addComponent(lblHostName, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED).addComponent(hostNameTextField)))
-                        .addGap(50)));
-        gl_filterTextPanel.setVerticalGroup(gl_filterTextPanel.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_filterTextPanel.createSequentialGroup().addGap(23)
-                        .addGroup(gl_filterTextPanel.createParallelGroup(Alignment.LEADING)
-                                .addGroup(
-                                        gl_filterTextPanel.createSequentialGroup().addGap(5).addComponent(lblRoomName))
-                                .addComponent(roomNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                                        GroupLayout.PREFERRED_SIZE))
-                        .addGap(2)
-                        .addGroup(gl_filterTextPanel.createParallelGroup(Alignment.BASELINE)
-                                .addComponent(hostNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                                        GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblHostName))
-                        .addContainerGap(23, Short.MAX_VALUE)));
-        filterTextPanel.setLayout(gl_filterTextPanel);
+        frame.getContentPane().add(btnRefresh);
 
         // Use to cancel knock.
         JButton cancelBtn = new JButton("Cancel");

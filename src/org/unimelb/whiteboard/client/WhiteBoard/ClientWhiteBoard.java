@@ -2,7 +2,7 @@ package org.unimelb.whiteboard.client.WhiteBoard;
 
 import org.unimelb.whiteboard.client.Chat.ChatClient;
 import org.unimelb.whiteboard.client.Client;
-import org.unimelb.whiteboard.client.ClientUser.UserManager;
+import org.unimelb.whiteboard.client.User.UserManager;
 
 public class ClientWhiteBoard extends SharedWhiteBoard {
     private ChatClient chatClient;

@@ -2,9 +2,9 @@ package org.unimelb.whiteboard.client.WhiteBoard;
 
 import org.unimelb.whiteboard.client.Chat.ChatServer;
 import org.unimelb.whiteboard.client.Client;
-import org.unimelb.whiteboard.client.ClientUser.UserManager;
 import org.unimelb.whiteboard.client.RMI.IRemoteDoor;
 import org.unimelb.whiteboard.client.RMI.RemoteDoor;
+import org.unimelb.whiteboard.client.User.UserManager;
 
 public class ServerWhiteBoard extends SharedWhiteBoard {
 

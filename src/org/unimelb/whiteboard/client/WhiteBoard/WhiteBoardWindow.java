@@ -2,9 +2,9 @@ package org.unimelb.whiteboard.client.WhiteBoard;
 
 import org.unimelb.whiteboard.client.Chat.ChatPanel;
 import org.unimelb.whiteboard.client.Client;
-import org.unimelb.whiteboard.client.ClientUser.UserManager;
 import org.unimelb.whiteboard.client.Menus.EditMenu;
 import org.unimelb.whiteboard.client.Menus.FileMenu;
+import org.unimelb.whiteboard.client.User.UserManager;
 import org.unimelb.whiteboard.util.NumberTextField;
 import org.unimelb.whiteboard.util.WhiteBoardCloseListener;
 

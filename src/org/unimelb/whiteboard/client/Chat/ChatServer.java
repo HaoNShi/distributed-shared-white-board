@@ -38,7 +38,7 @@ public class ChatServer implements Runnable {
 
     private void init() {
         chatPanel = new ChatPanel();
-        clients = new Vector<>();// Vector是clients的集合，是线程安全的！
+        clients = new Vector<>(); // Vector是clients的集合，是线程安全的！
         chatPanel.btnSend.addActionListener((e) -> {
             SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
             processMsg('[' + df.format(new Date()) + "] " + userId + ":\n" + this.chatPanel.txtInput.getText());

@@ -1,6 +1,6 @@
 package org.unimelb.whiteboard.client.RMI;
 
-import org.unimelb.whiteboard.client.ClientUser.UserManager;
+import org.unimelb.whiteboard.client.User.UserManager;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

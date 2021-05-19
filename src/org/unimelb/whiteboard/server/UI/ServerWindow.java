@@ -1,7 +1,6 @@
 package org.unimelb.whiteboard.server.UI;
 
 import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -11,8 +10,8 @@ public class ServerWindow {
 
     private JFrame frame;
     private JTextArea logArea;
+    private JScrollPane scrollPane;
     private JLabel addressLabel;
-    private JLabel portLabel;
 
     /**
      * Create the application.
@@ -35,9 +34,9 @@ public class ServerWindow {
     private void initialize(String address, String port) {
         frame = new JFrame();
         frame.setTitle("Server");
-        frame.setMinimumSize(new Dimension(450, 300));
         frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(null);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
@@ -45,40 +44,16 @@ public class ServerWindow {
             }
         });
 
-        JScrollPane scrollPane = new JScrollPane();
+        addressLabel = new JLabel("<html><body>Address: " + address + "<br>Port: " + port + "</body></html>");
+        addressLabel.setBounds(20, 20, 400, 30);
+        addressLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        frame.getContentPane().add(addressLabel);
 
         logArea = new JTextArea();
         logArea.setLineWrap(true);
         logArea.setEditable(false);
-        scrollPane.setViewportView(logArea);
-
-        addressLabel = new JLabel("Address: " + address);
-
-        portLabel = new JLabel("Port: " + port);
-        GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-        groupLayout.setHorizontalGroup(
-                groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(groupLayout.createSequentialGroup()
-                                .addGap(20)
-                                .addComponent(addressLabel, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(groupLayout.createSequentialGroup()
-                                .addGap(20)
-                                .addComponent(portLabel, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(groupLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
-                                .addContainerGap())
-        );
-        groupLayout.setVerticalGroup(
-                groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(groupLayout.createSequentialGroup()
-                                .addGap(20)
-                                .addComponent(addressLabel, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(portLabel, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-                                .addGap(45)
-                                .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                                .addContainerGap())
-        );
-        frame.getContentPane().setLayout(groupLayout);
+        scrollPane = new JScrollPane(logArea);
+        scrollPane.setBounds(20, 80, 400, 170);
+        frame.getContentPane().add(scrollPane);
     }
 }

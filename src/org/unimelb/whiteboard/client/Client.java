@@ -24,7 +24,6 @@ import java.rmi.registry.Registry;
 import java.rmi.server.RMISocketFactory;
 import java.util.Map;
 
-
 public class Client {
     public static final int TIMEOUT = 600;
     // RoomList
@@ -167,7 +166,8 @@ public class Client {
     }
 
     /**
-     * Unbind um paint door, so that next time when user create a whiteboard, they can be bind.
+     * Unbind um paint door, so that next time when user create a whiteboard, they
+     * can be bind.
      */
     public void unbindAndSetNull() {
         try {
@@ -388,7 +388,7 @@ public class Client {
             });
 
             // Get IP address of Localhost.
-//			ip = InetAddress.getLocalHost();
+            // ip = InetAddress.getLocalHost();
             ip = RealIp.getHostIp();
 
             // Get a random port (Available one).
