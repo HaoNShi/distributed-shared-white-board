@@ -50,19 +50,14 @@ public class LoginWindow {
     private void initialize() {
         frame = new JFrame();
         frame.setResizable(false);
-        frame.setBounds(100, 100, 450, 300);
+        frame.setBounds(100, 100, 366, 259);
         frame.setTitle("Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
-        JLabel titleJLabel = new JLabel("Distribute Shared White Board");
-        titleJLabel.setBounds(70, 20, 300, 25);
-        titleJLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        frame.getContentPane().add(titleJLabel);
-
         JButton btnLogin = new JButton("Login");
         btnLogin.setFont(new Font("Arial", Font.PLAIN, 12));
-        btnLogin.setBounds(155, 201, 147, 45);
+        btnLogin.setBounds(122, 162, 106, 32);
         frame.getContentPane().add(btnLogin);
         // Login logic here.
         btnLogin.addActionListener(new ActionListener() {
@@ -96,22 +91,22 @@ public class LoginWindow {
 
         JLabel lblServerAddress = new JLabel("Address:");
         lblServerAddress.setFont(new Font("Arial", Font.PLAIN, 12));
-        lblServerAddress.setBounds(105, 80, 58, 16);
+        lblServerAddress.setBounds(43, 45, 58, 16);
         frame.getContentPane().add(lblServerAddress);
 
         JLabel lblPort = new JLabel("Port:");
         lblPort.setFont(new Font("Arial", Font.PLAIN, 12));
-        lblPort.setBounds(105, 112, 58, 16);
+        lblPort.setBounds(43, 77, 58, 16);
         frame.getContentPane().add(lblPort);
 
         JLabel lblUserId = new JLabel("User ID:");
         lblUserId.setFont(new Font("Arial", Font.PLAIN, 12));
-        lblUserId.setBounds(105, 151, 58, 16);
+        lblUserId.setBounds(43, 116, 58, 16);
         frame.getContentPane().add(lblUserId);
 
         addressTextField = new JTextField();
         addressTextField.setFont(new Font("Arial", Font.PLAIN, 12));
-        addressTextField.setBounds(173, 75, 130, 26);
+        addressTextField.setBounds(111, 40, 130, 26);
         addressTextField.setText(client.getIp());
         addressTextField.setColumns(10);
         frame.getContentPane().add(addressTextField);
@@ -119,34 +114,34 @@ public class LoginWindow {
         portTextField = new JTextField();
         portTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         portTextField.setText("4443");
-        portTextField.setBounds(173, 107, 58, 26);
+        portTextField.setBounds(111, 72, 129, 26);
         portTextField.setColumns(10);
         frame.getContentPane().add(portTextField);
 
         userIdTextField = new JTextField();
         userIdTextField.setFont(new Font("Arial", Font.PLAIN, 12));
-        userIdTextField.setBounds(173, 146, 130, 26);
+        userIdTextField.setBounds(111, 111, 130, 26);
         userIdTextField.setDocument(new NumberTextField(8, false));
         userIdTextField.setColumns(8);
         frame.getContentPane().add(userIdTextField);
 
         lblAddressWarn = new JLabel("Invalid!");
         lblAddressWarn.setFont(new Font("Arial", Font.PLAIN, 12));
-        lblAddressWarn.setBounds(309, 80, 46, 16);
+        lblAddressWarn.setBounds(247, 45, 46, 16);
         lblAddressWarn.setForeground(Color.RED);
         lblAddressWarn.setVisible(false);
         frame.getContentPane().add(lblAddressWarn);
 
         lblPortWarn = new JLabel("Invalid!");
         lblPortWarn.setFont(new Font("Arial", Font.PLAIN, 12));
-        lblPortWarn.setBounds(309, 112, 46, 16);
+        lblPortWarn.setBounds(247, 77, 46, 16);
         lblPortWarn.setForeground(Color.RED);
         lblPortWarn.setVisible(false);
         frame.getContentPane().add(lblPortWarn);
 
         lblIdWarn = new JLabel("A-Za-z0-9_");
         lblIdWarn.setFont(new Font("Arial", Font.PLAIN, 12));
-        lblIdWarn.setBounds(309, 151, 78, 16);
+        lblIdWarn.setBounds(247, 116, 78, 16);
         lblIdWarn.setForeground(Color.RED);
         lblIdWarn.setVisible(false);
         frame.getContentPane().add(lblIdWarn);

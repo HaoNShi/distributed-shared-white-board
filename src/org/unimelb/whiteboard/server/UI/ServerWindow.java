@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-
 public class ServerWindow {
 
     private JFrame frame;
@@ -34,7 +33,7 @@ public class ServerWindow {
     private void initialize(String address, String port) {
         frame = new JFrame();
         frame.setTitle("Server");
-        frame.setBounds(100, 100, 450, 300);
+        frame.setBounds(100, 100, 457, 297);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
         frame.addWindowListener(new WindowAdapter() {
@@ -44,8 +43,8 @@ public class ServerWindow {
             }
         });
 
-        addressLabel = new JLabel("<html><body>Address: " + address + "<br>Port: " + port + "</body></html>");
-        addressLabel.setBounds(20, 20, 400, 30);
+        addressLabel = new JLabel("<html><body>Address: " + address + "&emsp &emsp &emsp &emsp &emsp &emsp &emsp Port: " + port + "</body></html>");
+        addressLabel.setBounds(20, 18, 400, 32);
         addressLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         frame.getContentPane().add(addressLabel);
 
@@ -53,7 +52,7 @@ public class ServerWindow {
         logArea.setLineWrap(true);
         logArea.setEditable(false);
         scrollPane = new JScrollPane(logArea);
-        scrollPane.setBounds(20, 80, 400, 170);
+        scrollPane.setBounds(20, 60, 400, 170);
         frame.getContentPane().add(scrollPane);
     }
 }
