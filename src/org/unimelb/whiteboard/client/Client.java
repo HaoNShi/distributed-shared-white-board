@@ -191,7 +191,7 @@ public class Client {
     /**
      * Switch to whiteBoard.
      */
-    public void switch2WhiteBoard() {
+    public void openWhiteBoard() {
         lobbyWindow.setWaitDialogVisible(false);
         lobbyWindow.setBeKickedDialogVisible(false);
 
@@ -203,7 +203,7 @@ public class Client {
     /**
      * Switch to Login window.
      */
-    public void switch2SignIn(Boolean isCentralServerCrush) {
+    public void openLogin(Boolean isCentralServerCrush) {
         if (lobbyWindow != null) {
             lobbyWindow.getFrame().setVisible(false);
         }
@@ -237,7 +237,7 @@ public class Client {
         if (state == StateCode.SUCCESS) {
             sharedWhiteBoard = new ServerWhiteBoard(this);
             sharedWhiteBoard.setRoomId(resJSON.getInteger("roomId"));
-            switch2WhiteBoard();
+            openWhiteBoard();
         } else {
             System.out.println("Fail to create room.");
         }
@@ -249,7 +249,7 @@ public class Client {
     public void joinRoom(String hostIp, int chatPort) {
         tempClientWhiteBoard.createChatClient(hostIp, chatPort);
         sharedWhiteBoard = tempClientWhiteBoard;
-        switch2WhiteBoard();
+        openWhiteBoard();
     }
 
     /**
@@ -281,7 +281,7 @@ public class Client {
             roomList = (Map<Integer, String>) resJson.get("roomList");
         } else {
             System.out.println("Can not get rooms list!");
-            switch2SignIn(true);
+            openLogin(true);
         }
         System.out.println("Get rooms list!");
     }
@@ -388,7 +388,6 @@ public class Client {
             });
 
             // Get IP address of Localhost.
-            // ip = InetAddress.getLocalHost();
             ip = RealIp.getHostIp();
 
             // Get a random port (Available one).

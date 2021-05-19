@@ -115,7 +115,6 @@ public class Server {
 
     private void init() throws IOException {
         // Get IP address of Localhost
-//		ip = InetAddress.getLocalHost();
         ip = RealIp.getHostIp();
         server = new ServerSocket(this.port);
 

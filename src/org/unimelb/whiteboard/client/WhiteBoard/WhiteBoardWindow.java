@@ -214,8 +214,7 @@ public class WhiteBoardWindow {
         defaultColorPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         JPanel thicknessPanel = new JPanel();
-        thicknessPanel
-                .setBorder(new TitledBorder(null, "Thickness Bar", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        thicknessPanel.setBorder(new TitledBorder(null, "Thickness Bar", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         thicknessPanel.setPreferredSize(new Dimension(0, 50));
         drawToolPanel.add(thicknessPanel, BorderLayout.SOUTH);
         thicknessPanel.setLayout(new BorderLayout(0, 0));

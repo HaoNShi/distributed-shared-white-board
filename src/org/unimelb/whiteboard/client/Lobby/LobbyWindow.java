@@ -115,7 +115,7 @@ public class LobbyWindow {
         btnCreateRoom = new JButton();
         btnCreateRoom.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                RoomCreateDialog.showCreateRoomDialog(frame, frame, client);
+                RoomCreateWindow.showCreateRoomDialog(frame, frame, client);
             }
         });
         ImageIcon addIcon = new ImageIcon(addImagePath);
