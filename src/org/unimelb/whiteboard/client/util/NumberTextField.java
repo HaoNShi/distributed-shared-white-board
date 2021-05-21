@@ -1,6 +1,7 @@
-package org.unimelb.whiteboard.util;
+package org.unimelb.whiteboard.client.util;
 
 import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
 public class NumberTextField extends PlainDocument {
@@ -13,13 +14,11 @@ public class NumberTextField extends PlainDocument {
         this.isNumOnly = isNumOnly;
     }
 
-    public void insertString(int offset, String str, AttributeSet attr) throws javax.swing.text.BadLocationException {
+    public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
         if (str == null) {
             return;
         }
-
         char[] s = str.toCharArray();
-
         // Only allow number input
         int length = 0;
         for (int i = 0; i < s.length; i++) {

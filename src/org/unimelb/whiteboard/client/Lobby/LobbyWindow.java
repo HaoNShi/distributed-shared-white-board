@@ -1,8 +1,8 @@
 package org.unimelb.whiteboard.client.Lobby;
 
 import org.unimelb.whiteboard.client.Client;
-import org.unimelb.whiteboard.util.LobbyCloseListener;
-import org.unimelb.whiteboard.util.WaitDialogCloseListener;
+import org.unimelb.whiteboard.client.util.LobbyCloseListener;
+import org.unimelb.whiteboard.client.util.WaitDialogCloseListener;
 
 import javax.swing.*;
 import java.awt.*;

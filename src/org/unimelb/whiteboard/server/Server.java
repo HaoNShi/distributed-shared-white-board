@@ -3,7 +3,6 @@ package org.unimelb.whiteboard.server;
 import org.unimelb.whiteboard.server.Request.RequestHandler;
 import org.unimelb.whiteboard.server.Room.RoomManager;
 import org.unimelb.whiteboard.server.UI.ServerWindow;
-import org.unimelb.whiteboard.util.RealIp;
 
 import java.io.IOException;
 import java.net.*;
@@ -18,12 +17,12 @@ import java.util.Map;
  */
 
 public class Server {
-    public static final int DEFAULT_PORT = 4443;
+    public static final int DEFAULT_PORT = 8080;
     private final RoomManager rm;
     private int port;
     private ServerSocket server;
     private ServerWindow ui;
-    private String ip;
+    private String ip = "127.0.0.1";
     private Map<String, String> userList;
 
     /**
@@ -47,7 +46,6 @@ public class Server {
     public static void main(String[] args) {
         try {
             Server server = null;
-
             if (args.length == 1) {
                 if (Integer.parseInt(args[0]) <= 1024 || Integer.parseInt(args[0]) >= 49151) {
                     System.out.println("Invalid Port Number: Port number should be between 1024 and 49151!");
@@ -60,8 +58,7 @@ public class Server {
             }
             server.run();
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(
-                    "Lack of Parameters:\nPlease run like \"java - jar CentralServer.jar <port>\"!");
+            System.out.println("Lack of Parameters:\nPlease run like \"java - jar CentralServer.jar <port>\"!");
         } catch (NumberFormatException e) {
             System.out.println("Invalid Port Number: Port number should be between 1024 and 49151!");
         } catch (BindException e) {
@@ -115,12 +112,9 @@ public class Server {
 
     private void init() throws IOException {
         // Get IP address of Localhost
-        ip = RealIp.getHostIp();
         server = new ServerSocket(this.port);
-
         // Use to record the user add into the server.
         userList = new HashMap<>();
-
         printInitialStats();
         this.ui = new ServerWindow(ip, String.valueOf(port));
     }

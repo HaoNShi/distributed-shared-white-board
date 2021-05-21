@@ -7,7 +7,7 @@ import java.awt.*;
  */
 public class MyImage implements MyShape {
     private final MyPoint startP;
-    private Image image = null;
+    private Image image;
 
     public MyImage(MyPoint startP, Image image) {
         this.startP = startP;

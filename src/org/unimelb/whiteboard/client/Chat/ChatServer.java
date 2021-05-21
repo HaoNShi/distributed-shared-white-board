@@ -38,21 +38,24 @@ public class ChatServer implements Runnable {
 
     private void init() {
         chatPanel = new ChatPanel();
-        clients = new Vector<>(); // Vector是clients的集合，是线程安全的！
+        clients = new Vector<>(); // Vector is a collection of clients and is thread-safe
         chatPanel.btnSend.addActionListener((e) -> {
             SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
             processMsg('[' + df.format(new Date()) + "] " + userId + ":\n" + this.chatPanel.txtInput.getText());
         });
     }
 
-    // 处理信息：1.把信息显示到列表框里。2.广播信息
+    /**
+     * Processing information: 1. Display the information in the textArea. 2. Broadcast information
+     */
     public void processMsg(String str) {
         SwingUtilities.invokeLater(() -> chatPanel.textArea.append(str + '\n'));
-
         broadcastMsg(str);
     }
 
-    // 广播：用一个循环把信息发给所有连接
+    /**
+     * Broadcast: send information to all connections in a loop
+     */
     public void broadcastMsg(String str) {
         Iterator<Connection> iter = clients.iterator();
         Connection client;
@@ -72,7 +75,9 @@ public class ChatServer implements Runnable {
         broadcastMsg(chatPanel.txtInput.getText());
     }
 
-    // Create a ServerSocket to listen for connections on; start the thread
+    /**
+     * Create a ServerSocket to listen for connections on; start the thread
+     */
     public void ServerListen() {
         try {
             // Get a random chat port (Available one).
@@ -85,15 +90,16 @@ public class ChatServer implements Runnable {
             e.printStackTrace();
         }
         processMsg("Chat: listening on port " + chatPort);
-        // 这个线程是server thread，处理多个客户，下面的run()函数就是这个线程的
+        // Server thread, which handles multiple clients, run below is for this thread
         thread = new Thread(this);
         thread.start();
     }
 
-    // The body of the server thread.(上面的thread)
-    // Loop forever,listening for and accepting connections from clients.
-    // For each connection, create a Connection object to handle communication
-    // through the new Socket.
+    /**
+     * The body of the server thread.(thread above)
+     * Loop forever,listening for and accepting connections from clients.
+     * For each connection, create a Connection object to handle communication through the new Socket.
+     */
     public void run() {
         try {
             while (true) {

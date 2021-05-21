@@ -1,4 +1,4 @@
-package org.unimelb.whiteboard.util;
+package org.unimelb.whiteboard.client.util;
 
 import org.unimelb.whiteboard.client.Client;
 import org.unimelb.whiteboard.client.User.UserManager;

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.unimelb.whiteboard.client.Client;
 import org.unimelb.whiteboard.client.RMI.IRemoteDoor;
 import org.unimelb.whiteboard.client.StateCode.StateCode;
-import org.unimelb.whiteboard.util.Execute;
+import org.unimelb.whiteboard.client.util.Execute;
 
 import javax.swing.*;
 import java.awt.*;

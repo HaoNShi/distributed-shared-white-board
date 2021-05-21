@@ -9,15 +9,19 @@ import java.net.Socket;
 import java.security.Key;
 import java.util.Base64;
 
-// 每一个连接都是一个线程
-// This class is the thread that handles all communication with a client
+/**
+ * Each connection is a thread
+ * This class is the thread that handles all communication with a client
+ */
 class Connection extends Thread {
     protected Socket client;
     protected DataInputStream in;
     protected DataOutputStream out;
     ChatServer server;
 
-    // Initialize the stream and start the thread
+    /**
+     * Initialize the stream and start the thread
+     */
     public Connection(Socket client_socket, ChatServer server_frame) {
         client = client_socket;
         server = server_frame;
@@ -63,9 +67,11 @@ class Connection extends Thread {
         }
     }
 
-    // Connection里面这个线程也是无限循环的，用来接收信息、处理信息
-    // Provide service.
-    // Read a line
+    /**
+     * This thread in Connection is also infinite loop, used to receive information and process information
+     * Provide service.
+     * Read a line
+     */
     public void run() {
         try {
             for (; ; ) {
@@ -99,7 +105,6 @@ class Connection extends Thread {
             return msg;
         } catch (IOException e) {
             disconnect();
-            // e.printStackTrace();
         }
         return "";
     }

@@ -11,10 +11,24 @@ import java.awt.event.ActionListener;
 public class NewApplicantWindow extends JDialog {
     private static final long serialVersionUID = -1582604536132283889L;
     private final JPanel contentPanel = new JPanel();
-    private JButton agreeBtn;
-    private JButton disagreeBtn;
-    private JButton ignoreBtn;
+    private final JButton agreeBtn;
+    private final JButton disagreeBtn;
+    private final JButton ignoreBtn;
     private int count = 10;
+
+    /**
+     * Timer
+     */
+    Timer timer = new Timer(1000, new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            count--;
+            if (count < 0) {
+                timer.stop();
+                NewApplicantWindow.this.dispose(); // 时间倒数完毕，销毁Dialog
+            } else
+                ignoreBtn.setText("Ignore(" + count + ")");
+        }
+    });
 
     /**
      * Create the dialog.
@@ -64,17 +78,5 @@ public class NewApplicantWindow extends JDialog {
 
         timer.start();
     }
-
-    // Timer类
-    Timer timer = new Timer(1000, new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            count--;
-            if (count < 0) {
-                timer.stop();
-                NewApplicantWindow.this.dispose(); // 时间倒数完毕，销毁Dialog
-            } else
-                ignoreBtn.setText("Ignore(" + count + ")");
-        }
-    });
 
 }

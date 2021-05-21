@@ -1,4 +1,4 @@
-package org.unimelb.whiteboard.util;
+package org.unimelb.whiteboard.client.util;
 
 import com.alibaba.fastjson.JSONObject;
 import org.unimelb.whiteboard.client.StateCode.StateCode;
@@ -8,8 +8,7 @@ import java.util.concurrent.TimeoutException;
 public class Execute {
 
     /**
-     * Send request to central server, which can detect whether the server address
-     * is workable or not.
+     * Send request to central server, which can detect whether the server address is workable or not.
      */
     public static final JSONObject execute(JSONObject reqJSON, String ip, int port) {
         JSONObject resJSON = new JSONObject();
@@ -24,7 +23,6 @@ public class Execute {
             }
             resJSON = eThread.getResJSON();
         } catch (TimeoutException e) {
-            //resJSON = new JSONObject();
             resJSON.put("state", StateCode.TIMEOUT);
         } catch (Exception e) {
             e.printStackTrace();

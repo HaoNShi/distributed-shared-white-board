@@ -2,7 +2,7 @@ package org.unimelb.whiteboard.client.Login;
 
 import org.unimelb.whiteboard.client.Client;
 import org.unimelb.whiteboard.client.StateCode.StateCode;
-import org.unimelb.whiteboard.util.NumberTextField;
+import org.unimelb.whiteboard.client.util.NumberTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,12 +10,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginWindow {
+    private final LoginController controller;
     protected JTextField userIdTextField;
     protected JTextField addressTextField;
     protected JTextField portTextField;
     protected Client client;
     private JFrame frame;
-    private final LoginController controller;
 
     /**
      * Create the application.
@@ -101,7 +101,7 @@ public class LoginWindow {
 
         portTextField = new JTextField();
         portTextField.setFont(new Font("Arial", Font.PLAIN, 12));
-        portTextField.setText("4443");
+        portTextField.setText("8080");
         portTextField.setBounds(96, 60, 192, 26);
         portTextField.setColumns(10);
         frame.getContentPane().add(portTextField);

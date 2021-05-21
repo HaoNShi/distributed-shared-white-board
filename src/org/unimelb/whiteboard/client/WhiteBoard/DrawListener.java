@@ -13,10 +13,10 @@ public class DrawListener extends MouseAdapter implements ActionListener {
     private final WhiteBoardWindow wbv;
     private MyPoint startP, endP;
     private String toolName = "pen";
-    private Color color = null;
+    private Color color;
     private Image drawBuffer = null;
     private int thickness = 2;
-    private MyFreeDraw currentFreeDraw = null;
+    private MyFreeDraw currentFreeDraw;
 
     DrawListener(WhiteBoardWindow wbv) {
         currentFreeDraw = null;
@@ -37,7 +37,6 @@ public class DrawListener extends MouseAdapter implements ActionListener {
     }
 
     public void mousePressed(MouseEvent e) {
-//		System.out.println("Operation: " + "mousePressed " + toolName);
         color = wbv.getCurrentColor();
         thickness = wbv.getThickness();
         startP = new MyPoint(e.getX(), e.getY());
@@ -46,7 +45,6 @@ public class DrawListener extends MouseAdapter implements ActionListener {
     }
 
     public void mouseReleased(MouseEvent e) {
-//		System.out.println("Operation: " + "mouseReleased " + toolName);
         endP = new MyPoint(e.getX(), e.getY());
         MyShape myShape = null;
         if (toolName.equals("line")) {
@@ -83,7 +81,6 @@ public class DrawListener extends MouseAdapter implements ActionListener {
         } else {
             System.out.println("Error: Unknown Tool Name!");
         }
-//		wbv.getPaintBoardPanel().revalidate();
         wbv.getPaintBoardPanel().setBufferShape(null);
         if (myShape != null) wbv.getPaintManager().addShape(myShape);
     }

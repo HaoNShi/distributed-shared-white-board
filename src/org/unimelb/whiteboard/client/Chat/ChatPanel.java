@@ -32,13 +32,16 @@ public class ChatPanel extends JPanel {
         textArea.setLineWrap(true);
         textArea.setEditable(false);
         chatScrollPane.setViewportView(textArea);
+
         JPanel pnlFoot = new JPanel();
         pnlFoot.setLayout(new BorderLayout(0, 0));
         txtInput = new JTextField("", 10);
         pnlFoot.add(txtInput, BorderLayout.CENTER);
+
         btnSend = new JButton("Send");
         btnSend.setPreferredSize(new Dimension(70, 0));
         pnlFoot.add(btnSend, BorderLayout.EAST);
+
         add(pnlFoot, BorderLayout.SOUTH);
     }
 }

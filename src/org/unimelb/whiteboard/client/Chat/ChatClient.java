@@ -101,12 +101,14 @@ public class ChatClient implements Runnable {
         }
     }
 
-    // run()方法作用：一直和服务端通讯，包括接收信息receiveMsg()、处理信息processMsg()
+    /**
+     * Continue to communicate with the server, including receiving and processing information
+     */
     public void run() {
         while (true) {
             try {
                 String msg = receiveMsg();
-                Thread.sleep(100L); //
+                Thread.sleep(100L);
                 if (!msg.equals("")) {
                     processMsg(msg);
                 }
@@ -116,13 +118,17 @@ public class ChatClient implements Runnable {
         }
     }
 
-    // 发送信息，out流写出去，写到服务端
+    /**
+     * Send information, write out stream to the server
+     */
     public void sendMsg(String msg) throws IOException {
         sendEncrypted(msg, out);
         out.flush();
     }
 
-    // 接收信息，in流
+    /**
+     * Receive information, in stream
+     */
     public String receiveMsg() throws IOException {
         try {
             if (in.available() > 0) {
@@ -134,7 +140,9 @@ public class ChatClient implements Runnable {
         return "";
     }
 
-    // 处理信息（显示信息）
+    /**
+     * Processing information (display information)
+     */
     public void processMsg(String str) {
         SwingUtilities.invokeLater(() -> chatPanel.textArea.append(str + '\n'));
     }

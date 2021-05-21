@@ -6,12 +6,11 @@ public class User implements Serializable {
     public static final int MANAGER = 0;
     public static final int MEMBER = 1;
     public static final int APPLICANT = 2;
+
     // Personal info
     String userId;
-
     // User identity
     int identity;
-
     // Network Info
     String ip;
     int registerPort;

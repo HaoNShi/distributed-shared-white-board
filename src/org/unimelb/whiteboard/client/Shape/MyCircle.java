@@ -10,7 +10,7 @@ public class MyCircle implements MyShape {
 
 
     public MyCircle(MyPoint startP, MyPoint endP, Color color, int thickness) {
-        MyPoint temp = null;
+        MyPoint temp;
         if (startP.getX() > endP.getX()) {
             if (startP.getY() > endP.getY()) {
                 temp = endP;

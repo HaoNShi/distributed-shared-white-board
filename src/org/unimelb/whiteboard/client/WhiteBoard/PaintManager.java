@@ -12,7 +12,7 @@ import java.util.Vector;
 
 
 public class PaintManager {
-    // Default mode.
+    // Default mode
     public static final int SERVER_MODE = 0;
     public static final int CLIENT_MODE = 1;
     public static final int OFFLINE_MODE = 2;
@@ -20,13 +20,13 @@ public class PaintManager {
     private final UserManager userManager;
     // There are three kind of mode: server, client and offline
     private final int mode;
-    // Use to record all the shapes.
-    private Vector<MyShape> paintHistory = null;
-    // Use to handle redo and undo, only host can use.
+    // Use to record all the shapes
+    private Vector<MyShape> paintHistory;
+    // Use to handle redo and undo, only host can use
     private Stack<MyShape> redoHistory = null;
     // Use to store the current painting area
     private PaintBoardPanel paintArea;
-    // Use to control the editMenu UI.
+    // Use to control the editMenu UI
     private EditMenu editMenu;
 
     /**
@@ -89,7 +89,6 @@ public class PaintManager {
                 } catch (RemoteException e) {
                     userManager.removeMember(userId);
                     System.err.println("Can't connect to member " + userId + ", Remove.");
-//					e.printStackTrace();
                 }
             }
             paintArea.repaint();

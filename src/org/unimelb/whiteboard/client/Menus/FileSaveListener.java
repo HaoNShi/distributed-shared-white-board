@@ -20,7 +20,7 @@ import java.util.Vector;
 public class FileSaveListener implements ActionListener {
     private final WhiteBoardWindow wbv;
     private final Client client;
-    private String action = null;
+    private String action;
 
     public FileSaveListener(WhiteBoardWindow wbv, Client client, String action) {
         super();

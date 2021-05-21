@@ -45,8 +45,7 @@ public class RequestHandler extends Thread {
                     int port = reqJSON.getInteger("hostPort");
                     // return roomId
                     roomId = controller.getRoomManager().addRoom(ipAddress, port, hostName, roomName, password);
-                    controller.printOnBoth(
-                            hostName + " create a room! Current room num: " + controller.getRoomManager().getRoomNum());
+                    controller.printOnBoth(hostName + " create a room! Current room num: " + controller.getRoomManager().getRoomNum());
                     controller.printOnBoth("- Host: " + ipAddress + ": " + port);
                     resJSON.put("state", StateCode.SUCCESS);
                     resJSON.put("roomId", roomId);
@@ -86,8 +85,7 @@ public class RequestHandler extends Thread {
                         resJSON.put("state", StateCode.FAIL);
                     } else {
                         controller.getUserList().put(userId, userId);
-                        controller.printOnBoth(
-                                "User-" + userId + " join. " + "Current user number: " + controller.getUserList().size());
+                        controller.printOnBoth("User-" + userId + " join. " + "Current user number: " + controller.getUserList().size());
                         resJSON.put("state", StateCode.SUCCESS);
                     }
                     break;
@@ -95,11 +93,9 @@ public class RequestHandler extends Thread {
                     userId = reqJSON.get("userId").toString();
                     if (controller.getUserList().containsKey(userId)) {
                         controller.getUserList().remove(userId);
-                        controller.printOnBoth(
-                                "Delete " + userId + ". " + "Current user number: " + controller.getUserList().size());
+                        controller.printOnBoth("Delete " + userId + ". " + "Current user number: " + controller.getUserList().size());
                         controller.getRoomManager().removeRoom(userId);
-                        controller.printOnBoth("Delete " + userId + "'s room. " + "Current user number: "
-                                + controller.getRoomManager().getRoomNum());
+                        controller.printOnBoth("Delete " + userId + "'s room. " + "Current user number: " + controller.getRoomManager().getRoomNum());
                         resJSON.put("state", StateCode.SUCCESS);
                     } else {
                         controller.printOnBoth(userId + " not exist! Can't be delete.");

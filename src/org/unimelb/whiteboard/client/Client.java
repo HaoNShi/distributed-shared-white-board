@@ -10,8 +10,7 @@ import org.unimelb.whiteboard.client.StateCode.StateCode;
 import org.unimelb.whiteboard.client.WhiteBoard.ClientWhiteBoard;
 import org.unimelb.whiteboard.client.WhiteBoard.ServerWhiteBoard;
 import org.unimelb.whiteboard.client.WhiteBoard.SharedWhiteBoard;
-import org.unimelb.whiteboard.util.Execute;
-import org.unimelb.whiteboard.util.RealIp;
+import org.unimelb.whiteboard.client.util.Execute;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class Client {
     private LoginWindow loginWindow = null;
     private LobbyWindow lobbyWindow = null;
     // User information
-    private String ip;
+    private String ip = "127.0.0.1";
     private String userId = "";
     // Central server information
     private String serverIp = "";
@@ -241,9 +240,6 @@ public class Client {
         }
     }
 
-    /**
-     *
-     */
     public void joinRoom(String hostIp, int chatPort) {
         tempClientWhiteBoard.createChatClient(hostIp, chatPort);
         sharedWhiteBoard = tempClientWhiteBoard;
@@ -384,9 +380,6 @@ public class Client {
                     return new ServerSocket(port);
                 }
             });
-
-            // Get IP address of Localhost.
-            ip = RealIp.getHostIp();
 
             // Get a random port (Available one).
             ServerSocket registrySocket = new ServerSocket(0);

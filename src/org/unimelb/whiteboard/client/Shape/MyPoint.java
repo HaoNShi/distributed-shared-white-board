@@ -15,12 +15,6 @@ public class MyPoint implements Serializable {
         this.y = y;
     }
 
-    public static final void switchPoints(MyPoint p1, MyPoint p2) {
-        MyPoint temp = p1;
-        p1 = p2;
-        p2 = p1;
-    }
-
     public int getX() {
         return x;
     }
@@ -37,7 +31,4 @@ public class MyPoint implements Serializable {
         this.y = y;
     }
 
-    public boolean equals(Point p) {
-        return (this.x == p.getX() && this.y == p.getY());
-    }
 }

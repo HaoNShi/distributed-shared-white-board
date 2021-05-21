@@ -3,7 +3,7 @@ package org.unimelb.whiteboard.client.Shape;
 import java.awt.*;
 
 /**
- * My Shape
+ * My Line
  */
 public class MyLine implements MyShape {
     private final MyPoint startP;
@@ -19,8 +19,7 @@ public class MyLine implements MyShape {
     }
 
     public void draw(Graphics2D g) {
-        g.setStroke(new BasicStroke(thickness, BasicStroke.CAP_ROUND,
-                BasicStroke.JOIN_BEVEL));
+        g.setStroke(new BasicStroke(thickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
         g.setColor(color);
         g.drawLine(startP.getX(), startP.getY(), endP.getX(), endP.getY());
     }

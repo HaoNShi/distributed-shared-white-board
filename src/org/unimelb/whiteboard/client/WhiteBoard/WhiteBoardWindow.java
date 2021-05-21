@@ -5,8 +5,8 @@ import org.unimelb.whiteboard.client.Client;
 import org.unimelb.whiteboard.client.Menus.EditMenu;
 import org.unimelb.whiteboard.client.Menus.FileMenu;
 import org.unimelb.whiteboard.client.User.UserManager;
-import org.unimelb.whiteboard.util.NumberTextField;
-import org.unimelb.whiteboard.util.WhiteBoardCloseListener;
+import org.unimelb.whiteboard.client.util.NumberTextField;
+import org.unimelb.whiteboard.client.util.WhiteBoardCloseListener;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
