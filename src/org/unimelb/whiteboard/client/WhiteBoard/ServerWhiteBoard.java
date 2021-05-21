@@ -17,7 +17,7 @@ public class ServerWhiteBoard extends SharedWhiteBoard {
         initDoorRMI();
         super.initUmRMI();
         super.initPaintRMI();
-        userManager.setHostPaintManager(paintManager);
+        userManager.setManagerPaintManager(paintManager);
         initChat();
         initView();
     }
@@ -45,7 +45,7 @@ public class ServerWhiteBoard extends SharedWhiteBoard {
 
     private void initChat() {
         chatServer = new ChatServer(client.getUserId());
-        userManager.setHostChatPort(chatServer.getPort());
+        userManager.setManagerChatPort(chatServer.getPort());
         userManager.setChatPanel(chatServer.getPanel());
     }
 

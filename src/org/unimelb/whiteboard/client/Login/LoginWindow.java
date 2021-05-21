@@ -45,8 +45,7 @@ public class LoginWindow {
         frame.getContentPane().setLayout(null);
 
         JButton btnLogin = new JButton("Login");
-        btnLogin.setFont(new Font("Arial", Font.PLAIN, 12));
-        btnLogin.setBounds(111, 141, 106, 32);
+        btnLogin.setBounds(120, 135, 80, 30);
         frame.getContentPane().add(btnLogin);
         // Login logic here.
         btnLogin.addActionListener(new ActionListener() {

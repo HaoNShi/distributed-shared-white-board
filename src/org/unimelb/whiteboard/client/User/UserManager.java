@@ -15,63 +15,62 @@ import java.util.Map;
 
 
 public class UserManager {
-    private final Boolean isHost;
-    // Host info
-    private final User host;
-    private final Map<String, IRemotePaint> guestRemotePaints;
-    private final Map<String, IRemoteApp> guestRemoteApps;
-    private final Map<String, IRemoteUM> guestRemoteUMs;
-    // Visitors info
-    private final Map<String, User> visitors;
-    private final Map<String, IRemoteApp> visitorRemoteApps;
+    // Manager info
+    private final User manager;
+    private final Boolean isManager;
+    private PaintManager managerPaintManager;
+    private int managerChatPort;
+    private IRemotePaint managerRemotePaint;
+    private IRemoteUM managerRemoteUM;
+    private IRemoteApp managerRemoteApp;
+    // Applicants info
+    private final Map<String, User> applicants;
+    private final Map<String, IRemoteApp> applicantRemoteApps;
+    // Members info
+    private Map<String, User> members;
+    private final Map<String, IRemotePaint> memberRemotePaints;
+    private final Map<String, IRemoteApp> memberRemoteApps;
+    private final Map<String, IRemoteUM> memberRemoteUMs;
     // Use to refresh ui
     ClientListScrollPanel clsp;
     ChatPanel chatPanel;
-    private PaintManager hostPaintManager;
-    private int hostChatPort;
-    private IRemotePaint hostRemotePaint;
-    private IRemoteUM hostRemoteUM;
-    private IRemoteApp hostRemoteApp;
-    // Guests info
-    private Map<String, User> guests;
 
-    public UserManager(Boolean isHost, String hostId, String hostIp, int registerPort, int chatPort) {
-        this.isHost = isHost;
+    public UserManager(Boolean isManager, String managerId, String managerIp, int registerPort, int chatPort) {
+        this.isManager = isManager;
 
-        this.host = new User(hostId, User.HOST, hostIp, registerPort, chatPort);
-        if (!isHost) {
+        this.manager = new User(managerId, User.MANAGER, managerIp, registerPort, chatPort);
+        if (!isManager) {
             try {
-                Registry registry = LocateRegistry.getRegistry(hostIp, registerPort);
-                // Registry registry = LimitedTimeRegistry.getLimitedTimeRegistry(hostIp, registerPort, 1000);
-                hostRemotePaint = (IRemotePaint) registry.lookup("paint");
-                hostRemoteUM = (IRemoteUM) registry.lookup("um");
-                hostRemoteApp = (IRemoteApp) registry.lookup("app");
+                Registry registry = LocateRegistry.getRegistry(managerIp, registerPort);
+                managerRemotePaint = (IRemotePaint) registry.lookup("paint");
+                managerRemoteUM = (IRemoteUM) registry.lookup("um");
+                managerRemoteApp = (IRemoteApp) registry.lookup("app");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        guests = new HashMap<>();
-        guestRemotePaints = new HashMap<>();
-        guestRemoteUMs = new HashMap<>();
-        guestRemoteApps = new HashMap<>();
+        members = new HashMap<>();
+        memberRemotePaints = new HashMap<>();
+        memberRemoteUMs = new HashMap<>();
+        memberRemoteApps = new HashMap<>();
 
-        visitors = new HashMap<>();
-        visitorRemoteApps = new HashMap<>();
+        applicants = new HashMap<>();
+        applicantRemoteApps = new HashMap<>();
     }
 
     /**
      * Get the host chat port.
      */
-    public int getHostChatPort() {
-        return hostChatPort;
+    public int getManagerChatPort() {
+        return managerChatPort;
     }
 
     /**
      * Set the host's chat port.
      */
-    public void setHostChatPort(int chatPort) {
-        this.hostChatPort = chatPort;
+    public void setManagerChatPort(int chatPort) {
+        this.managerChatPort = chatPort;
     }
 
     public void setChatPanel(ChatPanel chatPanel) {
@@ -81,98 +80,95 @@ public class UserManager {
     /**
      * This method is for host, set the host paint manager.
      */
-    public void setHostPaintManager(PaintManager paintManager) {
-        if (isHost)
-            this.hostPaintManager = paintManager;
+    public void setManagerPaintManager(PaintManager paintManager) {
+        if (isManager)
+            this.managerPaintManager = paintManager;
     }
 
     /**
-     * Remove all the guest and visitor.
+     * Remove all the member and applicant.
      */
     public void clear() {
-        for (IRemoteApp remoteApp : guestRemoteApps.values()) {
+        for (IRemoteApp remoteApp : memberRemoteApps.values()) {
             try {
                 remoteApp.askOut();
             } catch (Exception e) {
-                System.out.println("Discover a guest has network problem when asking him out.");
+                System.out.println("Discover a member has network problem when asking him out.");
             }
         }
 
-        for (IRemoteApp remoteApp : visitorRemoteApps.values()) {
+        for (IRemoteApp remoteApp : applicantRemoteApps.values()) {
             try {
                 remoteApp.askOut();
             } catch (Exception e) {
-                System.out.println("Discover a visitor has network problem when asking him out.");
+                System.out.println("Discover a applicant has network problem when asking him out.");
             }
         }
 
-        guestRemoteApps.clear();
-        guestRemotePaints.clear();
-        guestRemoteUMs.clear();
-        guests.clear();
+        memberRemoteApps.clear();
+        memberRemotePaints.clear();
+        memberRemoteUMs.clear();
+        members.clear();
 
-        visitorRemoteApps.clear();
-        visitors.clear();
+        applicantRemoteApps.clear();
+        applicants.clear();
     }
 
     /**
      * Check whether is the user manager belongs to host.
      */
-    public Boolean isHost() {
-        return isHost;
+    public Boolean isManager() {
+        return isManager;
     }
 
     /**
      * Get remote UM.
      */
-    public IRemoteUM getHostRemoteUM() {
-        return hostRemoteUM;
+    public IRemoteUM getManagerRemoteUM() {
+        return managerRemoteUM;
     }
 
     /**
-     * Add a visitor to guest list, open the door for a visitor.
+     * Add a applicant to member list, open the door for a applicant.
      */
-    public void addGuest(String guestId) {
-        System.out.println("Allow " + guestId + " enter.");
-        // add guest
-        User guest = visitors.get(guestId);
-        guests.put(guestId, guest);
-        guestRemoteApps.put(guestId, visitorRemoteApps.get(guestId));
+    public void addMember(String userId) {
+        System.out.println("Allow " + userId + " enter.");
+        // add member
+        User member = applicants.get(userId);
+        members.put(userId, member);
+        memberRemoteApps.put(userId, applicantRemoteApps.get(userId));
         try {
-            Registry clientRegistry = LocateRegistry.getRegistry(guest.getIp(), guest.getRegisterPort());
-            // Registry clientRegistry = LimitedTimeRegistry.getLimitedTimeRegistry(guest.getIp(), guest.getRegisterPort(), 1000);
-            IRemoteApp guestRemoteApp = (IRemoteApp) clientRegistry.lookup("app");
-            guestRemoteApp.askIn(host.getIp(), hostChatPort);
+            Registry clientRegistry = LocateRegistry.getRegistry(member.getIp(), member.getRegisterPort());
+            IRemoteApp memberRemoteApp = (IRemoteApp) clientRegistry.lookup("app");
+            memberRemoteApp.askIn(manager.getIp(), managerChatPort);
 
             IRemotePaint remotePaint = (IRemotePaint) clientRegistry.lookup("paint");
-            guestRemotePaints.put(guestId, remotePaint);
-            if (hostPaintManager != null) {
-                remotePaint.setHistory(hostPaintManager.getPaintHistory());
+            memberRemotePaints.put(userId, remotePaint);
+            if (managerPaintManager != null) {
+                remotePaint.setHistory(managerPaintManager.getPaintHistory());
             }
 
             IRemoteUM remoteUM = (IRemoteUM) clientRegistry.lookup("um");
-            guestRemoteUMs.put(guestId, remoteUM);
+            memberRemoteUMs.put(userId, remoteUM);
 
-            // delete visitor
-            visitors.remove(guestId);
-            visitorRemoteApps.remove(guestId);
+            // delete applicant
+            applicants.remove(userId);
+            applicantRemoteApps.remove(userId);
         } catch (Exception e) {
-            removeGuest(guestId);
-            visitors.remove(guestId);
-            visitorRemoteApps.remove(guestId);
-            chatPanel.appendText("Can't connect to guest " + guestId + ", Remove.\n");
-            System.err.println("Can't connect to guest " + guestId + ", Remove.");
-            // e.printStackTrace();
+            removeMember(userId);
+            applicants.remove(userId);
+            applicantRemoteApps.remove(userId);
+            chatPanel.appendText("Can't connect to member " + userId + ", Remove.\n");
+            System.err.println("Can't connect to member " + userId + ", Remove.");
         }
 
         // set remote user manager
-        for (String key : guestRemoteUMs.keySet()) {
+        for (String key : memberRemoteUMs.keySet()) {
             try {
-                guestRemoteUMs.get(key).setGuests(guests);
+                memberRemoteUMs.get(key).setMembers(members);
             } catch (RemoteException e) {
-                System.err.println("Can't connect to guest " + key + ", Remove.");
-                removeGuest(key);
-                //e.printStackTrace();
+                System.err.println("Can't connect to member " + key + ", Remove.");
+                removeMember(key);
             }
         }
 
@@ -183,28 +179,25 @@ public class UserManager {
     }
 
     /**
-     * Remove a guest from guest list.
+     * Remove a member from member list.
      */
-    public void removeGuest(String guestId) {
-        guests.remove(guestId);
-        guestRemoteUMs.remove(guestId);
-        guestRemotePaints.remove(guestId);
-        guestRemoteApps.remove(guestId);
+    public void removeMember(String userId) {
+        members.remove(userId);
+        memberRemoteUMs.remove(userId);
+        memberRemotePaints.remove(userId);
+        memberRemoteApps.remove(userId);
 
         // set remote user manager
-        for (String key : guestRemoteUMs.keySet()) {
+        for (String key : memberRemoteUMs.keySet()) {
             try {
-                guestRemoteUMs.get(key).setGuests(guests);
+                memberRemoteUMs.get(key).setMembers(members);
             } catch (RemoteException e) {
-                System.err.println("Can't connect to guest " + key + ", Remove.");
-                removeGuest(key);
-                //e.printStackTrace();
+                System.err.println("Can't connect to member " + key + ", Remove.");
+                removeMember(key);
             }
         }
-
         if (chatPanel != null)
-            chatPanel.appendText("Guest " + guestId + " leaves!\n");
-
+            chatPanel.appendText("Member " + userId + " leaves!\n");
         // refresh ui.
         if (clsp != null) {
             clsp.updateUserList();
@@ -212,45 +205,40 @@ public class UserManager {
     }
 
     /**
-     * Kick a guest out of the room.
+     * Kick a member out of the room.
      */
-    public void kickGuest(String guestId) {
-        System.out.println("Kick " + guestId + " out.");
+    public void kickMember(String userId) {
+        System.out.println("Kick " + userId + " out.");
         try {
-            IRemoteApp remoteApp = guestRemoteApps.get(guestId);
+            IRemoteApp remoteApp = memberRemoteApps.get(userId);
             remoteApp.askOut();
         } catch (Exception e) {
-            System.err.println("Can't connect to guest " + guestId + ", Remove.");
-            // e.printStackTrace();
+            System.err.println("Can't connect to member " + userId + ", Remove.");
         }
-        removeGuest(guestId);
+        removeMember(userId);
     }
 
     /**
-     * Get all the guests' remotePaints
+     * Get all the members' remotePaints
      */
-    public Map<String, IRemotePaint> getGuestRemotePaints() {
-        return guestRemotePaints;
+    public Map<String, IRemotePaint> getMemberRemotePaints() {
+        return memberRemotePaints;
     }
 
     /**
-     * Add a visitor to the visitor list, when the visitor knock the door.
+     * Add a applicant to the applicant list, when the applicant knock the door.
      */
-    public void addVisitor(String userId, String ip, int registerPort) {
-        visitors.put(userId, new User(userId, User.VISITOR, ip, registerPort, -1));
+    public void addApplicant(String userId, String ip, int registerPort) {
+        applicants.put(userId, new User(userId, User.APPLICANT, ip, registerPort, -1));
         try {
             Registry clientRegistry = LocateRegistry.getRegistry(ip, registerPort);
-            // Registry clientRegistry = LimitedTimeRegistry.getLimitedTimeRegistry(ip, registerPort, 1000);
-            IRemoteApp remoteVisitorApp = (IRemoteApp) clientRegistry.lookup("app");
-            visitorRemoteApps.put(userId, remoteVisitorApp);
+            IRemoteApp remoteApplicantApp = (IRemoteApp) clientRegistry.lookup("app");
+            applicantRemoteApps.put(userId, remoteApplicantApp);
         } catch (Exception e) {
             System.err.println("Can not get the client registry.");
-            // e.printStackTrace();
         }
-
         if (chatPanel != null)
-            chatPanel.appendText("Visitor " + userId + " wants to join!\n");
-
+            chatPanel.appendText("Applicant " + userId + " wants to join!\n");
         // refresh ui.
         if (clsp != null) {
             clsp.updateUserList();
@@ -258,43 +246,41 @@ public class UserManager {
     }
 
     /**
-     * Remove the visitor from the visitor list.
+     * Remove the applicant from the applicant list.
      */
-    public void removeVisitor(String userId) {
-        visitors.remove(userId);
-        visitorRemoteApps.remove(userId);
+    public void removeApplicant(String userId) {
+        applicants.remove(userId);
+        applicantRemoteApps.remove(userId);
         if (chatPanel != null)
-            chatPanel.appendText("Visitor " + userId + " leaves!\n");
+            chatPanel.appendText("Applicant " + userId + " leaves!\n");
         // refresh ui.
         if (clsp != null) {
             clsp.updateUserList();
         }
     }
 
-    public void kickVisitor(String userId) {
+    public void kickApplicant(String userId) {
         try {
-            IRemoteApp remoteApp = visitorRemoteApps.get(userId);
+            IRemoteApp remoteApp = applicantRemoteApps.get(userId);
             remoteApp.askOut();
         } catch (Exception e) {
             System.err.println("Can not get the client registry.");
-            // e.printStackTrace();
         }
-
-        removeVisitor(userId);
+        removeApplicant(userId);
     }
 
     /**
-     * Get guest list.
+     * Get member list.
      */
-    public Map<String, User> getGuests() {
-        return guests;
+    public Map<String, User> getMembers() {
+        return members;
     }
 
     /**
-     * Update all the guests.
+     * Update all the members.
      */
-    public void setGuests(Map<String, User> guests) {
-        this.guests = guests;
+    public void setMembers(Map<String, User> members) {
+        this.members = members;
         // refresh ui.
         if (clsp != null) {
             clsp.updateUserList();
@@ -302,24 +288,24 @@ public class UserManager {
     }
 
     /**
-     * Get visitor list.
+     * Get applicant list.
      */
-    public Map<String, User> getVisitors() {
-        return visitors;
+    public Map<String, User> getApplicants() {
+        return applicants;
     }
 
     /**
      * Get host.
      */
-    public User getHost() {
-        return host;
+    public User getManager() {
+        return manager;
     }
 
     /**
      * Get the remotePaint of host
      */
-    public IRemotePaint getHostRemotePaint() {
-        return hostRemotePaint;
+    public IRemotePaint getManagerRemotePaint() {
+        return managerRemotePaint;
     }
 
     /**
@@ -333,20 +319,20 @@ public class UserManager {
      * Get the identity of a given userId.
      */
     public int getIdentity(String userId) {
-        if (host.getUserId().equals(userId)) {
-            return User.HOST;
-        } else if (guests.containsKey(userId)) {
-            return User.GUEST;
+        if (manager.getUserId().equals(userId)) {
+            return User.MANAGER;
+        } else if (members.containsKey(userId)) {
+            return User.MEMBER;
         } else {
-            return User.VISITOR;
+            return User.APPLICANT;
         }
     }
 
-    public IRemoteApp getHostRemoteApp() {
-        return hostRemoteApp;
+    public IRemoteApp getManagerRemoteApp() {
+        return managerRemoteApp;
     }
 
-    public void setHostRemoteApp(IRemoteApp hostRemoteApp) {
-        this.hostRemoteApp = hostRemoteApp;
+    public void setManagerRemoteApp(IRemoteApp managerRemoteApp) {
+        this.managerRemoteApp = managerRemoteApp;
     }
 }

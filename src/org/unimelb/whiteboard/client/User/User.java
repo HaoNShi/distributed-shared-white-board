@@ -3,9 +3,9 @@ package org.unimelb.whiteboard.client.User;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    public static final int HOST = 0;
-    public static final int GUEST = 1;
-    public static final int VISITOR = 2;
+    public static final int MANAGER = 0;
+    public static final int MEMBER = 1;
+    public static final int APPLICANT = 2;
     // Personal info
     String userId;
 

@@ -15,7 +15,6 @@ public class RoomCreateWindow extends JDialog {
     private final JTextField roomNameTextField;
     private final JTextField PasswordTextField;
     private final Client client;
-    private final JLabel lblError;
     private String roomName = "";
     private String password = "";
 
@@ -26,46 +25,33 @@ public class RoomCreateWindow extends JDialog {
         this.client = client;
         setTitle("Create Room");
         setResizable(false);
-        setBounds(100, 100, 384, 239);
+        setBounds(100, 100, 300, 220);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPanel.setLayout(null);
         getContentPane().add(contentPanel, BorderLayout.CENTER);
 
         JLabel lblRoomName = new JLabel("Room Name:");
-        lblRoomName.setBounds(49, 24, 106, 27);
-        lblRoomName.setFont(new Font("Arial", Font.PLAIN, 15));
+        lblRoomName.setBounds(25, 22, 73, 20);
         contentPanel.add(lblRoomName);
 
         JLabel lblPassword = new JLabel("Password:");
-        lblPassword.setBounds(49, 78, 106, 27);
-        lblPassword.setFont(new Font("Arial", Font.PLAIN, 15));
+        lblPassword.setBounds(25, 67, 73, 20);
         contentPanel.add(lblPassword);
 
         roomNameTextField = new JTextField();
-        roomNameTextField.setBounds(161, 24, 150, 27);
-        roomNameTextField.setFont(new Font("Arial", Font.PLAIN, 15));
+        roomNameTextField.setBounds(110, 22, 150, 25);
         roomNameTextField.setColumns(10);
         contentPanel.add(roomNameTextField);
 
         PasswordTextField = new JTextField();
-        PasswordTextField.setBounds(161, 78, 150, 27);
-        PasswordTextField.setFont(new Font("Arial", Font.PLAIN, 15));
+        PasswordTextField.setBounds(110, 67, 150, 25);
         PasswordTextField.setColumns(10);
         contentPanel.add(PasswordTextField);
 
-        lblError = new JLabel("Error");
-        lblError.setFont(new Font("Arial", Font.PLAIN, 12));
-        lblError.setBounds(49, 115, 262, 16);
-        lblError.setForeground(Color.RED);
-        lblError.setVisible(false);
-
-        contentPanel.add(lblError);
-
-        JButton okButton = new JButton("OK");
-        okButton.setFont(new Font("Arial", Font.PLAIN, 12));
-        okButton.setBounds(49, 141, 106, 36);
-        okButton.addActionListener(new ActionListener() {
+        JButton createBtn = new JButton("Create");
+        createBtn.setBounds(48, 116, 80, 30);
+        createBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 roomName = roomNameTextField.getText();
                 password = PasswordTextField.getText();
@@ -75,20 +61,19 @@ public class RoomCreateWindow extends JDialog {
                 }
             }
         });
-        okButton.setActionCommand("OK");
-        contentPanel.add(okButton);
-        getRootPane().setDefaultButton(okButton);
+        createBtn.setActionCommand("OK");
+        contentPanel.add(createBtn);
+        getRootPane().setDefaultButton(createBtn);
 
-        JButton cancelButton = new JButton("Cancel");
-        cancelButton.setFont(new Font("Arial", Font.PLAIN, 12));
-        cancelButton.setBounds(205, 141, 106, 36);
-        cancelButton.addActionListener(new ActionListener() {
+        JButton cancelBtn = new JButton("Cancel");
+        cancelBtn.setBounds(150, 116, 80, 30);
+        cancelBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         });
-        cancelButton.setActionCommand("Cancel");
-        contentPanel.add(cancelButton);
+        cancelBtn.setActionCommand("Cancel");
+        contentPanel.add(cancelBtn);
     }
 
     public static void showCreateRoomDialog(Frame owner, Component parentComponent, Client client) {
@@ -102,18 +87,13 @@ public class RoomCreateWindow extends JDialog {
     private Boolean roomInfoCheck() {
         String roomNamePatten = "^\\w{1,8}$";
         String passwordPatten = "^\\w{0,8}$";
-        String err;
 
         if (!Pattern.matches(roomNamePatten, roomName)) {
-            err = "Room Name Format: \\w{1,8}";
-            lblError.setText(err);
-            lblError.setVisible(true);
+            JOptionPane.showMessageDialog(this, "Room name contains illegal characters!", "Warning", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         if (!Pattern.matches(passwordPatten, password)) {
-            err = "Password Format: \\w{,8}";
-            lblError.setText(err);
-            lblError.setVisible(true);
+            JOptionPane.showMessageDialog(this, "Password contains illegal characters!", "Warning", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;

@@ -63,10 +63,8 @@ public class ChatServer implements Runnable {
             } catch (Exception e) {
                 client.disconnect();
                 iter.remove();
-                System.err.println("A guest exit in an abnormal way");
-                // e.printStackTrace();
+                System.err.println("A member exit in an abnormal way.");
             }
-
         }
     }
 
@@ -103,7 +101,7 @@ public class ChatServer implements Runnable {
                 // 封装成功能更强的Connection对象
                 Connection c = new Connection(client_socket, this);
                 clients.add(c);
-                processMsg("A new guest Comes in");
+                processMsg("A new member comes in");
             }
         } catch (IOException e) {
             e.printStackTrace();

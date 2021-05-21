@@ -81,6 +81,7 @@ public class LobbyController {
                                 // The follow code would block all code.
                                 ui.setWaitDialogVisible(true);
                             } catch (Exception e2) {
+                                e2.printStackTrace();
                                 client.unbindAndSetNull();
                                 System.out.println("The host's network has problem!");
                                 JOptionPane.showMessageDialog(ui.getFrame(), "The host's network has problem!");

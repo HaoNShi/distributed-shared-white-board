@@ -160,7 +160,7 @@ public class WhiteBoardWindow {
         drawToolPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel toolPanel = new JPanel();
-        toolPanel.setBorder(new TitledBorder(null, "Tool Bar", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        toolPanel.setBorder(new TitledBorder(null, "Shape", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         toolPanel.setLayout(new GridLayout(0, 1, 0, 0));
         toolPanel.setPreferredSize(new Dimension(0, 300));
         drawToolPanel.add(toolPanel, BorderLayout.NORTH);
@@ -176,7 +176,7 @@ public class WhiteBoardWindow {
 
         // Create color panel
         JPanel colorPanel = new JPanel();
-        colorPanel.setBorder(new TitledBorder(null, "Color Bar", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        colorPanel.setBorder(new TitledBorder(null, "Color", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         drawToolPanel.add(colorPanel, BorderLayout.CENTER);
         colorPanel.setLayout(new BorderLayout(0, 0));
 
@@ -212,13 +212,10 @@ public class WhiteBoardWindow {
         defaultColorPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         JPanel thicknessPanel = new JPanel();
-        thicknessPanel.setBorder(new TitledBorder(null, "Thickness Bar", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        thicknessPanel.setBorder(new TitledBorder(null, "Thickness", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         thicknessPanel.setPreferredSize(new Dimension(0, 50));
         drawToolPanel.add(thicknessPanel, BorderLayout.SOUTH);
         thicknessPanel.setLayout(new BorderLayout(0, 0));
-
-        JLabel lblThickness = new JLabel("Thickness:");
-        thicknessPanel.add(lblThickness, BorderLayout.WEST);
 
         JPanel thicknessTextPanel = new JPanel();
         thicknessPanel.add(thicknessTextPanel, BorderLayout.CENTER);

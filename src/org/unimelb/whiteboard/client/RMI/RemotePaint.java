@@ -19,7 +19,7 @@ public class RemotePaint extends UnicastRemoteObject implements IRemotePaint {
 
     @Override
     public void addShape(MyShape shape) throws RemoteException {
-        System.out.println("Guest add shape.");
+        System.out.println("Member add shape.");
         paintManager.addShape(shape);
     }
 

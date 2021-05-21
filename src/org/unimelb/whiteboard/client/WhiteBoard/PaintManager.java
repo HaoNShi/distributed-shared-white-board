@@ -82,20 +82,20 @@ public class PaintManager {
             paintHistory.add(shape);
             redoHistory.clear();
             if (editMenu != null) editMenu.updateEnable();
-            Map<String, IRemotePaint> guestRemotePaint = userManager.getGuestRemotePaints();
-            for (String guestId : guestRemotePaint.keySet()) {
+            Map<String, IRemotePaint> memberRemotePaints = userManager.getMemberRemotePaints();
+            for (String userId : memberRemotePaints.keySet()) {
                 try {
-                    updateRemoteHistory(guestRemotePaint.get(guestId));
+                    updateRemoteHistory(memberRemotePaints.get(userId));
                 } catch (RemoteException e) {
-                    userManager.removeGuest(guestId);
-                    System.err.println("Can't connect to guest " + guestId + ", Remove.");
+                    userManager.removeMember(userId);
+                    System.err.println("Can't connect to member " + userId + ", Remove.");
 //					e.printStackTrace();
                 }
             }
             paintArea.repaint();
         } else if (mode == CLIENT_MODE) {
             try {
-                userManager.getHostRemotePaint().addShape(shape);
+                userManager.getManagerRemotePaint().addShape(shape);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -118,8 +118,8 @@ public class PaintManager {
             paintHistory.clear();
             redoHistory.clear();
             if (editMenu != null) editMenu.updateEnable();
-            Map<String, IRemotePaint> guestRemotePaint = userManager.getGuestRemotePaints();
-            for (IRemotePaint x : guestRemotePaint.values()) {
+            Map<String, IRemotePaint> memberRemotePaints = userManager.getMemberRemotePaints();
+            for (IRemotePaint x : memberRemotePaints.values()) {
                 try {
                     x.clearHistory();
                 } catch (Exception e) {
@@ -149,13 +149,12 @@ public class PaintManager {
 
         if (mode == SERVER_MODE) {
             if (editMenu != null) editMenu.updateEnable();
-            Map<String, IRemotePaint> guestRemotePaint = userManager.getGuestRemotePaints();
-            for (String guestId : guestRemotePaint.keySet()) {
+            Map<String, IRemotePaint> memberRemotePaints = userManager.getMemberRemotePaints();
+            for (String userId : memberRemotePaints.keySet()) {
                 try {
-                    updateRemoteHistory(guestRemotePaint.get(guestId));
+                    updateRemoteHistory(memberRemotePaints.get(userId));
                 } catch (RemoteException e) {
-                    userManager.removeGuest(guestId);
-                    //e.printStackTrace();
+                    userManager.removeMember(userId);
                 }
             }
         }

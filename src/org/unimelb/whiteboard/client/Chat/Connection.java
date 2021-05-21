@@ -103,6 +103,4 @@ class Connection extends Thread {
         }
         return "";
     }
-
-
 }

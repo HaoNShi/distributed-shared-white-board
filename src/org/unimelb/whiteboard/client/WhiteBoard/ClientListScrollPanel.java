@@ -19,8 +19,8 @@ public class ClientListScrollPanel extends JPanel {
     private JButton btnAgree;
     private JButton btnKickOut;
     private JButton btnDisagree;
-    private JPanel visitorControlPanel;
-    private JPanel guestControlPanel;
+    private JPanel applicantControlPanel;
+    private JPanel memberControlPanel;
     private String selectUserId;
 
     public ClientListScrollPanel(UserManager userManager) {
@@ -35,18 +35,18 @@ public class ClientListScrollPanel extends JPanel {
      */
     public void updateUserList() {
         Vector<String> listData = new Vector<>();
-        // 1. add host.
-        listData.add("[host] " + userManager.getHost().getUserId());
-        // 2. add guest.
-        Map<String, User> guests = userManager.getGuests();
-        for (User x : guests.values()) {
-            listData.add("[guest] " + x.getUserId());
+        // Add manager
+        listData.add("[manager] " + userManager.getManager().getUserId());
+        // Add member
+        Map<String, User> members = userManager.getMembers();
+        for (User x : members.values()) {
+            listData.add("[member] " + x.getUserId());
         }
-
-        if (userManager.isHost()) {
-            Map<String, User> visitors = userManager.getVisitors();
-            for (User x : visitors.values()) {
-                listData.add("[visitor] " + x.getUserId());
+        // Add applicant
+        if (userManager.isManager()) {
+            Map<String, User> applicants = userManager.getApplicants();
+            for (User x : applicants.values()) {
+                listData.add("[applicant] " + x.getUserId());
             }
         }
         userList.setListData(listData);
@@ -59,36 +59,36 @@ public class ClientListScrollPanel extends JPanel {
         scrollPane = new JScrollPane();
         scrollPane.setPreferredSize(new Dimension(200, 200));
 
-        // visitor
-        visitorControlPanel = new JPanel(new GridLayout(1, 2));
+        // applicant
+        applicantControlPanel = new JPanel(new GridLayout(1, 2));
         btnAgree = new JButton("Agree");
         btnAgree.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                userManager.addGuest(selectUserId);
+                userManager.addMember(selectUserId);
                 removeBtn();
             }
         });
-        visitorControlPanel.add(btnAgree);
+        applicantControlPanel.add(btnAgree);
         btnDisagree = new JButton("Disagree");
         btnDisagree.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                userManager.kickVisitor(selectUserId);
+                userManager.kickApplicant(selectUserId);
                 removeBtn();
             }
         });
-        visitorControlPanel.add(btnDisagree);
+        applicantControlPanel.add(btnDisagree);
 
-        // guest
-        guestControlPanel = new JPanel(new GridLayout(1, 1));
+        // member
+        memberControlPanel = new JPanel(new GridLayout(1, 1));
         btnKickOut = new JButton("Kick Out");
         btnKickOut.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                userManager.kickGuest(selectUserId);
+                userManager.kickMember(selectUserId);
                 removeBtn();
             }
         });
-        guestControlPanel.add(btnKickOut);
+        memberControlPanel.add(btnKickOut);
 
         // The user list should be create after the control panel.
         userList = new JList<>();
@@ -103,18 +103,18 @@ public class ClientListScrollPanel extends JPanel {
                         String[] tempStrings = userList.getSelectedValue().split("] ");
                         if (tempStrings[1] != null) {
                             selectUserId = tempStrings[1];
-                            if (userManager.isHost()) {
+                            if (userManager.isManager()) {
                                 int identity = userManager.getIdentity(selectUserId);
-                                if (identity == User.HOST) {
+                                if (identity == User.MANAGER) {
                                     removeBtn();
-                                } else if (identity == User.GUEST) {
-                                    remove(visitorControlPanel);
-                                    add(guestControlPanel, BorderLayout.SOUTH);
+                                } else if (identity == User.MEMBER) {
+                                    remove(applicantControlPanel);
+                                    add(memberControlPanel, BorderLayout.SOUTH);
                                     revalidate();
                                     repaint();
                                 } else {
-                                    remove(guestControlPanel);
-                                    add(visitorControlPanel, BorderLayout.SOUTH);
+                                    remove(memberControlPanel);
+                                    add(applicantControlPanel, BorderLayout.SOUTH);
                                     revalidate();
                                     repaint();
                                 }
@@ -137,8 +137,8 @@ public class ClientListScrollPanel extends JPanel {
     }
 
     private void removeBtn() {
-        remove(guestControlPanel);
-        remove(visitorControlPanel);
+        remove(memberControlPanel);
+        remove(applicantControlPanel);
         revalidate();
         repaint();
     }

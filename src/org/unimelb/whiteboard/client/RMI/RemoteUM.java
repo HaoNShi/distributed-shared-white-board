@@ -16,8 +16,8 @@ public class RemoteUM extends UnicastRemoteObject implements IRemoteUM {
     }
 
     @Override
-    public void setGuests(Map<String, User> guest) throws RemoteException {
-        System.out.println("Host set the guest list.");
-        um.setGuests(guest);
+    public void setMembers(Map<String, User> members) throws RemoteException {
+        System.out.println("Manager set the member list.");
+        um.setMembers(members);
     }
 }

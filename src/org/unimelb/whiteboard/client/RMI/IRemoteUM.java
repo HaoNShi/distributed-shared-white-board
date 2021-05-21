@@ -8,5 +8,5 @@ import java.util.Map;
 
 
 public interface IRemoteUM extends Remote {
-    void setGuests(Map<String, User> guest) throws RemoteException;
+    void setMembers(Map<String, User> members) throws RemoteException;
 }
