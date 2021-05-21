@@ -47,6 +47,8 @@ public class ClientListScrollPanel extends JPanel {
             Map<String, User> applicants = userManager.getApplicants();
             for (User x : applicants.values()) {
                 listData.add("[applicant] " + x.getUserId());
+                NewApplicantWindow applicantWindow = new NewApplicantWindow(this, userManager, x.getUserId());
+                applicantWindow.setVisible(true);
             }
         }
         userList.setListData(listData);
@@ -62,21 +64,10 @@ public class ClientListScrollPanel extends JPanel {
         // applicant
         applicantControlPanel = new JPanel(new GridLayout(1, 2));
         btnAgree = new JButton("Agree");
-        btnAgree.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                userManager.addMember(selectUserId);
-                removeBtn();
-            }
-        });
+        btnAgree.addActionListener(new agreeActionListener());
         applicantControlPanel.add(btnAgree);
         btnDisagree = new JButton("Disagree");
-        btnDisagree.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                userManager.kickApplicant(selectUserId);
-                removeBtn();
-            }
-        });
+        btnDisagree.addActionListener(new disagreeActionListener());
         applicantControlPanel.add(btnDisagree);
 
         // member
@@ -136,10 +127,26 @@ public class ClientListScrollPanel extends JPanel {
         add(userListPanel, BorderLayout.CENTER);
     }
 
-    private void removeBtn() {
+    protected void removeBtn() {
         remove(memberControlPanel);
         remove(applicantControlPanel);
         revalidate();
         repaint();
+    }
+
+    public class agreeActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            userManager.addMember(selectUserId);
+            removeBtn();
+        }
+    }
+
+    public class disagreeActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            userManager.kickApplicant(selectUserId);
+            removeBtn();
+        }
     }
 }

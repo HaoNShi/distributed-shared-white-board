@@ -226,7 +226,7 @@ public class WhiteBoardWindow {
         thicknessTextField = new JTextField();
         thicknessTextField.setDocument(new NumberTextField(2, true));
         thicknessTextField.addKeyListener(new KeyAdapter() {
-            public void keyReleased(KeyEvent e){
+            public void keyReleased(KeyEvent e) {
                 thickness = Integer.parseInt(thicknessTextField.getText());
             }
         });
