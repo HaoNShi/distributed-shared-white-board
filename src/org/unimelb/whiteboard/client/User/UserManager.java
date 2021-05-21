@@ -35,13 +35,13 @@ public class UserManager {
     ClientListScrollPanel clsp;
     ChatPanel chatPanel;
 
-    public UserManager(Boolean isManager, String managerId, String managerIp, int registerPort, int chatPort) {
+    public UserManager(Boolean isManager, String userId, String ip, int registerPort, int chatPort) {
         this.isManager = isManager;
 
-        this.manager = new User(managerId, User.MANAGER, managerIp, registerPort, chatPort);
+        this.manager = new User(userId, User.MANAGER, ip, registerPort, chatPort);
         if (!isManager) {
             try {
-                Registry registry = LocateRegistry.getRegistry(managerIp, registerPort);
+                Registry registry = LocateRegistry.getRegistry(ip, registerPort);
                 managerRemotePaint = (IRemotePaint) registry.lookup("paint");
                 managerRemoteUM = (IRemoteUM) registry.lookup("um");
                 managerRemoteApp = (IRemoteApp) registry.lookup("app");
@@ -60,14 +60,14 @@ public class UserManager {
     }
 
     /**
-     * Get the host chat port.
+     * Get the manager chat port.
      */
     public int getManagerChatPort() {
         return managerChatPort;
     }
 
     /**
-     * Set the host's chat port.
+     * Set the manager's chat port.
      */
     public void setManagerChatPort(int chatPort) {
         this.managerChatPort = chatPort;
@@ -78,7 +78,7 @@ public class UserManager {
     }
 
     /**
-     * This method is for host, set the host paint manager.
+     * This method is for manager, set the manager paint manager.
      */
     public void setManagerPaintManager(PaintManager paintManager) {
         if (isManager)
@@ -115,7 +115,7 @@ public class UserManager {
     }
 
     /**
-     * Check whether is the user manager belongs to host.
+     * Check if the user is manager.
      */
     public Boolean isManager() {
         return isManager;

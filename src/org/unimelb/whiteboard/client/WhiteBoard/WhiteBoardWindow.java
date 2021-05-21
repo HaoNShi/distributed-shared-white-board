@@ -14,6 +14,8 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class WhiteBoardWindow {
     // Default color display in the left bottom.
@@ -223,11 +225,9 @@ public class WhiteBoardWindow {
 
         thicknessTextField = new JTextField();
         thicknessTextField.setDocument(new NumberTextField(2, true));
-        thicknessTextField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        thicknessTextField.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e){
                 thickness = Integer.parseInt(thicknessTextField.getText());
-                thicknessTextField.setFocusable(false);
-                thicknessTextField.setFocusable(true);
             }
         });
         thicknessTextField.setText(Integer.toString(thickness));
