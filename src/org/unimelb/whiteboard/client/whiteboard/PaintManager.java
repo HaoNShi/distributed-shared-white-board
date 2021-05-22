@@ -1,6 +1,5 @@
 package org.unimelb.whiteboard.client.whiteboard;
 
-import org.unimelb.whiteboard.client.menu.EditMenu;
 import org.unimelb.whiteboard.client.remote.IRemotePaint;
 import org.unimelb.whiteboard.client.shape.MyShape;
 import org.unimelb.whiteboard.client.user.UserManager;
@@ -26,8 +25,7 @@ public class PaintManager {
     private Stack<MyShape> redoHistory = null;
     // Use to store the current painting area
     private PaintBoardPanel paintArea;
-    // Use to control the editMenu UI
-    private EditMenu editMenu;
+
 
     /**
      * @param mode There are three kind of mode: server, client and offline
@@ -65,7 +63,6 @@ public class PaintManager {
         paintHistory.clear();
         if (mode == SERVER_MODE) {
             redoHistory.clear();
-            if (editMenu != null) editMenu.updateEnable();
         }
         paintArea.removeAll();
         paintArea.revalidate();
@@ -81,7 +78,6 @@ public class PaintManager {
         if (mode == SERVER_MODE) {
             paintHistory.add(shape);
             redoHistory.clear();
-            if (editMenu != null) editMenu.updateEnable();
             Map<String, IRemotePaint> memberRemotePaints = userManager.getMemberRemotePaints();
             for (String userId : memberRemotePaints.keySet()) {
                 try {
@@ -116,7 +112,6 @@ public class PaintManager {
         if (mode == SERVER_MODE) {
             paintHistory.clear();
             redoHistory.clear();
-            if (editMenu != null) editMenu.updateEnable();
             Map<String, IRemotePaint> memberRemotePaints = userManager.getMemberRemotePaints();
             for (IRemotePaint x : memberRemotePaints.values()) {
                 try {
@@ -147,7 +142,6 @@ public class PaintManager {
         this.paintHistory = paintHistory;
 
         if (mode == SERVER_MODE) {
-            if (editMenu != null) editMenu.updateEnable();
             Map<String, IRemotePaint> memberRemotePaints = userManager.getMemberRemotePaints();
             for (String userId : memberRemotePaints.keySet()) {
                 try {
@@ -166,56 +160,6 @@ public class PaintManager {
      */
     public int getMode() {
         return mode;
-    }
-
-    /**
-     * Undo, only host can use.
-     */
-    public void undo() {
-        if (mode == SERVER_MODE) {
-            redoHistory.push(paintHistory.lastElement());
-            paintHistory.remove(paintHistory.size() - 1);
-            setPaintHistory(paintHistory);
-        }
-    }
-
-    /**
-     * Redo, only host can use.
-     */
-    public void redo() {
-        if (mode == SERVER_MODE) {
-            paintHistory.add(redoHistory.pop());
-            setPaintHistory(paintHistory);
-        }
-    }
-
-    /**
-     * Check whether undo is allowed.
-     */
-    public Boolean isUndoAllow() {
-        if (mode == SERVER_MODE) {
-            return !paintHistory.isEmpty();
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Check whether redo is allowed.
-     */
-    public Boolean isRedoAllow() {
-        if (mode == SERVER_MODE) {
-            return !redoHistory.isEmpty();
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Set the editMenu UI.
-     */
-    public void setEditMenu(EditMenu editMenu) {
-        this.editMenu = editMenu;
     }
 
     public void clearRedoHistory() {

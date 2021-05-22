@@ -2,27 +2,22 @@ package org.unimelb.whiteboard.client.whiteboard;
 
 import org.unimelb.whiteboard.client.Client;
 import org.unimelb.whiteboard.client.chatroom.ChatPanel;
-import org.unimelb.whiteboard.client.menu.EditMenu;
 import org.unimelb.whiteboard.client.menu.FileMenu;
 import org.unimelb.whiteboard.client.user.UserManager;
-import org.unimelb.whiteboard.client.util.NumberTextField;
 import org.unimelb.whiteboard.client.util.WhiteBoardCloseListener;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class WhiteBoardWindow {
     // Default color display in the left bottom.
     private static final Color[] COLORS = {Color.BLACK, Color.GRAY, Color.RED, Color.MAGENTA, Color.ORANGE, Color.GREEN,
             Color.WHITE, Color.LIGHT_GRAY, Color.PINK, Color.CYAN, Color.YELLOW, Color.BLUE};
     // Use to create tool button.
-    private static final String[] TOOLS = {"pen", "line", "circle", "eraser", "rect", "oval", "roundrect", "text"};
+    private static final String[] TOOLS = {"line", "circle", "rect", "oval", "text", "eraser"};
     private final JColorChooser colorChooser;
     // Title of the window
     private final String title;
@@ -163,7 +158,7 @@ public class WhiteBoardWindow {
         drawToolPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel toolPanel = new JPanel();
-        toolPanel.setBorder(new TitledBorder(null, "Shape", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        toolPanel.setBorder(BorderFactory.createRaisedBevelBorder());
         toolPanel.setLayout(new GridLayout(2, 0, 5, 5));
         drawToolPanel.add(toolPanel, BorderLayout.WEST);
 
@@ -178,7 +173,7 @@ public class WhiteBoardWindow {
 
         // Create color panel
         JPanel colorPanel = new JPanel();
-        colorPanel.setBorder(new TitledBorder(null, "Color", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        colorPanel.setBorder(BorderFactory.createRaisedBevelBorder());
         drawToolPanel.add(colorPanel, BorderLayout.CENTER);
         colorPanel.setLayout(new BorderLayout(0, 0));
 
@@ -215,7 +210,7 @@ public class WhiteBoardWindow {
             btnDefaultColors.setBackground(defaultColor);
             btnDefaultColors.setOpaque(true);
             btnDefaultColors.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            btnDefaultColors.setPreferredSize(new Dimension(40, 40));
+            btnDefaultColors.setSize(new Dimension(40, 40));
             btnDefaultColors.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     currentColor = ((JButton) e.getSource()).getBackground();
@@ -255,7 +250,7 @@ public class WhiteBoardWindow {
         btnEditColor.setOpaque(true);
         btnEditColor.setPreferredSize(new Dimension(50, 50));
 
-        JPanel thicknessPanel = new JPanel();
+   /*     JPanel thicknessPanel = new JPanel();
         thicknessPanel.setBorder(new TitledBorder(null, "Thickness", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         thicknessPanel.setPreferredSize(new Dimension(80, 0));
         drawToolPanel.add(thicknessPanel, BorderLayout.EAST);
@@ -276,16 +271,12 @@ public class WhiteBoardWindow {
         thicknessTextField.setHorizontalAlignment(SwingConstants.CENTER);
         thicknessTextPanel.add(thicknessTextField);
         thicknessTextField.setColumns(2);
-
+*/
         // Add menu bar at the last, need to wait for creation of paintBoardPanel.
         JMenuBar menuBar = new JMenuBar();
         frame.setJMenuBar(menuBar);
+        menuBar.setBackground(Color.WHITE);
         menuBar.add(new FileMenu(client, this, paintManager, userManager));
-        EditMenu editMenu = new EditMenu(this);
-        menuBar.add(editMenu);
-
-        // Add the editMenu into paint manager, so it can be controlled.
-        paintManager.setEditMenu(editMenu);
 
         frame.setVisible(false);
 
