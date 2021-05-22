@@ -40,6 +40,7 @@ public class WhiteBoardWindow {
     private JButton btnCurrentColor;
     // Color
     private Color currentColor;
+    private Color editColor;
     // Thickness
     private int thickness;
     private JTextField thicknessTextField;
@@ -195,13 +196,7 @@ public class WhiteBoardWindow {
         btnCurrentColor = new JButton();
         marginCC1Panel.add(btnCurrentColor);
         btnCurrentColor.setBorderPainted(false);
-        btnCurrentColor.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnCurrentColor.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                currentColor = JColorChooser.showDialog(frame, "Color Chooser", currentColor);
-                btnCurrentColor.setBackground(currentColor);
-            }
-        });
+        btnCurrentColor.setEnabled(false);
 
         btnCurrentColor.setBackground(currentColor);
         btnCurrentColor.setOpaque(true);
@@ -230,6 +225,35 @@ public class WhiteBoardWindow {
             });
             defaultColorPanel.add(btnDefaultColors);
         }
+
+        JPanel editColorPanel = new JPanel();
+        colorPanel.add(editColorPanel, BorderLayout.EAST);
+        editColorPanel.setLayout(new BorderLayout());
+
+        JLabel lblEditColor = new JLabel("      Edit");
+        editColorPanel.add(lblEditColor, BorderLayout.SOUTH);
+
+        JPanel marginCC2Panel = new JPanel();
+        marginCC2Panel.setPreferredSize(new Dimension(60, 0));
+        editColorPanel.add(marginCC2Panel, BorderLayout.CENTER);
+
+        JButton btnEditColor = new JButton();
+        marginCC2Panel.add(btnEditColor);
+        btnEditColor.setBorderPainted(false);
+        btnEditColor.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnEditColor.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                currentColor = JColorChooser.showDialog(frame, "Color Chooser", currentColor);
+                btnCurrentColor.setBackground(currentColor);
+                System.out.println("Operation: Change color.");
+            }
+        });
+
+        ImageIcon editIcon = new ImageIcon("images/palette.jpg");
+        editIcon.setImage(editIcon.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        btnEditColor.setIcon(editIcon);
+        btnEditColor.setOpaque(true);
+        btnEditColor.setPreferredSize(new Dimension(50, 50));
 
         JPanel thicknessPanel = new JPanel();
         thicknessPanel.setBorder(new TitledBorder(null, "Thickness", TitledBorder.LEADING, TitledBorder.TOP, null, null));
