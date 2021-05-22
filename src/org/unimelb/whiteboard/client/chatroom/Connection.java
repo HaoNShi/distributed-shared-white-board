@@ -48,7 +48,6 @@ class Connection extends Thread {
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.DECRYPT_MODE, aesKey);
             message = new String(cipher.doFinal(Base64.getDecoder().decode(message.getBytes())));
-            System.err.println("Decrypted message: " + message);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -62,7 +62,7 @@ public class Server {
         } catch (NumberFormatException e) {
             System.out.println("Invalid Port Number: Port number should be between 1024 and 49151!");
         } catch (BindException e) {
-            System.err.println("Address already in use, change one.");
+            System.err.println("Address already in use!");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -140,7 +140,7 @@ public class WhiteBoardWindow {
         userPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel userControlPanel = new JPanel();
-        userControlPanel.setPreferredSize(new Dimension(0, 300));
+        userControlPanel.setPreferredSize(new Dimension(0, 200));
         userPanel.add(userControlPanel, BorderLayout.NORTH);
         userControlPanel.setLayout(new BorderLayout(0, 0));
 
@@ -288,6 +288,5 @@ public class WhiteBoardWindow {
         paintManager.setEditMenu(editMenu);
 
         frame.setVisible(false);
-
     }
 }
