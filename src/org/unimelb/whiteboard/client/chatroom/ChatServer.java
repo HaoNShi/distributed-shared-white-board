@@ -41,7 +41,8 @@ public class ChatServer implements Runnable {
         clients = new Vector<>(); // Vector is a collection of clients and is thread-safe
         chatPanel.btnSend.addActionListener((e) -> {
             SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-            processMsg('[' + df.format(new Date()) + "] " + userId + ":\n" + this.chatPanel.txtInput.getText());
+            processMsg("[" + df.format(new Date()) + "] " + userId + ":\n" + this.chatPanel.txtInput.getText());
+            chatPanel.txtInput.setText("");
         });
     }
 
@@ -103,7 +104,6 @@ public class ChatServer implements Runnable {
         try {
             while (true) {
                 Socket client_socket = listen_socket.accept();
-                // 封装成功能更强的Connection对象
                 Connection c = new Connection(client_socket, this);
                 clients.add(c);
             }
