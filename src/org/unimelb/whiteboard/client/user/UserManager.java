@@ -196,8 +196,6 @@ public class UserManager {
                 removeMember(key);
             }
         }
-        if (chatPanel != null)
-            chatPanel.appendText("Member " + userId + " leaves!\n");
         // refresh ui.
         if (clsp != null) {
             clsp.updateUserList();
@@ -237,8 +235,6 @@ public class UserManager {
         } catch (Exception e) {
             System.err.println("Can not get the client registry.");
         }
-        if (chatPanel != null)
-            chatPanel.appendText("Applicant " + userId + " wants to join!\n");
         // refresh ui.
         if (clsp != null) {
             clsp.updateUserList();
@@ -251,8 +247,6 @@ public class UserManager {
     public void removeApplicant(String userId) {
         applicants.remove(userId);
         applicantRemoteApps.remove(userId);
-        if (chatPanel != null)
-            chatPanel.appendText("Applicant " + userId + " leaves!\n");
         // refresh ui.
         if (clsp != null) {
             clsp.updateUserList();

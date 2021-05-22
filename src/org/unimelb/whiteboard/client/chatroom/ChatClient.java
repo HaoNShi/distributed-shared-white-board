@@ -47,7 +47,6 @@ public class ChatClient implements Runnable {
             // Perform encryption
             cipher.init(Cipher.ENCRYPT_MODE, aesKey);
             byte[] encrypted = cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
-            System.err.println("Encrypted text: " + new String(encrypted));
             out.writeUTF(Base64.getEncoder().encodeToString(encrypted));
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,12 +76,10 @@ public class ChatClient implements Runnable {
         try {
             socket = new Socket(ip, chatPort);
             bConnected = true;
-            processMsg("Connection ok");
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
-            processMsg("Connection failed");
         }
         if (thread == null) {
             thread = new Thread(this);

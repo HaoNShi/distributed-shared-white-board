@@ -19,8 +19,8 @@ import java.awt.event.KeyEvent;
 
 public class WhiteBoardWindow {
     // Default color display in the left bottom.
-    private static final Color[] COLORS = {Color.BLACK, Color.GRAY, Color.RED, Color.MAGENTA, Color.ORANGE, Color.GREEN,
-            Color.WHITE, Color.LIGHT_GRAY, Color.PINK, Color.CYAN, Color.YELLOW, Color.BLUE};
+    private static final Color[] COLORS = {Color.BLACK, Color.GRAY, new Color(136, 0, 21), Color.RED, new Color(255, 127, 39), Color.YELLOW, new Color(34, 177, 76), Color.BLUE,
+            Color.WHITE, Color.LIGHT_GRAY, new Color(185, 122, 87), Color.PINK, Color.ORANGE, new Color(239, 228, 176), Color.GREEN, new Color(63, 72, 204)};
     // Use to create tool button.
     private static final String[] TOOLS = {"pen", "line", "circle", "eraser", "rect", "oval", "roundrect", "text"};
     private final JColorChooser colorChooser;
@@ -114,16 +114,12 @@ public class WhiteBoardWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // When close the window, it should remove its information in the system.
         frame.addWindowListener(new WhiteBoardCloseListener(client, paintManager, userManager));
-        frame.setSize(900, 800);
+        frame.setSize(980, 800);
         frame.setTitle(title);
         frame.setResizable(true);
 
         // Add Action Listener
         drawListener = new DrawListener(this);
-
-        // Add draw tool panel.
-        JPanel drawToolPanel = new JPanel();
-        frame.getContentPane().add(drawToolPanel, BorderLayout.NORTH);
 
         // Add Painting broad.
         paintBoardPanel = new PaintBoardPanel(paintManager);
@@ -148,7 +144,7 @@ public class WhiteBoardWindow {
         userPanel.add(userControlPanel, BorderLayout.NORTH);
         userControlPanel.setLayout(new BorderLayout(0, 0));
 
-        JLabel lblUserList = new JLabel("User List:");
+        JLabel lblUserList = new JLabel("User List");
         userControlPanel.add(lblUserList, BorderLayout.NORTH);
 
         ClientListScrollPanel clientListScrollPanel = new ClientListScrollPanel(userManager);
@@ -158,8 +154,12 @@ public class WhiteBoardWindow {
         userPanel.add(chatRoomControlPanel, BorderLayout.CENTER);
         chatRoomControlPanel.setLayout(new BorderLayout(0, 0));
 
-        JLabel lblChatRoom = new JLabel("Chat Room:");
+        JLabel lblChatRoom = new JLabel("Chat Room");
         chatRoomControlPanel.add(lblChatRoom, BorderLayout.NORTH);
+
+        // Add draw tool panel.
+        JPanel drawToolPanel = new JPanel();
+        frame.getContentPane().add(drawToolPanel, BorderLayout.NORTH);
         drawToolPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel toolPanel = new JPanel();

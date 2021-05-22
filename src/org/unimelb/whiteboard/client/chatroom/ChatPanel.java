@@ -39,7 +39,7 @@ public class ChatPanel extends JPanel {
         pnlFoot.add(txtInput, BorderLayout.CENTER);
 
         btnSend = new JButton("Send");
-        btnSend.setPreferredSize(new Dimension(70, 0));
+        btnSend.setPreferredSize(new Dimension(70, 30));
         pnlFoot.add(btnSend, BorderLayout.EAST);
 
         add(pnlFoot, BorderLayout.SOUTH);
