@@ -122,9 +122,15 @@ public class WhiteBoardWindow {
 
         // Add draw tool panel.
         JPanel drawToolPanel = new JPanel();
-        // drawToolPanel.setPreferredSize(new Dimension(0, 100));
         frame.getContentPane().add(drawToolPanel, BorderLayout.NORTH);
 
+        // Add Painting broad.
+        paintBoardPanel = new PaintBoardPanel(paintManager);
+        paintBoardPanel.setBackground(Color.white);
+        paintBoardPanel.addMouseListener(drawListener);
+        paintBoardPanel.addMouseMotionListener(drawListener);
+        paintBoardPanel.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+        frame.getContentPane().add(paintBoardPanel, BorderLayout.CENTER);
 
         // Set the paint area in paintManager to the current paintBoard panel.
         paintManager.setPaintArea(paintBoardPanel);
@@ -157,15 +163,13 @@ public class WhiteBoardWindow {
 
         JPanel toolPanel = new JPanel();
         toolPanel.setBorder(new TitledBorder(null, "Shape", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        toolPanel.setLayout(new GridLayout(2, 0, 0, 0));
-        // toolPanel.setPreferredSize(new Dimension(100, 0));
+        toolPanel.setLayout(new GridLayout(2, 0, 5, 5));
         drawToolPanel.add(toolPanel, BorderLayout.WEST);
 
         // Add tool bar button
         JButton btnTools;
         for (String s : TOOLS) {
             btnTools = new JButton(s);
-            // btnTools.setPreferredSize(new Dimension(100, 50));
             btnTools.setCursor(new Cursor(Cursor.HAND_CURSOR));
             toolPanel.add(btnTools);
             btnTools.addActionListener(drawListener);
@@ -206,7 +210,7 @@ public class WhiteBoardWindow {
         JPanel defaultColorPanel = new JPanel();
         colorPanel.add(defaultColorPanel, BorderLayout.CENTER);
         defaultColorPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        defaultColorPanel.setLayout(new GridLayout(2, 0, 0, 0));
+        defaultColorPanel.setLayout(new GridLayout(2, 0, 5, 5));
 
         // Add default colors
         JButton btnDefaultColors;
@@ -248,14 +252,6 @@ public class WhiteBoardWindow {
         thicknessTextField.setHorizontalAlignment(SwingConstants.CENTER);
         thicknessTextPanel.add(thicknessTextField);
         thicknessTextField.setColumns(2);
-
-        // Add Painting broad.
-        paintBoardPanel = new PaintBoardPanel(paintManager);
-        paintBoardPanel.setBackground(Color.white);
-        paintBoardPanel.addMouseListener(drawListener);
-        paintBoardPanel.addMouseMotionListener(drawListener);
-        paintBoardPanel.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
-        frame.getContentPane().add(paintBoardPanel, BorderLayout.CENTER);
 
         // Add menu bar at the last, need to wait for creation of paintBoardPanel.
         JMenuBar menuBar = new JMenuBar();
