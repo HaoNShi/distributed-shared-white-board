@@ -1,16 +1,16 @@
 package org.unimelb.whiteboard.client;
 
 import com.alibaba.fastjson.JSONObject;
-import org.unimelb.whiteboard.client.Lobby.LobbyWindow;
-import org.unimelb.whiteboard.client.Login.LoginWindow;
-import org.unimelb.whiteboard.client.RMI.IRemoteApp;
-import org.unimelb.whiteboard.client.RMI.IRemoteDoor;
-import org.unimelb.whiteboard.client.RMI.RemoteApp;
-import org.unimelb.whiteboard.client.StateCode.StateCode;
-import org.unimelb.whiteboard.client.WhiteBoard.ClientWhiteBoard;
-import org.unimelb.whiteboard.client.WhiteBoard.ServerWhiteBoard;
-import org.unimelb.whiteboard.client.WhiteBoard.SharedWhiteBoard;
+import org.unimelb.whiteboard.client.lobby.LobbyWindow;
+import org.unimelb.whiteboard.client.login.LoginWindow;
+import org.unimelb.whiteboard.client.remote.IRemoteApp;
+import org.unimelb.whiteboard.client.remote.IRemoteDoor;
+import org.unimelb.whiteboard.client.remote.RemoteApp;
 import org.unimelb.whiteboard.client.util.Execute;
+import org.unimelb.whiteboard.client.whiteboard.ClientWhiteBoard;
+import org.unimelb.whiteboard.client.whiteboard.ServerWhiteBoard;
+import org.unimelb.whiteboard.client.whiteboard.SharedWhiteBoard;
+import org.unimelb.whiteboard.standard.StateCode;
 
 import javax.swing.*;
 import java.io.IOException;

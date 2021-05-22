@@ -1,8 +1,8 @@
 package org.unimelb.whiteboard.server;
 
-import org.unimelb.whiteboard.server.Request.RequestHandler;
-import org.unimelb.whiteboard.server.Room.RoomManager;
-import org.unimelb.whiteboard.server.UI.ServerWindow;
+import org.unimelb.whiteboard.server.request.RequestHandler;
+import org.unimelb.whiteboard.server.room.RoomManager;
+import org.unimelb.whiteboard.server.ui.ServerWindow;
 
 import java.io.IOException;
 import java.net.*;

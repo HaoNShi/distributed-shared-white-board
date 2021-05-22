@@ -2,7 +2,7 @@ package org.unimelb.whiteboard.client.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.unimelb.whiteboard.client.StateCode.StateCode;
+import org.unimelb.whiteboard.standard.StateCode;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
