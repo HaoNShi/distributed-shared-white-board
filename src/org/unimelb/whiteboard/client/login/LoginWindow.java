@@ -78,37 +78,31 @@ public class LoginWindow {
         });
 
         JLabel lblAddress = new JLabel("Address:");
-        lblAddress.setFont(new Font("Arial", Font.PLAIN, 12));
-        lblAddress.setBounds(28, 29, 58, 16);
+        lblAddress.setBounds(28, 29, 70, 16);
         frame.getContentPane().add(lblAddress);
 
         JLabel lblPort = new JLabel("Port:");
-        lblPort.setFont(new Font("Arial", Font.PLAIN, 12));
-        lblPort.setBounds(28, 65, 58, 16);
+        lblPort.setBounds(28, 65, 70, 16);
         frame.getContentPane().add(lblPort);
 
         JLabel lblUserId = new JLabel("User Name:");
-        lblUserId.setFont(new Font("Arial", Font.PLAIN, 12));
-        lblUserId.setBounds(28, 100, 58, 16);
+        lblUserId.setBounds(28, 100, 70, 16);
         frame.getContentPane().add(lblUserId);
 
         addressTextField = new JTextField();
-        addressTextField.setFont(new Font("Arial", Font.PLAIN, 12));
-        addressTextField.setBounds(96, 24, 192, 26);
+        addressTextField.setBounds(108, 24, 180, 26);
         addressTextField.setText(client.getIp());
         addressTextField.setColumns(10);
         frame.getContentPane().add(addressTextField);
 
         portTextField = new JTextField();
-        portTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         portTextField.setText("8080");
-        portTextField.setBounds(96, 60, 192, 26);
+        portTextField.setBounds(108, 60, 180, 26);
         portTextField.setColumns(10);
         frame.getContentPane().add(portTextField);
 
         userIdTextField = new JTextField();
-        userIdTextField.setFont(new Font("Arial", Font.PLAIN, 12));
-        userIdTextField.setBounds(96, 95, 192, 26);
+        userIdTextField.setBounds(108, 95, 180, 26);
         userIdTextField.setDocument(new NumberTextField(8, false));
         userIdTextField.setColumns(8);
         frame.getContentPane().add(userIdTextField);

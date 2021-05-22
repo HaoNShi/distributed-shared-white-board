@@ -137,30 +137,4 @@ public class LobbyController {
         ui.firstPanel.add(ui.btnCreateRoom);
     }
 
-    protected void findRoomsList() {
-        refreshRoomsListPanel();
-        JPanel currentPanel = ui.firstPanel;
-        int i = 0;
-        for (JButton btn : ui.roomsBtnVec) {
-            if (i % 2 != 0) {
-                ui.scrollPane.setPreferredSize(new Dimension(0, (i / 2 + 2) * 170));
-                JPanel temp = new JPanel();
-                temp.setBounds(5, (i / 2 + 1) * 170, 570, 160);
-                temp.setLayout(new GridLayout(1, 2, 5, 0));
-                currentPanel = temp;
-                ui.scrollPane.add(temp);
-            }
-            String[] roomInfo = btn.getText().split(" - ");
-            if ((ui.roomNameTextField.getText().equals(roomInfo[0]) || ui.roomNameTextField.getText().equals(""))
-                    && (ui.hostNameTextField.getText().equals(roomInfo[1])
-                    || ui.hostNameTextField.getText().equals(""))) {
-                currentPanel.add(btn);
-                i++;
-            }
-        }
-        if (i % 2 == 0) {
-            currentPanel.add(ui.blankPanel);
-        }
-    }
-
 }
