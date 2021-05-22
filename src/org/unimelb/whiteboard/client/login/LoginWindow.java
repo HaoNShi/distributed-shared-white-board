@@ -87,7 +87,7 @@ public class LoginWindow {
         lblPort.setBounds(28, 65, 58, 16);
         frame.getContentPane().add(lblPort);
 
-        JLabel lblUserId = new JLabel("User ID:");
+        JLabel lblUserId = new JLabel("User Name:");
         lblUserId.setFont(new Font("Arial", Font.PLAIN, 12));
         lblUserId.setBounds(28, 100, 58, 16);
         frame.getContentPane().add(lblUserId);
@@ -112,5 +112,6 @@ public class LoginWindow {
         userIdTextField.setDocument(new NumberTextField(8, false));
         userIdTextField.setColumns(8);
         frame.getContentPane().add(userIdTextField);
+        frame.setLocationRelativeTo(null);
     }
 }

@@ -139,12 +139,16 @@ public class WhiteBoardWindow {
         userPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel userControlPanel = new JPanel();
-        userControlPanel.setPreferredSize(new Dimension(0, 300));
+        userControlPanel.setPreferredSize(new Dimension(0, 200));
         userPanel.add(userControlPanel, BorderLayout.NORTH);
         userControlPanel.setLayout(new BorderLayout(0, 0));
 
-        JLabel lblUserList = new JLabel("User List:");
-        userControlPanel.add(lblUserList, BorderLayout.NORTH);
+        JLabel peerList = new JLabel("Peer List:");
+        peerList.setOpaque(true);
+        peerList.setBackground(Color.WHITE);
+        peerList.setFont(new Font("Arial", 1, 20));
+        userControlPanel.add(peerList, BorderLayout.NORTH);
+
 
         ClientListScrollPanel clientListScrollPanel = new ClientListScrollPanel(userManager);
         userControlPanel.add(clientListScrollPanel, BorderLayout.CENTER);
@@ -153,8 +157,11 @@ public class WhiteBoardWindow {
         userPanel.add(chatRoomControlPanel, BorderLayout.CENTER);
         chatRoomControlPanel.setLayout(new BorderLayout(0, 0));
 
-        JLabel lblChatRoom = new JLabel("Chat Room:");
-        chatRoomControlPanel.add(lblChatRoom, BorderLayout.NORTH);
+        JLabel chatWindow = new JLabel("Chat Window:");
+        peerList.setOpaque(true);
+        peerList.setBackground(Color.WHITE);
+        chatWindow.setFont(new Font("Arial", 1, 20));
+        chatRoomControlPanel.add(chatWindow, BorderLayout.NORTH);
         drawToolPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel toolPanel = new JPanel();
@@ -250,35 +257,16 @@ public class WhiteBoardWindow {
         btnEditColor.setOpaque(true);
         btnEditColor.setPreferredSize(new Dimension(50, 50));
 
-   /*     JPanel thicknessPanel = new JPanel();
-        thicknessPanel.setBorder(new TitledBorder(null, "Thickness", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        thicknessPanel.setPreferredSize(new Dimension(80, 0));
-        drawToolPanel.add(thicknessPanel, BorderLayout.EAST);
-        thicknessPanel.setLayout(new BorderLayout(0, 0));
 
-        JPanel thicknessTextPanel = new JPanel();
-        thicknessPanel.add(thicknessTextPanel, BorderLayout.CENTER);
-        thicknessTextPanel.setLayout(new BorderLayout(0, 0));
-
-        thicknessTextField = new JTextField();
-        thicknessTextField.setDocument(new NumberTextField(2, true));
-        thicknessTextField.addKeyListener(new KeyAdapter() {
-            public void keyReleased(KeyEvent e) {
-                thickness = Integer.parseInt(thicknessTextField.getText());
-            }
-        });
-        thicknessTextField.setText(Integer.toString(thickness));
-        thicknessTextField.setHorizontalAlignment(SwingConstants.CENTER);
-        thicknessTextPanel.add(thicknessTextField);
-        thicknessTextField.setColumns(2);
-*/
         // Add menu bar at the last, need to wait for creation of paintBoardPanel.
         JMenuBar menuBar = new JMenuBar();
         frame.setJMenuBar(menuBar);
         menuBar.setBackground(Color.WHITE);
         menuBar.add(new FileMenu(client, this, paintManager, userManager));
-
         frame.setVisible(false);
+
+        //show the window in center
+        frame.setLocationRelativeTo(null);
 
     }
 }

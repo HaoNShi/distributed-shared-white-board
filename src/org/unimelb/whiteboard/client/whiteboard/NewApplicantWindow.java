@@ -16,6 +16,7 @@ public class NewApplicantWindow extends JDialog {
     private final JButton ignoreBtn;
     private int count = 10;
 
+
     /**
      * Timer
      */
@@ -73,10 +74,12 @@ public class NewApplicantWindow extends JDialog {
                 NewApplicantWindow.this.dispose();
             }
         });
+
         ignoreBtn.setBounds(247, 73, 100, 30);
         contentPanel.add(ignoreBtn);
 
         timer.start();
+        setLocationRelativeTo(null);
     }
 
 }

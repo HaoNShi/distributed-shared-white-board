@@ -54,5 +54,6 @@ public class ServerWindow {
         scrollPane = new JScrollPane(logArea);
         scrollPane.setBounds(20, 60, 400, 170);
         frame.getContentPane().add(scrollPane);
+        frame.setLocationRelativeTo(null);
     }
 }
