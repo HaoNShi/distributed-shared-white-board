@@ -19,9 +19,10 @@ import java.awt.event.KeyEvent;
 
 public class WhiteBoardWindow {
     // Default color display in the left bottom.
-    private static final Color[] DEFAULT_COLORS = {Color.WHITE, Color.BLACK, Color.LIGHT_GRAY, Color.GRAY, Color.PINK, Color.RED, Color.ORANGE, Color.YELLOW, Color.CYAN, Color.MAGENTA, Color.BLUE, Color.GREEN};
+    private static final Color[] COLORS = {Color.BLACK, Color.GRAY, Color.RED, Color.MAGENTA, Color.ORANGE, Color.GREEN,
+            Color.WHITE, Color.LIGHT_GRAY, Color.PINK, Color.CYAN, Color.YELLOW, Color.BLUE};
     // Use to create tool button.
-    private static final String[] TOOL_NAME = {"pen", "line", "circle", "eraser", "rect", "oval", "roundrect", "text"};
+    private static final String[] TOOLS = {"pen", "line", "circle", "eraser", "rect", "oval", "roundrect", "text"};
     private final JColorChooser colorChooser;
     // Title of the window
     private final String title;
@@ -112,7 +113,7 @@ public class WhiteBoardWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // When close the window, it should remove its information in the system.
         frame.addWindowListener(new WhiteBoardCloseListener(client, paintManager, userManager));
-        frame.setSize(1000, 760);
+        frame.setSize(900, 800);
         frame.setTitle(title);
         frame.setResizable(true);
 
@@ -121,16 +122,9 @@ public class WhiteBoardWindow {
 
         // Add draw tool panel.
         JPanel drawToolPanel = new JPanel();
-        drawToolPanel.setPreferredSize(new Dimension(110, 0));
-        frame.getContentPane().add(drawToolPanel, BorderLayout.WEST);
+        // drawToolPanel.setPreferredSize(new Dimension(0, 100));
+        frame.getContentPane().add(drawToolPanel, BorderLayout.NORTH);
 
-        // Add Painting broad.
-        paintBoardPanel = new PaintBoardPanel(paintManager);
-        paintBoardPanel.setBackground(Color.white);
-        paintBoardPanel.addMouseListener(drawListener);
-        paintBoardPanel.addMouseMotionListener(drawListener);
-        paintBoardPanel.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
-        frame.getContentPane().add(paintBoardPanel, BorderLayout.CENTER);
 
         // Set the paint area in paintManager to the current paintBoard panel.
         paintManager.setPaintArea(paintBoardPanel);
@@ -163,14 +157,15 @@ public class WhiteBoardWindow {
 
         JPanel toolPanel = new JPanel();
         toolPanel.setBorder(new TitledBorder(null, "Shape", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        toolPanel.setLayout(new GridLayout(0, 1, 0, 0));
-        toolPanel.setPreferredSize(new Dimension(0, 300));
-        drawToolPanel.add(toolPanel, BorderLayout.NORTH);
+        toolPanel.setLayout(new GridLayout(2, 0, 0, 0));
+        // toolPanel.setPreferredSize(new Dimension(100, 0));
+        drawToolPanel.add(toolPanel, BorderLayout.WEST);
 
         // Add tool bar button
         JButton btnTools;
-        for (String s : TOOL_NAME) {
+        for (String s : TOOLS) {
             btnTools = new JButton(s);
+            // btnTools.setPreferredSize(new Dimension(100, 50));
             btnTools.setCursor(new Cursor(Cursor.HAND_CURSOR));
             toolPanel.add(btnTools);
             btnTools.addActionListener(drawListener);
@@ -183,16 +178,15 @@ public class WhiteBoardWindow {
         colorPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel currentColorPanel = new JPanel();
-        colorPanel.add(currentColorPanel, BorderLayout.NORTH);
-        currentColorPanel.setPreferredSize(new Dimension(0, 40));
+        colorPanel.add(currentColorPanel, BorderLayout.WEST);
         currentColorPanel.setLayout(new BorderLayout());
 
-        JLabel lblCurrentColor = new JLabel(" Current:");
-        currentColorPanel.add(lblCurrentColor, BorderLayout.CENTER);
+        JLabel lblCurrentColor = new JLabel("   Current");
+        currentColorPanel.add(lblCurrentColor, BorderLayout.SOUTH);
 
         JPanel marginCC1Panel = new JPanel();
-        marginCC1Panel.setPreferredSize(new Dimension(40, 40));
-        currentColorPanel.add(marginCC1Panel, BorderLayout.EAST);
+        marginCC1Panel.setPreferredSize(new Dimension(60, 0));
+        currentColorPanel.add(marginCC1Panel, BorderLayout.CENTER);
 
         btnCurrentColor = new JButton();
         marginCC1Panel.add(btnCurrentColor);
@@ -207,16 +201,36 @@ public class WhiteBoardWindow {
 
         btnCurrentColor.setBackground(currentColor);
         btnCurrentColor.setOpaque(true);
-        btnCurrentColor.setPreferredSize(new Dimension(30, 30));
+        btnCurrentColor.setPreferredSize(new Dimension(50, 50));
 
         JPanel defaultColorPanel = new JPanel();
         colorPanel.add(defaultColorPanel, BorderLayout.CENTER);
         defaultColorPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        defaultColorPanel.setLayout(new GridLayout(2, 0, 0, 0));
+
+        // Add default colors
+        JButton btnDefaultColors;
+        for (Color defaultColor : COLORS) {
+            btnDefaultColors = new JButton();
+            btnDefaultColors.setBorderPainted(false);
+            btnDefaultColors.setBackground(defaultColor);
+            btnDefaultColors.setOpaque(true);
+            btnDefaultColors.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            btnDefaultColors.setPreferredSize(new Dimension(40, 40));
+            btnDefaultColors.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    currentColor = ((JButton) e.getSource()).getBackground();
+                    btnCurrentColor.setBackground(currentColor);
+                    System.out.println("Operation: Change color.");
+                }
+            });
+            defaultColorPanel.add(btnDefaultColors);
+        }
 
         JPanel thicknessPanel = new JPanel();
         thicknessPanel.setBorder(new TitledBorder(null, "Thickness", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        thicknessPanel.setPreferredSize(new Dimension(0, 50));
-        drawToolPanel.add(thicknessPanel, BorderLayout.SOUTH);
+        thicknessPanel.setPreferredSize(new Dimension(80, 0));
+        drawToolPanel.add(thicknessPanel, BorderLayout.EAST);
         thicknessPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel thicknessTextPanel = new JPanel();
@@ -235,24 +249,13 @@ public class WhiteBoardWindow {
         thicknessTextPanel.add(thicknessTextField);
         thicknessTextField.setColumns(2);
 
-        // Add default colors
-        JButton btnDefaultColors;
-        for (Color defaultColor : DEFAULT_COLORS) {
-            btnDefaultColors = new JButton();
-            btnDefaultColors.setBorderPainted(false);
-            btnDefaultColors.setBackground(defaultColor);
-            btnDefaultColors.setOpaque(true);
-            btnDefaultColors.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            btnDefaultColors.setPreferredSize(new Dimension(40, 40));
-            btnDefaultColors.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    currentColor = ((JButton) e.getSource()).getBackground();
-                    btnCurrentColor.setBackground(currentColor);
-                    System.out.println("Operation: Change color.");
-                }
-            });
-            defaultColorPanel.add(btnDefaultColors);
-        }
+        // Add Painting broad.
+        paintBoardPanel = new PaintBoardPanel(paintManager);
+        paintBoardPanel.setBackground(Color.white);
+        paintBoardPanel.addMouseListener(drawListener);
+        paintBoardPanel.addMouseMotionListener(drawListener);
+        paintBoardPanel.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+        frame.getContentPane().add(paintBoardPanel, BorderLayout.CENTER);
 
         // Add menu bar at the last, need to wait for creation of paintBoardPanel.
         JMenuBar menuBar = new JMenuBar();

@@ -10,7 +10,6 @@
 /.settings/
 /bin/
 /target/
-/out/
 
 # Java class files
 *.class
@@ -18,6 +17,7 @@
 # generated files
 bin/
 gen/
+out/
 
 # Eclipse project files
 .classpath
