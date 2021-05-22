@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginWindow {
-    private final LoginController controller;
+    private final LoginValidator validator;
     protected JTextField userIdTextField;
     protected JTextField addressTextField;
     protected JTextField portTextField;
@@ -23,7 +23,7 @@ public class LoginWindow {
     public LoginWindow(Client client) {
         this.client = client;
         initialize();
-        this.controller = new LoginController(this);
+        this.validator = new LoginValidator(this);
     }
 
     /**
@@ -50,17 +50,17 @@ public class LoginWindow {
         // Login logic here.
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (controller.validateFormat()) {
+                if (validator.validateFormat()) {
                     // The function above is asynchronous. Use the invokeLater to keep it work synchronous.
                     EventQueue.invokeLater(new Runnable() {
                         public void run() {
                             try {
-                                client.setUserId(controller.userId);
-                                client.setServerIp(controller.address);
-                                client.setServerPort(controller.port);
+                                client.setUserId(validator.userId);
+                                client.setServerIp(validator.address);
+                                client.setServerPort(validator.port);
                                 int state = client.register();
                                 if (state == StateCode.SUCCESS) {
-                                    client.switch2Lobby();
+                                    client.openLobby();
                                 } else if (state == StateCode.FAIL) {
                                     JOptionPane.showMessageDialog(frame, "User name exist! Change one!", "Warning",
                                             JOptionPane.WARNING_MESSAGE);
@@ -78,36 +78,30 @@ public class LoginWindow {
         });
 
         JLabel lblAddress = new JLabel("Address:");
-        lblAddress.setFont(new Font("Arial", Font.PLAIN, 12));
         lblAddress.setBounds(28, 29, 58, 16);
         frame.getContentPane().add(lblAddress);
 
         JLabel lblPort = new JLabel("Port:");
-        lblPort.setFont(new Font("Arial", Font.PLAIN, 12));
         lblPort.setBounds(28, 65, 58, 16);
         frame.getContentPane().add(lblPort);
 
         JLabel lblUserId = new JLabel("User ID:");
-        lblUserId.setFont(new Font("Arial", Font.PLAIN, 12));
         lblUserId.setBounds(28, 100, 58, 16);
         frame.getContentPane().add(lblUserId);
 
         addressTextField = new JTextField();
-        addressTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         addressTextField.setBounds(96, 24, 192, 26);
         addressTextField.setText(client.getIp());
         addressTextField.setColumns(10);
         frame.getContentPane().add(addressTextField);
 
         portTextField = new JTextField();
-        portTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         portTextField.setText("8080");
         portTextField.setBounds(96, 60, 192, 26);
         portTextField.setColumns(10);
         frame.getContentPane().add(portTextField);
 
         userIdTextField = new JTextField();
-        userIdTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         userIdTextField.setBounds(96, 95, 192, 26);
         userIdTextField.setDocument(new NumberTextField(8, false));
         userIdTextField.setColumns(8);

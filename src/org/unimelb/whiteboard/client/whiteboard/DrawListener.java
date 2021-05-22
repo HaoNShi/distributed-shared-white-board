@@ -16,7 +16,7 @@ public class DrawListener extends MouseAdapter implements ActionListener {
     private Color color;
     private Image drawBuffer = null;
     private int thickness = 2;
-    private MyFreeDraw currentFreeDraw;
+    private MyPen currentFreeDraw;
 
     DrawListener(WhiteBoardWindow wbv) {
         currentFreeDraw = null;
@@ -47,39 +47,49 @@ public class DrawListener extends MouseAdapter implements ActionListener {
     public void mouseReleased(MouseEvent e) {
         endP = new MyPoint(e.getX(), e.getY());
         MyShape myShape = null;
-        if (toolName.equals("line")) {
-            myShape = new MyLine(startP, endP, color, thickness);
-        } else if (toolName.equals("circle")) {
-            myShape = new MyCircle(startP, endP, color, thickness);
-        } else if (toolName.equals("rect")) {
-            myShape = new MyRect(false, startP, endP, color, thickness);
-        } else if (toolName.equals("roundrect")) {
-            myShape = new MyRect(true, startP, endP, color, thickness);
-        } else if (toolName.equals("oval")) {
-            myShape = new MyOval(startP, endP, color, thickness);
-        } else if (toolName.equals("pen")) {
-            if (currentFreeDraw == null) {
-                currentFreeDraw = new MyFreeDraw(MyFreeDraw.PEN, startP, endP, color, thickness);
-            } else {
-                currentFreeDraw.addPoints(endP);
-            }
-            myShape = currentFreeDraw;
-            currentFreeDraw = null;
-        } else if (toolName.equals("eraser")) {
-            if (currentFreeDraw == null) {
-                currentFreeDraw = new MyFreeDraw(MyFreeDraw.ERASER, startP, endP, wbv.getBackgroundColor(), thickness);
-            } else {
-                currentFreeDraw.addPoints(endP);
-            }
-            myShape = currentFreeDraw;
-            currentFreeDraw = null;
-        } else if (toolName.equals("text")) {
-            String text = JOptionPane.showInputDialog(wbv.getFrame(), "Text:");
-            if (text != null && !text.equals("")) {
-                myShape = new MyText(endP, text, thickness * 10, color);
-            }
-        } else {
-            System.out.println("Error: Unknown Tool Name!");
+        switch (toolName) {
+            case "line":
+                myShape = new MyLine(startP, endP, color, thickness);
+                break;
+            case "circle":
+                myShape = new MyCircle(startP, endP, color, thickness);
+                break;
+            case "rect":
+                myShape = new MyRect(false, startP, endP, color, thickness);
+                break;
+            case "roundrect":
+                myShape = new MyRect(true, startP, endP, color, thickness);
+                break;
+            case "oval":
+                myShape = new MyOval(startP, endP, color, thickness);
+                break;
+            case "pen":
+                if (currentFreeDraw == null) {
+                    currentFreeDraw = new MyPen(MyPen.PEN, startP, endP, color, thickness);
+                } else {
+                    currentFreeDraw.addPoints(endP);
+                }
+                myShape = currentFreeDraw;
+                currentFreeDraw = null;
+                break;
+            case "eraser":
+                if (currentFreeDraw == null) {
+                    currentFreeDraw = new MyPen(MyPen.ERASER, startP, endP, wbv.getBackgroundColor(), thickness);
+                } else {
+                    currentFreeDraw.addPoints(endP);
+                }
+                myShape = currentFreeDraw;
+                currentFreeDraw = null;
+                break;
+            case "text":
+                String text = JOptionPane.showInputDialog(wbv.getFrame(), "Text:");
+                if (text != null && !text.equals("")) {
+                    myShape = new MyText(endP, text, thickness * 10, color);
+                }
+                break;
+            default:
+                System.out.println("Error: Unknown Tool Name!");
+                break;
         }
         wbv.getPaintBoardPanel().setBufferShape(null);
         if (myShape != null) wbv.getPaintManager().addShape(myShape);
@@ -88,34 +98,44 @@ public class DrawListener extends MouseAdapter implements ActionListener {
     public void mouseDragged(MouseEvent e) {
         endP = new MyPoint(e.getX(), e.getY());
         MyShape bufferShape = null;
-        if (toolName.equals("pen")) {
-            if (currentFreeDraw == null) {
-                currentFreeDraw = new MyFreeDraw(MyFreeDraw.PEN, startP, endP, color, thickness);
-            } else {
-                currentFreeDraw.addPoints(endP);
-            }
-            bufferShape = currentFreeDraw;
-        } else if (toolName.equals("eraser")) {
-            if (currentFreeDraw == null) {
-                currentFreeDraw = new MyFreeDraw(MyFreeDraw.ERASER, startP, endP, wbv.getBackgroundColor(), thickness);
-            } else {
-                currentFreeDraw.addPoints(endP);
-            }
-            bufferShape = currentFreeDraw;
-        } else if (toolName.equals("line")) {
-            bufferShape = new MyLine(startP, endP, color, thickness);
-        } else if (toolName.equals("circle")) {
-            bufferShape = new MyCircle(startP, endP, color, thickness);
-        } else if (toolName.equals("rect")) {
-            bufferShape = new MyRect(false, startP, endP, color, thickness);
-        } else if (toolName.equals("roundrect")) {
-            bufferShape = new MyRect(true, startP, endP, color, thickness);
-        } else if (toolName.equals("oval")) {
-            bufferShape = new MyOval(startP, endP, color, thickness);
-        } else if (toolName.equals("text")) {
-            bufferShape = null;
-        } else {
-            System.out.println("Error: Unknown Tool Name!");
+        switch (toolName) {
+            case "pen":
+                if (currentFreeDraw == null) {
+                    currentFreeDraw = new MyPen(MyPen.PEN, startP, endP, color, thickness);
+                } else {
+                    currentFreeDraw.addPoints(endP);
+                }
+                bufferShape = currentFreeDraw;
+                break;
+            case "eraser":
+                if (currentFreeDraw == null) {
+                    currentFreeDraw = new MyPen(MyPen.ERASER, startP, endP, wbv.getBackgroundColor(), thickness);
+                } else {
+                    currentFreeDraw.addPoints(endP);
+                }
+                bufferShape = currentFreeDraw;
+                break;
+            case "line":
+                bufferShape = new MyLine(startP, endP, color, thickness);
+                break;
+            case "circle":
+                bufferShape = new MyCircle(startP, endP, color, thickness);
+                break;
+            case "rect":
+                bufferShape = new MyRect(false, startP, endP, color, thickness);
+                break;
+            case "roundrect":
+                bufferShape = new MyRect(true, startP, endP, color, thickness);
+                break;
+            case "oval":
+                bufferShape = new MyOval(startP, endP, color, thickness);
+                break;
+            case "text":
+                bufferShape = null;
+                break;
+            default:
+                System.out.println("Error: Unknown Tool Name!");
+                break;
         }
         // When working on RMI, no need to upload bufferShape. Only show in client window.
         wbv.getPaintBoardPanel().setBufferShape(bufferShape);

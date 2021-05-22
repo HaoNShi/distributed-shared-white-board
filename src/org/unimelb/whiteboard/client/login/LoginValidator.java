@@ -3,13 +3,13 @@ package org.unimelb.whiteboard.client.login;
 import javax.swing.*;
 import java.util.regex.Pattern;
 
-public class LoginController {
+public class LoginValidator {
     private final LoginWindow ui;
     protected String userId = "";
     protected String address = "";
     protected int port = -1;
 
-    public LoginController(LoginWindow ui) {
+    public LoginValidator(LoginWindow ui) {
         this.ui = ui;
     }
 

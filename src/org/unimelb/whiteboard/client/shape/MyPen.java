@@ -6,7 +6,7 @@ import java.util.Vector;
 /**
  * Use for pen and eraser.
  */
-public class MyFreeDraw implements MyShape {
+public class MyPen implements MyShape {
     public static final int PEN = 0;
     public static final int SPRAY = 1;
     public static final int ERASER = 1;
@@ -17,7 +17,7 @@ public class MyFreeDraw implements MyShape {
     private final int mode;
     private int isSpray;
 
-    public MyFreeDraw(int mode, MyPoint firstP, MyPoint nextP, Color color, int thickness) {
+    public MyPen(int mode, MyPoint firstP, MyPoint nextP, Color color, int thickness) {
         this.mode = mode;
         this.points = new Vector<>();
         this.points.add(firstP);

@@ -22,7 +22,7 @@ public class RemoteApp extends UnicastRemoteObject implements IRemoteApp {
     @Override
     public void askOut() throws RemoteException {
         System.out.println("Be kicked by the host.");
-        client.switch2Lobby();
+        client.openLobby();
         client.getLobbyView().createBeKickedDialog();
     }
 }

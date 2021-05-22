@@ -148,7 +148,7 @@ public class Client {
     /**
      * When user completes sign in, use this method to switch to Lobby.
      */
-    public void switch2Lobby() {
+    public void openLobby() {
         System.out.println("User: " + userId + " enter Lobby.");
         if (lobbyWindow == null)
             lobbyWindow = new LobbyWindow(this);

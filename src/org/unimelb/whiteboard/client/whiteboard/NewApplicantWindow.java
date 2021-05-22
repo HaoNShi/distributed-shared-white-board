@@ -15,11 +15,7 @@ public class NewApplicantWindow extends JDialog {
     private final JButton disagreeBtn;
     private final JButton ignoreBtn;
     private int count = 10;
-
-    /**
-     * Timer
-     */
-    Timer timer = new Timer(1000, new ActionListener() {
+    private Timer timer = new Timer(1000, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             count--;
             if (count < 0) {

@@ -19,6 +19,7 @@ public class FileMenu extends JMenu {
 
     public FileMenu(Client client, WhiteBoardWindow wbv, PaintManager paintManager, UserManager userManager) {
         super("File(F)");
+        this.setMnemonic(KeyEvent.VK_F);
 
         JMenuItem newMenuItem = new JMenuItem("New", KeyEvent.VK_N);
         newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
@@ -59,7 +60,7 @@ public class FileMenu extends JMenu {
                     client.removeRoom();
                     userManager.clear();
                 }
-                client.switch2Lobby();
+                client.openLobby();
             }
         });
         this.add(exitMenuItem);
