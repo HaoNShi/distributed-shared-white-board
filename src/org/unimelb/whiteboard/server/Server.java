@@ -5,7 +5,10 @@ import org.unimelb.whiteboard.server.room.RoomManager;
 import org.unimelb.whiteboard.server.ui.ServerWindow;
 
 import java.io.IOException;
-import java.net.*;
+import java.net.BindException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,6 +92,7 @@ public class Server {
     public RoomManager getRoomManager() {
         return rm;
     }
+
     public Map<String, String> getUserList() {
         return userList;
     }

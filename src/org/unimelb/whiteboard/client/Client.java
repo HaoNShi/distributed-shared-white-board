@@ -85,8 +85,6 @@ public class Client {
         this.userId = userId;
     }
 
-
-
     /**
      * Run the program.
      */

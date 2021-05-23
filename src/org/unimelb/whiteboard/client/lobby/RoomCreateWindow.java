@@ -54,7 +54,6 @@ public class RoomCreateWindow extends JDialog {
         createBtn.setActionCommand("OK");
         contentPanel.add(createBtn);
         getRootPane().setDefaultButton(createBtn);
-        
     }
 
     public static void showCreateRoomDialog(Frame owner, Component parentComponent, Client client) {

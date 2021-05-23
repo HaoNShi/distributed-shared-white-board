@@ -114,8 +114,7 @@ public class LobbyWindow {
             }
         });
 
-        
-        
+
         // Initialize Blank Panel
         blankPanel = new JPanel();
 

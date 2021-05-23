@@ -46,7 +46,7 @@ public class LobbyController {
             String[] roomInfo = entry.getValue().split(" ");
             String roomName = roomInfo[0];
             String hostName = roomInfo[1];
-            tempBtn.setText("Room: "+ roomName + " --- Manager: " + hostName);
+            tempBtn.setText("Room: " + roomName + " --- Manager: " + hostName);
             tempBtn.addActionListener(new ActionListener() {
                 /**
                  * Try to join a exist room.
