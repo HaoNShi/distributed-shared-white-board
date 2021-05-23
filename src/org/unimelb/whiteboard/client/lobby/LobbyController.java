@@ -46,10 +46,7 @@ public class LobbyController {
             String[] roomInfo = entry.getValue().split(" ");
             String roomName = roomInfo[0];
             String hostName = roomInfo[1];
-            tempBtn.setText(roomName + " - " + hostName);
-            ImageIcon joinIcon = new ImageIcon(ui.joinImagePath);
-            joinIcon.setImage(joinIcon.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
-            tempBtn.setIcon(joinIcon);
+            tempBtn.setText("Join "+roomName + " - " + hostName);
             tempBtn.addActionListener(new ActionListener() {
                 /**
                  * Try to join a exist room.
@@ -98,20 +95,15 @@ public class LobbyController {
             });
             ui.roomsBtnVec.add(tempBtn);
 
-            if (i % 2 != 0) {
-                ui.scrollPane.setPreferredSize(new Dimension(0, (i / 2 + 2) * 170));
-                JPanel temp = new JPanel();
-                temp.setBounds(5, (i / 2 + 1) * 170, 570, 160);
-                temp.setLayout(new GridLayout(1, 2, 5, 0));
-                currentPanel = temp;
-                ui.scrollPane.add(temp);
-            }
+            ui.scrollPane.setPreferredSize(new Dimension(0, (i + 2) * 70));
+            JPanel temp = new JPanel();
+            temp.setBounds(5, (i + 1) * 70, 230, 70);
+            temp.setLayout(new GridLayout(1, 0, 5, 5));
+            currentPanel = temp;
+            ui.scrollPane.add(temp);
 
             currentPanel.add(tempBtn);
             i++;
-        }
-        if (i % 2 == 0) {
-            currentPanel.add(ui.blankPanel);
         }
     }
 

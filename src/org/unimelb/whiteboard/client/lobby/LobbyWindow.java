@@ -22,9 +22,6 @@ public class LobbyWindow {
     protected Client client;
     protected LobbyController controller;
 
-    protected String addImagePath = "images/add.png";
-    protected String joinImagePath = "images/join.png";
-
     protected JOptionPane waitPane;
     protected JDialog waitDialog;
 
@@ -92,33 +89,29 @@ public class LobbyWindow {
         frame = new JFrame();
         frame.setResizable(false);
         frame.setTitle("Lobby");
-        frame.setBounds(100, 100, 600, 419);
+        frame.setBounds(100, 100, 260, 510);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addWindowListener(new LobbyCloseListener(client));
-        frame.setMinimumSize(new Dimension(600, 400));
         frame.getContentPane().setLayout(null);
 
         scrollPane = new JScrollPane();
-        scrollPane.setBounds(0, 0, 596, 472);
+        scrollPane.setBounds(0, 0, 336, 472);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         frame.getContentPane().add(scrollPane);
 
         // FirstPanel In RoomList Panel INIT
         firstPanel = new JPanel();
-        firstPanel.setBounds(5, 5, 570, 160);
-        firstPanel.setLayout(new GridLayout(1, 2, 5, 0));
+        firstPanel.setBounds(5, 5, 230, 70);
+        firstPanel.setLayout(new GridLayout(1, 0, 5, 5));
 
         // CREATE_ROOM button INIT
-        btnCreateRoom = new JButton();
+        btnCreateRoom = new JButton("New Room");
         btnCreateRoom.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 RoomCreateWindow.showCreateRoomDialog(frame, frame, client);
             }
         });
-        ImageIcon addIcon = new ImageIcon(addImagePath);
-        addIcon.setImage(addIcon.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
-        btnCreateRoom.setIcon(addIcon);
 
         // Initialize Blank Panel
         blankPanel = new JPanel();
