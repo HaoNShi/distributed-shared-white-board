@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginWindow {
-    private final LoginController controller;
+    private final LoginValidator validator;
     protected JTextField userIdTextField;
     protected JTextField addressTextField;
     protected JTextField portTextField;
@@ -23,7 +23,7 @@ public class LoginWindow {
     public LoginWindow(Client client) {
         this.client = client;
         initialize();
-        this.controller = new LoginController(this);
+        this.validator = new LoginValidator(this);
     }
 
     /**
@@ -50,14 +50,14 @@ public class LoginWindow {
         // Login logic here.
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (controller.validateFormat()) {
+                if (validator.validateFormat()) {
                     // The function above is asynchronous. Use the invokeLater to keep it work synchronous.
                     EventQueue.invokeLater(new Runnable() {
                         public void run() {
                             try {
-                                client.setUserId(controller.userId);
-                                client.setServerIp(controller.address);
-                                client.setServerPort(controller.port);
+                                client.setUserId(validator.userId);
+                                client.setServerIp(validator.address);
+                                client.setServerPort(validator.port);
                                 int state = client.register();
                                 if (state == StateCode.SUCCESS) {
                                     client.switch2Lobby();

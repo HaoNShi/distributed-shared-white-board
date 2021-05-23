@@ -31,7 +31,7 @@ public abstract class SharedWhiteBoard {
         this.roomId = roomId;
     }
 
-    public WhiteBoardWindow getView() {
+    public WhiteBoardWindow getWindow() {
         return ui;
     }
 

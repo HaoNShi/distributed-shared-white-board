@@ -15,13 +15,13 @@ import java.util.Vector;
 
 public class FileOpenListener implements ActionListener {
     private final JFileChooser chooser;
-    private final WhiteBoardWindow wbv;
+    private final WhiteBoardWindow window;
     private final Client client;
     private String currentPath;
 
-    public FileOpenListener(WhiteBoardWindow wbv, Client client) {
+    public FileOpenListener(WhiteBoardWindow window, Client client) {
         super();
-        this.wbv = wbv;
+        this.window = window;
         this.client = client;
         chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("WhiteBoard files", "wb");
@@ -35,7 +35,7 @@ public class FileOpenListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         System.out.println("Operation: Open File.");
         chooser.setCurrentDirectory(new File("."));
-        int returnVal = chooser.showOpenDialog(wbv.getFrame());
+        int returnVal = chooser.showOpenDialog(window.getFrame());
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             try {
                 currentPath = chooser.getSelectedFile().getPath();
@@ -43,8 +43,8 @@ public class FileOpenListener implements ActionListener {
                 System.out.println(currentPath);
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(currentPath));
                 Vector<MyShape> history = (Vector<MyShape>) ois.readObject();
-                wbv.getPaintManager().clearRedoHistory();
-                wbv.getPaintManager().setPaintHistory(history);
+                window.getPaintManager().clearRedoHistory();
+                window.getPaintManager().setPaintHistory(history);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

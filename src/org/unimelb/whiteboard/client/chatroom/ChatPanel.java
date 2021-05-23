@@ -35,12 +35,20 @@ public class ChatPanel extends JPanel {
 
         JPanel pnlFoot = new JPanel();
         pnlFoot.setLayout(new BorderLayout(0, 0));
+
+        JLabel lblInput = new JLabel("           Input");
+        lblInput.setOpaque(true);
+        lblInput.setBackground(Color.WHITE);
+        lblInput.setFont(new Font("Arial", Font.BOLD, 15));
+        pnlFoot.add(lblInput, BorderLayout.NORTH);
+
         txtInput = new JTextField("", 10);
+        txtInput.setPreferredSize(new Dimension(0, 30));
         pnlFoot.add(txtInput, BorderLayout.CENTER);
 
         btnSend = new JButton("Send");
-        btnSend.setPreferredSize(new Dimension(70, 0));
-        pnlFoot.add(btnSend, BorderLayout.EAST);
+        btnSend.setPreferredSize(new Dimension(0, 30));
+        pnlFoot.add(btnSend, BorderLayout.SOUTH);
 
         add(pnlFoot, BorderLayout.SOUTH);
     }

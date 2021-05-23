@@ -63,8 +63,8 @@ public class ChatClient implements Runnable {
         chatPanel.btnSend.addActionListener(e -> {
             if (chatPanel.txtInput.getText().length() != 0) {
                 try {
-                    SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-                    sendMsg('[' + df.format(new Date()) + "] " + userId + ":\n" + this.chatPanel.txtInput.getText());
+                    sendMsg("[User] " + userId + ":\n" + this.chatPanel.txtInput.getText());
+                    chatPanel.txtInput.setText("");
                 } catch (IOException e2) {
                     processMsg(e2.toString());
                 }

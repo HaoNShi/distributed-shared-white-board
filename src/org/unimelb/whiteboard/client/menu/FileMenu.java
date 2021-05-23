@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
  */
 public class FileMenu extends JMenu {
 
-    public FileMenu(Client client, WhiteBoardWindow wbv, PaintManager paintManager, UserManager userManager) {
+    public FileMenu(Client client, WhiteBoardWindow window, PaintManager paintManager, UserManager userManager) {
         super("File");
         this.setFont(new Font("File", Font.BOLD, 16));
         JMenuItem newMenuItem = new JMenuItem("New");
@@ -28,15 +28,15 @@ public class FileMenu extends JMenu {
         this.add(newMenuItem);
 
         JMenuItem openMenuItem = new JMenuItem("Open");
-        openMenuItem.addActionListener(new FileOpenListener(wbv, client));
+        openMenuItem.addActionListener(new FileOpenListener(window, client));
         this.add(openMenuItem);
 
         JMenuItem saveMenuItem = new JMenuItem("Save");
-        saveMenuItem.addActionListener(new FileSaveListener(wbv, client, "save"));
+        saveMenuItem.addActionListener(new FileSaveListener(window, client, "save"));
         this.add(saveMenuItem);
 
         JMenuItem saveAsMenuItem = new JMenuItem("Save As...");
-        saveAsMenuItem.addActionListener(new FileSaveListener(wbv, client, "saveAs"));
+        saveAsMenuItem.addActionListener(new FileSaveListener(window, client, "saveAs"));
         this.add(saveAsMenuItem);
 
         JMenuItem closeMenuItem = new JMenuItem("Close");

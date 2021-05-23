@@ -40,8 +40,8 @@ public class ChatServer implements Runnable {
         chatPanel = new ChatPanel();
         clients = new Vector<>(); // Vector is a collection of clients and is thread-safe
         chatPanel.btnSend.addActionListener((e) -> {
-            SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
-            processMsg('[' + df.format(new Date()) + "] " + userId + ":\n" + this.chatPanel.txtInput.getText());
+            processMsg("[User] " + userId + ":\n" + this.chatPanel.txtInput.getText());
+            chatPanel.txtInput.setText("");
         });
     }
 

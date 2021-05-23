@@ -18,13 +18,13 @@ import java.io.ObjectOutputStream;
 import java.util.Vector;
 
 public class FileSaveListener implements ActionListener {
-    private final WhiteBoardWindow wbv;
+    private final WhiteBoardWindow window;
     private final Client client;
     private String action;
 
-    public FileSaveListener(WhiteBoardWindow wbv, Client client, String action) {
+    public FileSaveListener(WhiteBoardWindow window, Client client, String action) {
         super();
-        this.wbv = wbv;
+        this.window = window;
         this.client = client;
         this.action = action;
     }
@@ -33,7 +33,7 @@ public class FileSaveListener implements ActionListener {
         try {
             savePic();
         } catch (Exception er) {
-            JOptionPane.showMessageDialog(wbv.getFrame(), "Failed to save image");
+            JOptionPane.showMessageDialog(window.getFrame(), "Failed to save image");
             er.printStackTrace();
         }
     }
@@ -41,11 +41,11 @@ public class FileSaveListener implements ActionListener {
     private void savePic() throws IOException {
         System.out.println("Operation: Save-" + action);
 
-        Dimension imageSize = wbv.getPaintBoardPanel().getSize();
+        Dimension imageSize = window.getPaintBoardPanel().getSize();
         BufferedImage image = new BufferedImage(imageSize.width, imageSize.height, BufferedImage.TYPE_INT_RGB);
 
         Graphics2D graphics = image.createGraphics();
-        wbv.getPaintBoardPanel().paint(graphics);
+        window.getPaintBoardPanel().paint(graphics);
         graphics.dispose();
 
         if (action.equals("saveAs")) {
@@ -58,7 +58,7 @@ public class FileSaveListener implements ActionListener {
                 saveAsPic(image);
             } else {
                 // Not handle duplicate
-                Vector<MyShape> history = wbv.getPaintManager().getPaintHistory();
+                Vector<MyShape> history = window.getPaintManager().getPaintHistory();
                 ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(currentPath));
                 oos.writeObject(history);
                 oos.close();
@@ -81,7 +81,7 @@ public class FileSaveListener implements ActionListener {
             String format = fileFilter.getExtensions()[0];
             String savePath = imageFile.getPath() + "." + format;
             if (format.equals("wb")) {
-                Vector<MyShape> history = wbv.getPaintManager().getPaintHistory();
+                Vector<MyShape> history = window.getPaintManager().getPaintHistory();
                 ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(savePath));
                 oos.writeObject(history);
                 oos.close();
@@ -94,7 +94,7 @@ public class FileSaveListener implements ActionListener {
                     ImageIO.write(image, format, file);
                 } else {
                     // Duplicated image name
-                    int confirm = JOptionPane.showConfirmDialog(wbv.getFrame(),
+                    int confirm = JOptionPane.showConfirmDialog(window.getFrame(),
                             "This name has existed in this path. Replace the file?", "Warning",
                             JOptionPane.YES_NO_OPTION);
                     if (confirm == JOptionPane.YES_OPTION) {

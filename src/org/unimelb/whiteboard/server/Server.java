@@ -117,13 +117,14 @@ public class Server {
         userList = new HashMap<>();
         printInitialStats();
         this.ui = new ServerWindow(ip, String.valueOf(port));
+        printOnBoth("Server running...");
     }
 
     private void printInitialStats() throws UnknownHostException {
         InetAddress ip = InetAddress.getLocalHost();
-        System.out.println("Server Running...");
-        System.out.println("Current IP address : " + ip.getHostAddress());
-        System.out.println("Port = " + port);
-        System.out.println("Waiting for client connection...\n--------------");
+        System.out.println("Server start");
+        System.out.println("Current IP address: " + ip.getHostAddress());
+        System.out.println("Port: " + port);
+        System.out.println("Waiting for client connection...");
     }
 }

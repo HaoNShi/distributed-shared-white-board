@@ -42,7 +42,7 @@ public class WhiteBoardWindow {
     private JTextField thicknessTextField;
 
     /**
-     * Create the view with Paint Manager.
+     * Create the window with Paint Manager.
      */
     public WhiteBoardWindow(Client client, PaintManager paintManager, UserManager userManager, String title) {
         this.title = title;
@@ -113,6 +113,8 @@ public class WhiteBoardWindow {
         frame.setSize(900, 800);
         frame.setTitle(title);
         frame.setResizable(true);
+        frame.setLayout(new BorderLayout(0,10));
+        frame.setBackground(Color.white);
 
         // Add Action Listener
         drawListener = new DrawListener(this);
@@ -133,8 +135,7 @@ public class WhiteBoardWindow {
         paintManager.setPaintArea(paintBoardPanel);
 
         JPanel userPanel = new JPanel();
-        userPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-        userPanel.setPreferredSize(new Dimension(200, 0));
+        userPanel.setPreferredSize(new Dimension(130, 0));
         userPanel.setBackground(Color.WHITE);
         frame.getContentPane().add(userPanel, BorderLayout.WEST);
         userPanel.setLayout(new BorderLayout(0, 0));
@@ -144,7 +145,7 @@ public class WhiteBoardWindow {
         userPanel.add(userControlPanel, BorderLayout.NORTH);
         userControlPanel.setLayout(new BorderLayout(0, 0));
 
-        JLabel peerList = new JLabel("Peer List:");
+        JLabel peerList = new JLabel("        Peer List");
         peerList.setOpaque(true);
         peerList.setBackground(Color.WHITE);
         peerList.setFont(new Font("Arial", 1, 15));
@@ -158,7 +159,7 @@ public class WhiteBoardWindow {
         userPanel.add(chatRoomControlPanel, BorderLayout.CENTER);
         chatRoomControlPanel.setLayout(new BorderLayout(0, 0));
 
-        JLabel chatWindow = new JLabel("Chat Window:");
+        JLabel chatWindow = new JLabel("    Chat Window");
         chatWindow.setOpaque(true);
         chatWindow.setBackground(Color.WHITE);
         chatWindow.setFont(new Font("Arial", 1, 15));
@@ -166,7 +167,6 @@ public class WhiteBoardWindow {
         drawToolPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel toolPanel = new JPanel();
-        toolPanel.setBorder(BorderFactory.createRaisedBevelBorder());
         toolPanel.setLayout(new GridLayout(2, 0, 5, 5));
         drawToolPanel.add(toolPanel, BorderLayout.WEST);
 
@@ -184,7 +184,6 @@ public class WhiteBoardWindow {
 
         // Create color panel
         JPanel colorPanel = new JPanel();
-        colorPanel.setBorder(BorderFactory.createRaisedBevelBorder());
         drawToolPanel.add(colorPanel, BorderLayout.CENTER);
         colorPanel.setLayout(new BorderLayout(0, 0));
 
