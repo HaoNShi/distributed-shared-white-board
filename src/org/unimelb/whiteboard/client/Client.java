@@ -214,7 +214,7 @@ public class Client {
         loginWindow.getFrame().setVisible(true);
 
         if (isCentralServerCrush) {
-            JOptionPane.showMessageDialog(loginWindow.getFrame(), "Can not connect to Central Server. Please reconnect.");
+            JOptionPane.showMessageDialog(loginWindow.getFrame(), "Can't connect to the Server. Please try again.");
         }
     }
 
@@ -265,7 +265,7 @@ public class Client {
         if (state == StateCode.SUCCESS) {
             roomList = (Map<Integer, String>) resJson.get("roomList");
         } else {
-            System.out.println("Can not get rooms list!");
+            System.out.println("Can't get rooms list!");
             openLogin(true);
         }
         System.out.println("Get rooms list!");
@@ -290,7 +290,7 @@ public class Client {
             } else if (state == StateCode.FAIL) {
                 System.out.println("User name exists");
             } else {
-                System.out.println("Can not connect to the server.");
+                System.out.println("Can't connect to the server.");
             }
         }
         return state;

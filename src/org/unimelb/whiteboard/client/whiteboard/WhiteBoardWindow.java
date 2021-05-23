@@ -136,7 +136,7 @@ public class WhiteBoardWindow {
         userPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
         userPanel.setPreferredSize(new Dimension(200, 0));
         userPanel.setBackground(Color.WHITE);
-        frame.getContentPane().add(userPanel, BorderLayout.EAST);
+        frame.getContentPane().add(userPanel, BorderLayout.WEST);
         userPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel userControlPanel = new JPanel();
@@ -147,7 +147,7 @@ public class WhiteBoardWindow {
         JLabel peerList = new JLabel("Peer List:");
         peerList.setOpaque(true);
         peerList.setBackground(Color.WHITE);
-        peerList.setFont(new Font("Arial", 1, 20));
+        peerList.setFont(new Font("Arial", 1, 15));
         userControlPanel.add(peerList, BorderLayout.NORTH);
 
 
@@ -159,9 +159,9 @@ public class WhiteBoardWindow {
         chatRoomControlPanel.setLayout(new BorderLayout(0, 0));
 
         JLabel chatWindow = new JLabel("Chat Window:");
-        peerList.setOpaque(true);
-        peerList.setBackground(Color.WHITE);
-        chatWindow.setFont(new Font("Arial", 1, 20));
+        chatWindow.setOpaque(true);
+        chatWindow.setBackground(Color.WHITE);
+        chatWindow.setFont(new Font("Arial", 1, 15));
         chatRoomControlPanel.add(chatWindow, BorderLayout.NORTH);
         drawToolPanel.setLayout(new BorderLayout(0, 0));
 

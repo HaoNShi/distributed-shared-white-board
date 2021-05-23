@@ -79,14 +79,14 @@ public class LobbyController {
                             } catch (Exception e2) {
                                 e2.printStackTrace();
                                 client.unbindAndSetNull();
-                                System.out.println("The host's network has problem!");
-                                JOptionPane.showMessageDialog(ui.getFrame(), "The host's network has problem!");
+                                System.out.println("Something wrong with the manager");
+                                JOptionPane.showMessageDialog(ui.getFrame(), "Something wrong with the manager");
                             }
                         } else if (state == StateCode.FAIL) {
-                            JOptionPane.showMessageDialog(ui.frame, "Password wrong or the room is removed, please refresh!", "Warning",
+                            JOptionPane.showMessageDialog(ui.frame, "Password wrong or the room is removed, please refresh", "Warning",
                                     JOptionPane.WARNING_MESSAGE);
                         } else {
-                            JOptionPane.showMessageDialog(ui.frame, "Can not connect to central server!", "Error",
+                            JOptionPane.showMessageDialog(ui.frame, "Can't connect to the server!", "Error",
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     }
@@ -96,7 +96,7 @@ public class LobbyController {
 
             ui.scrollPane.setPreferredSize(new Dimension(0, (i + 2) * 70));
             JPanel temp = new JPanel();
-            temp.setBounds(0, (i + 1) * 50, 300, 50);
+            temp.setBounds(0, (i + 1) * 50, 285, 50);
             temp.setLayout(new GridLayout(1, 0, 5, 5));
             currentPanel = temp;
             ui.scrollPane.add(temp);

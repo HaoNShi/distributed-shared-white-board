@@ -235,10 +235,10 @@ public class UserManager {
             IRemoteApp remoteApplicantApp = (IRemoteApp) clientRegistry.lookup("app");
             applicantRemoteApps.put(userId, remoteApplicantApp);
         } catch (Exception e) {
-            System.err.println("Can not get the client registry.");
+            System.err.println("Can't get the user register.");
         }
-        if (chatPanel != null)
-            chatPanel.appendText("Applicant " + userId + " wants to join!\n");
+//        if (chatPanel != null)
+//           chatPanel.appendText("Applicant " + userId + " wants to join!\n");
         // refresh ui.
         if (clsp != null) {
             clsp.updateUserList();
@@ -251,8 +251,8 @@ public class UserManager {
     public void removeApplicant(String userId) {
         applicants.remove(userId);
         applicantRemoteApps.remove(userId);
-        if (chatPanel != null)
-            chatPanel.appendText("Applicant " + userId + " leaves!\n");
+//        if (chatPanel != null)
+ //           chatPanel.appendText("Applicant " + userId + " leaves!\n");
         // refresh ui.
         if (clsp != null) {
             clsp.updateUserList();
@@ -264,7 +264,7 @@ public class UserManager {
             IRemoteApp remoteApp = applicantRemoteApps.get(userId);
             remoteApp.askOut();
         } catch (Exception e) {
-            System.err.println("Can not get the client registry.");
+            System.err.println("Can't get the user register.");
         }
         removeApplicant(userId);
     }

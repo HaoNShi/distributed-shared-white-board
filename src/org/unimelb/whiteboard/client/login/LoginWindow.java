@@ -65,7 +65,7 @@ public class LoginWindow {
                                     JOptionPane.showMessageDialog(frame, "User name exist! Change one!", "Warning",
                                             JOptionPane.WARNING_MESSAGE);
                                 } else {
-                                    JOptionPane.showMessageDialog(frame, "Can not connect to the server!", "Warning",
+                                    JOptionPane.showMessageDialog(frame, "Can't connect to the server!", "Warning",
                                             JOptionPane.WARNING_MESSAGE);
                                 }
                             } catch (Exception e) {
