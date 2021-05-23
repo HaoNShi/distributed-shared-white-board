@@ -69,7 +69,7 @@ public class LobbyWindow {
      * Create a wait dialog, not visible.
      */
     public void createWaitDialog() {
-        waitDialog = waitPane.createDialog(frame, "Waiting");
+        waitDialog = waitPane.createDialog(frame, "Message");
         waitDialog.addWindowListener(new WaitDialogCloseListener(controller));
     }
 
@@ -77,7 +77,7 @@ public class LobbyWindow {
      * Create a beKicked dialog, visible.
      */
     public void createBeKickedDialog() {
-        beKickedDialog = beKickedPane.createDialog(frame, "Be Kicked");
+        beKickedDialog = beKickedPane.createDialog(frame, "Message");
         beKickedDialog.setModal(false);
         beKickedDialog.setVisible(true);
     }
@@ -96,14 +96,14 @@ public class LobbyWindow {
         frame.setLocationRelativeTo(null);
 
         scrollPane = new JScrollPane();
-        scrollPane.setBounds(0, 0, 300, 400);
+        scrollPane.setBounds(0, 0, 285, 400);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         frame.getContentPane().add(scrollPane);
 
         // FirstPanel In RoomList Panel INIT
         firstPanel = new JPanel();
-        firstPanel.setBounds(0, 0, 300, 50);
+        firstPanel.setBounds(0, 0, 285, 50);
         firstPanel.setLayout(new GridLayout(1, 0, 5, 5));
 
         // CREATE_ROOM button INIT
@@ -114,6 +114,8 @@ public class LobbyWindow {
             }
         });
 
+        
+        
         // Initialize Blank Panel
         blankPanel = new JPanel();
 

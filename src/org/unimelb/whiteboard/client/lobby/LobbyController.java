@@ -52,8 +52,7 @@ public class LobbyController {
                  * Try to join a exist room.
                  */
                 public void actionPerformed(ActionEvent e) {
-                    String password = JOptionPane.showInputDialog(ui.frame, "Please Enter Password:",
-                            "Room: " + roomName, JOptionPane.INFORMATION_MESSAGE);
+                    String password = "";
                     if (password != null) {
                         // So wired! Should learn more about entrySet().
                         int roomId = Integer.parseInt(entry.getKey() + "");

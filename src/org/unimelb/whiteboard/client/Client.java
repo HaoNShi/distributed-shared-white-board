@@ -246,24 +246,15 @@ public class Client {
         openWhiteBoard();
     }
 
-    /**
-     * Create a temporary client white board. If not, when the host try to get the
-     * information of it, would fail.
-     */
+
     public void createTempClientWhiteBoard(String hostId, String hostIp, int hostRegisterPort) {
         tempClientWhiteBoard = new ClientWhiteBoard(this, hostId, hostIp, hostRegisterPort);
     }
 
-    /**
-     * Get the Lobby view.
-     */
     public LobbyWindow getLobbyView() {
         return lobbyWindow;
     }
 
-    /**
-     * Use to pull remote room list from the central server.
-     */
     public void pullRemoteRoomList() {
         // sent request to central server to gain roomList
         JSONObject reqJSON = new JSONObject();
@@ -295,9 +286,9 @@ public class Client {
             System.out.println("Connection Fail: " + state);
         } else {
             if (state == StateCode.SUCCESS) {
-                System.out.println("Successfully register in the central server!");
+                System.out.println("Register in the server successfully");
             } else if (state == StateCode.FAIL) {
-                System.out.println("User name exist!");
+                System.out.println("User name exists");
             } else {
                 System.out.println("Can not connect to the server.");
             }
@@ -319,9 +310,9 @@ public class Client {
             System.out.println("Connection Fail: " + state);
         } else {
             if (state == StateCode.SUCCESS) {
-                System.out.println("Successfully exit from the central server!");
+                System.out.println("Exit from the server successfully");
             } else {
-                System.out.println("Exit invalidly!");
+                System.out.println("Exit invalidly");
             }
         }
     }
@@ -337,9 +328,9 @@ public class Client {
             System.out.println("Connection Fail: " + state);
         } else {
             if (state == StateCode.SUCCESS) {
-                System.out.println("Successfully remove room from server!");
+                System.out.println("Remove room from server successfully");
             } else {
-                System.out.println("Remove room fail!");
+                System.out.println("Remove room fail");
             }
         }
     }

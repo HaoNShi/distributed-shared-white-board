@@ -14,10 +14,11 @@ import java.awt.event.ActionListener;
 
 public class WhiteBoardWindow {
     // Default color display in the left bottom.
-    private static final Color[] COLORS = {Color.BLACK, Color.GRAY, Color.RED, Color.MAGENTA, Color.ORANGE, Color.GREEN,
-            Color.WHITE, Color.LIGHT_GRAY, Color.PINK, Color.CYAN, Color.YELLOW, Color.BLUE};
+    private static final Color[] COLORS = {Color.BLACK, Color.CYAN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.GREEN,
+            new Color(200,90,20),  Color.PINK, Color.GRAY, Color.YELLOW, Color.BLUE, new Color(100,200,150),
+            new Color(240,30,140), new Color(150,70,10), new Color(200,200,10), new Color(50,90,150)};
     // Use to create tool button.
-    private static final String[] TOOLS = {"line", "circle", "rect", "oval", "text", "eraser"};
+    private static final String[] TOOLS = {"pen", "line", "circle", "rect", "oval", "text"};
     private final JColorChooser colorChooser;
     // Title of the window
     private final String title;
@@ -170,12 +171,15 @@ public class WhiteBoardWindow {
         drawToolPanel.add(toolPanel, BorderLayout.WEST);
 
         // Add tool bar button
-        JButton btnTools;
+        JButton btnTool;
         for (String s : TOOLS) {
-            btnTools = new JButton(s);
-            btnTools.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            toolPanel.add(btnTools);
-            btnTools.addActionListener(drawListener);
+            btnTool = new JButton(s);
+            btnTool.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            ImageIcon toolIcon = new ImageIcon("images/" + s + ".png");
+            toolIcon.setImage(toolIcon.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+            btnTool.setIcon(toolIcon);
+            toolPanel.add(btnTool);
+            btnTool.addActionListener(drawListener);
         }
 
         // Create color panel
@@ -267,6 +271,5 @@ public class WhiteBoardWindow {
 
         //show the window in center
         frame.setLocationRelativeTo(null);
-
     }
 }

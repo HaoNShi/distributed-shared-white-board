@@ -1,10 +1,8 @@
 package org.unimelb.whiteboard.client.remote;
 
 import org.unimelb.whiteboard.client.Client;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-
 
 public class RemoteApp extends UnicastRemoteObject implements IRemoteApp {
     private final Client client;
@@ -21,7 +19,6 @@ public class RemoteApp extends UnicastRemoteObject implements IRemoteApp {
 
     @Override
     public void askOut() throws RemoteException {
-        System.out.println("Be kicked by the host.");
         client.switch2Lobby();
         client.getLobbyView().createBeKickedDialog();
     }
