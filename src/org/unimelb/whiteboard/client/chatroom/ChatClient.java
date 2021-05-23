@@ -77,12 +77,10 @@ public class ChatClient implements Runnable {
         try {
             socket = new Socket(ip, chatPort);
             bConnected = true;
-            processMsg("Connection ok");
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
-            processMsg("Connection failed");
         }
         if (thread == null) {
             thread = new Thread(this);

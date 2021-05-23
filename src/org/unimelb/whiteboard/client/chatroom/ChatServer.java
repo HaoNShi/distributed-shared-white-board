@@ -89,7 +89,6 @@ public class ChatServer implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        processMsg("Chat: listening on port " + chatPort);
         // Server thread, which handles multiple clients, run below is for this thread
         thread = new Thread(this);
         thread.start();
@@ -104,10 +103,8 @@ public class ChatServer implements Runnable {
         try {
             while (true) {
                 Socket client_socket = listen_socket.accept();
-                // 封装成功能更强的Connection对象
                 Connection c = new Connection(client_socket, this);
                 clients.add(c);
-                processMsg("A new member comes in");
             }
         } catch (IOException e) {
             e.printStackTrace();

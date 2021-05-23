@@ -25,7 +25,7 @@ public class NewApplicantWindow extends JDialog {
             count--;
             if (count < 0) {
                 timer.stop();
-                NewApplicantWindow.this.dispose(); // 时间倒数完毕，销毁Dialog
+                NewApplicantWindow.this.dispose(); // Time up, destroy Dialog
             } else
                 ignoreBtn.setText("Ignore(" + count + ")");
         }

@@ -16,7 +16,7 @@ public class ClientWhiteBoard extends SharedWhiteBoard {
     }
 
     private void initView() {
-        String title = "Client-" + client.getIp() + ":" + client.getRegistryPort();
+        String title = "White Board";
         ui = new WhiteBoardWindow(client, this.paintManager, userManager, title);
     }
 
