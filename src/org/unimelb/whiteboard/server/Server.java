@@ -62,7 +62,7 @@ public class Server {
         } catch (NumberFormatException e) {
             System.out.println("Invalid Port Number: Port number should be between 1024 and 49151!");
         } catch (BindException e) {
-            System.err.println("Address already in use!");
+            System.err.println("Error: Address already in use!");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -117,13 +117,14 @@ public class Server {
         userList = new HashMap<>();
         printInitialStats();
         this.ui = new ServerWindow(ip, String.valueOf(port));
+        printOnBoth("Server running...");
     }
 
     private void printInitialStats() throws UnknownHostException {
         InetAddress ip = InetAddress.getLocalHost();
-        System.out.println("Server Running...");
+        System.out.println("Server start");
         System.out.println("Current IP address : " + ip.getHostAddress());
         System.out.println("Port = " + port);
-        System.out.println("Waiting for client connection...\n--------------");
+        System.out.println("Waiting for client connection...");
     }
 }

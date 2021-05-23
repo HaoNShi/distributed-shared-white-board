@@ -1,7 +1,6 @@
 package org.unimelb.whiteboard.server.ui;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -39,7 +38,7 @@ public class ServerWindow {
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                System.out.println("Server Close!");
+                System.out.println("Server close.");
             }
         });
 

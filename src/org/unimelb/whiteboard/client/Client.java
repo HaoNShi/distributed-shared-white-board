@@ -68,7 +68,7 @@ public class Client {
      */
     public void run() {
         loginWindow.getFrame().setVisible(true);
-        System.out.println("App running");
+        System.out.println("Client start successfully!");
     }
 
     /**
@@ -149,7 +149,7 @@ public class Client {
      * When user completes sign in, use this method to switch to Lobby.
      */
     public void openLobby() {
-        System.out.println("User: " + userId + " enter Lobby.");
+        System.out.println("User " + userId + " enter Lobby.");
         if (lobbyWindow == null)
             lobbyWindow = new LobbyWindow(this);
 
@@ -401,8 +401,8 @@ public class Client {
     }
 
     private void printInitialStates() {
-        System.out.println("IP address : " + ip);
-        System.out.println("Registry Port = " + registryPort);
+        System.out.println("IP address: " + ip);
+        System.out.println("Registry Port: " + registryPort);
     }
 
 }

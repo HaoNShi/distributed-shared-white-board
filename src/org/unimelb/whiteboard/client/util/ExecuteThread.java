@@ -56,16 +56,16 @@ public class ExecuteThread extends Thread {
             System.out.println("Connect to server successfully.");
         } catch (UnknownHostException e) {
             connectState = StateCode.UNKNOWN_HOST;
-            System.out.println("Error: UNKNOWN HOST!");
+            System.err.println("Error: Unknown host!");
         } catch (ConnectException e) {
             connectState = StateCode.COLLECTION_REFUSED;
-            System.out.println("Error: COLLECTION REFUSED!");
+            System.err.println("Error: Collection refused!");
         } catch (SocketTimeoutException e) {
             connectState = StateCode.TIMEOUT;
-            System.out.println("Error: Timeout!");
+            System.err.println("Error: Timeout!");
         } catch (IOException e) {
             connectState = StateCode.IO_ERROR;
-            System.out.println("Error: I/O ERROR!");
+            System.err.println("Error: I/O Error!");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

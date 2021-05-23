@@ -33,14 +33,13 @@ public class FileOpenListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Operation: Open File.");
         chooser.setCurrentDirectory(new File("."));
         int returnVal = chooser.showOpenDialog(window.getFrame());
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             try {
                 currentPath = chooser.getSelectedFile().getPath();
                 client.setCurrentSavePath(currentPath);
-                System.out.println(currentPath);
+                System.out.println("Open file: " + currentPath);
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(currentPath));
                 Vector<MyShape> history = (Vector<MyShape>) ois.readObject();
                 window.getPaintManager().clearRedoHistory();

@@ -55,7 +55,7 @@ public class LobbyController {
                  * Try to join a exist room.
                  */
                 public void actionPerformed(ActionEvent e) {
-                    String password = JOptionPane.showInputDialog(ui.frame, "Please Enter Password:", "Room: " + roomName, JOptionPane.INFORMATION_MESSAGE);
+                    String password = JOptionPane.showInputDialog(ui.frame, "Password:", "Room: " + roomName, JOptionPane.INFORMATION_MESSAGE);
                     if (password != null) {
                         int roomId = Integer.parseInt(entry.getKey() + "");
                         JSONObject reqJSON = new JSONObject();
@@ -82,13 +82,13 @@ public class LobbyController {
                                 e2.printStackTrace();
                                 client.unbindAndSetNull();
                                 System.out.println("The host's network has problem!");
-                                JOptionPane.showMessageDialog(ui.getFrame(), "The host's network has problem!");
+                                JOptionPane.showMessageDialog(ui.getFrame(), "Network error!");
                             }
                         } else if (state == StateCode.FAIL) {
-                            JOptionPane.showMessageDialog(ui.frame, "Password wrong or the room is removed, please refresh!", "Warning",
+                            JOptionPane.showMessageDialog(ui.frame, "Wrong password!", "Warning",
                                     JOptionPane.WARNING_MESSAGE);
                         } else {
-                            JOptionPane.showMessageDialog(ui.frame, "Can not connect to central server!", "Error",
+                            JOptionPane.showMessageDialog(ui.frame, "Can not connect to the server!", "Error",
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     }

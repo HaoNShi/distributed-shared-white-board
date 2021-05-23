@@ -39,7 +39,7 @@ public class FileSaveListener implements ActionListener {
     }
 
     private void savePic() throws IOException {
-        System.out.println("Operation: Save-" + action);
+        System.out.println("Save " + action);
 
         Dimension imageSize = window.getPaintBoardPanel().getSize();
         BufferedImage image = new BufferedImage(imageSize.width, imageSize.height, BufferedImage.TYPE_INT_RGB);
@@ -50,7 +50,6 @@ public class FileSaveListener implements ActionListener {
 
         if (action.equals("saveAs")) {
             saveAsPic(image);
-
         } else {
             // Save jpg
             String currentPath = client.getCurrentSavePath();
@@ -62,7 +61,6 @@ public class FileSaveListener implements ActionListener {
                 ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(currentPath));
                 oos.writeObject(history);
                 oos.close();
-
             }
         }
     }

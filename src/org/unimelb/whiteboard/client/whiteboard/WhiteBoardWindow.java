@@ -228,7 +228,6 @@ public class WhiteBoardWindow {
                 public void actionPerformed(ActionEvent e) {
                     currentColor = ((JButton) e.getSource()).getBackground();
                     btnCurrentColor.setBackground(currentColor);
-                    System.out.println("Operation: Change color.");
                 }
             });
             defaultColorPanel.add(btnDefaultColors);
@@ -253,7 +252,6 @@ public class WhiteBoardWindow {
             public void actionPerformed(ActionEvent e) {
                 currentColor = JColorChooser.showDialog(frame, "Color Chooser", currentColor);
                 btnCurrentColor.setBackground(currentColor);
-                System.out.println("Operation: Change color.");
             }
         });
 

@@ -67,7 +67,7 @@ public class ChatServer implements Runnable {
             } catch (Exception e) {
                 client.disconnect();
                 iter.remove();
-                System.err.println("A member exit in an abnormal way.");
+                System.err.println("Error: A member exit in an abnormal way!");
             }
         }
     }

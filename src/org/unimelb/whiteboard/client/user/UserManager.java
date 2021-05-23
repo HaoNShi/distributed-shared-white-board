@@ -158,7 +158,6 @@ public class UserManager {
             removeMember(userId);
             applicants.remove(userId);
             applicantRemoteApps.remove(userId);
-            chatPanel.appendText("Can't connect to member " + userId + ", Remove.\n");
             System.err.println("Can't connect to member " + userId + ", Remove.");
         }
 

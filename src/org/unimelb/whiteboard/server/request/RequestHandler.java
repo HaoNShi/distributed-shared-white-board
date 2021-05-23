@@ -17,6 +17,9 @@ import java.util.Map;
 public class RequestHandler extends Thread {
     private final Socket clientSocket;
     Server controller;
+    String password = "";
+    String userId = "";
+    int roomId = -1;
 
     public RequestHandler(Socket clientSocket, Server controller) {
         this.clientSocket = clientSocket;
@@ -30,11 +33,8 @@ public class RequestHandler extends Thread {
             JSONObject reqJSON = JSON.parseObject(reader.readUTF());
             int command = Integer.parseInt(reqJSON.get("command").toString());
             JSONObject resJSON = new JSONObject();
-            // Execute command
-            String password = "";
-            int roomId = -1;
-            String userId = "";
 
+            // Execute command
             switch (command) {
                 case StateCode.ADD_ROOM:
                     // get info from request
@@ -45,8 +45,8 @@ public class RequestHandler extends Thread {
                     int port = reqJSON.getInteger("hostPort");
                     // return roomId
                     roomId = controller.getRoomManager().addRoom(ipAddress, port, hostName, roomName, password);
-                    controller.printOnBoth(hostName + " create a room! Current room num: " + controller.getRoomManager().getRoomNum());
-                    controller.printOnBoth("- Host: " + ipAddress + ": " + port);
+                    controller.printOnBoth("User " + hostName + " create a room! Current room num: " + controller.getRoomManager().getRoomNum());
+                    controller.printOnBoth("Host: " + ipAddress + ":" + port);
                     resJSON.put("state", StateCode.SUCCESS);
                     resJSON.put("roomId", roomId);
                     break;
@@ -54,7 +54,7 @@ public class RequestHandler extends Thread {
                     roomId = Integer.parseInt(reqJSON.get("roomId").toString());
                     int state = controller.getRoomManager().removeRoom(roomId);
                     resJSON.put("state", String.valueOf(state));
-                    controller.printOnBoth("Room: " + roomId + " is removed.");
+                    controller.printOnBoth("Delete room " + roomId + ". Current room num: " + controller.getRoomManager().getRoomNum());
                     break;
                 case StateCode.GET_ROOM_LIST:
                     Map<Integer, String> roomList = controller.getRoomManager().getRoomList();
@@ -72,20 +72,20 @@ public class RequestHandler extends Thread {
                         resJSON.put("state", StateCode.SUCCESS);
                         resJSON.put("ip", room.getIpAddress());
                         resJSON.put("port", room.getPort());
-                        controller.printOnBoth("A client asks room " + roomId + " with correct password.");
+                        controller.printOnBoth("User asks room " + roomId + " with correct password.");
                     } else {
                         resJSON.put("state", StateCode.FAIL);
-                        controller.printOnBoth("A client asks room " + roomId + " with wrong password.");
+                        controller.printOnBoth("User asks room " + roomId + " with wrong password.");
                     }
                     break;
                 case StateCode.ADD_USER:
                     userId = reqJSON.get("userId").toString();
                     if (controller.getUserList().containsKey(userId)) {
-                        controller.printOnBoth("A user try to join but " + userId + " exist!");
+                        controller.printOnBoth("User " + userId + " try to join but exist!");
                         resJSON.put("state", StateCode.FAIL);
                     } else {
                         controller.getUserList().put(userId, userId);
-                        controller.printOnBoth("User-" + userId + " join. " + "Current user number: " + controller.getUserList().size());
+                        controller.printOnBoth("User " + userId + " join. Current user number: " + controller.getUserList().size());
                         resJSON.put("state", StateCode.SUCCESS);
                     }
                     break;
@@ -93,17 +93,17 @@ public class RequestHandler extends Thread {
                     userId = reqJSON.get("userId").toString();
                     if (controller.getUserList().containsKey(userId)) {
                         controller.getUserList().remove(userId);
-                        controller.printOnBoth("Delete " + userId + ". " + "Current user number: " + controller.getUserList().size());
+                        controller.printOnBoth("Delete user " + userId + ". Current user number: " + controller.getUserList().size());
                         controller.getRoomManager().removeRoom(userId);
-                        controller.printOnBoth("Delete " + userId + "'s room. " + "Current user number: " + controller.getRoomManager().getRoomNum());
+                        controller.printOnBoth("Delete " + userId + "'s room if exists. Current room number: " + controller.getRoomManager().getRoomNum());
                         resJSON.put("state", StateCode.SUCCESS);
                     } else {
-                        controller.printOnBoth(userId + " not exist! Can't be delete.");
+                        controller.printOnBoth("User " + userId + " not exist! Can't be deleted.");
                         resJSON.put("state", StateCode.FAIL);
                     }
                     break;
                 default:
-                    System.out.print("Err: Unknown Command: " + command);
+                    System.err.print("Error: Unknown Command: " + command);
                     break;
             }
             // Send back to client
