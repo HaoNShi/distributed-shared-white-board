@@ -125,26 +125,26 @@ public class LobbyWindow {
         // Initialize Blank Panel
         blankPanel = new JPanel();
 
-        JLabel lblRoomName = new JLabel("Room Name:");
-        lblRoomName.setBounds(20, 393, 84, 15);
-        frame.getContentPane().add(lblRoomName);
-
         JLabel lblHostName = new JLabel("Host Name:");
-        lblHostName.setBounds(20, 418, 84, 15);
+        lblHostName.setBounds(20, 393, 84, 15);
         frame.getContentPane().add(lblHostName);
 
-        roomNameTextField = new JTextField();
-        roomNameTextField.setBounds(100, 390, 250, 21);
-        roomNameTextField.setColumns(10);
-        frame.getContentPane().add(roomNameTextField);
+        JLabel lblRoomName = new JLabel("Room Name:");
+        lblRoomName.setBounds(20, 418, 84, 15);
+        frame.getContentPane().add(lblRoomName);
 
         hostNameTextField = new JTextField();
-        hostNameTextField.setBounds(100, 415, 250, 21);
+        hostNameTextField.setBounds(100, 390, 250, 21);
         hostNameTextField.setColumns(10);
         frame.getContentPane().add(hostNameTextField);
 
+        roomNameTextField = new JTextField();
+        roomNameTextField.setBounds(100, 415, 250, 21);
+        roomNameTextField.setColumns(10);
+        frame.getContentPane().add(roomNameTextField);
+
         JButton btnFind = new JButton("Find");
-        btnFind.setBounds(380, 400, 80, 30);
+        btnFind.setBounds(380, 395, 80, 30);
         btnFind.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 controller.findRoomsList();
@@ -153,7 +153,7 @@ public class LobbyWindow {
         frame.getContentPane().add(btnFind);
 
         JButton btnRefresh = new JButton("Refresh");
-        btnRefresh.setBounds(470, 400, 80, 30);
+        btnRefresh.setBounds(470, 395, 80, 30);
         btnRefresh.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 controller.refreshRoomsList();

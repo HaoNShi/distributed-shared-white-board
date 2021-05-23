@@ -46,7 +46,7 @@ public class LobbyController {
             String[] roomInfo = entry.getValue().split(" ");
             String roomName = roomInfo[0];
             String hostName = roomInfo[1];
-            tempBtn.setText(roomName + " - " + hostName);
+            tempBtn.setText(hostName + " - " + roomName);
             ImageIcon joinIcon = new ImageIcon(ui.joinImagePath);
             joinIcon.setImage(joinIcon.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
             tempBtn.setIcon(joinIcon);
@@ -149,8 +149,8 @@ public class LobbyController {
                 ui.scrollPane.add(temp);
             }
             String[] roomInfo = btn.getText().split(" - ");
-            if ((ui.roomNameTextField.getText().equals(roomInfo[0]) || ui.roomNameTextField.getText().equals(""))
-                    && (ui.hostNameTextField.getText().equals(roomInfo[1])
+            if ((ui.roomNameTextField.getText().equals(roomInfo[1]) || ui.roomNameTextField.getText().equals(""))
+                    && (ui.hostNameTextField.getText().equals(roomInfo[0])
                     || ui.hostNameTextField.getText().equals(""))) {
                 currentPanel.add(btn);
                 i++;
