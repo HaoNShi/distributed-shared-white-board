@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.text.SimpleDateFormat;
 import java.util.Base64;
-import java.util.Date;
 
 public class ChatClient implements Runnable {
     ChatPanel chatPanel;
@@ -47,7 +45,6 @@ public class ChatClient implements Runnable {
             // Perform encryption
             cipher.init(Cipher.ENCRYPT_MODE, aesKey);
             byte[] encrypted = cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
-            System.err.println("Encrypted text: " + new String(encrypted));
             out.writeUTF(Base64.getEncoder().encodeToString(encrypted));
         } catch (Exception e) {
             e.printStackTrace();

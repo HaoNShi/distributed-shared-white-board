@@ -32,8 +32,8 @@ public class LoginValidator {
         } else {
             try {
                 port = Integer.parseInt(portStr);
-                if (port <= 1024 || port >= 49151) {
-                    JOptionPane.showMessageDialog(ui.getFrame(), "Port out of bounds!", "Warning", JOptionPane.ERROR_MESSAGE);
+                if (port <= 1000 || port >= 30000) {
+                    JOptionPane.showMessageDialog(ui.getFrame(), "Check the port range", "Warning", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
             } catch (Exception e) {
@@ -44,7 +44,7 @@ public class LoginValidator {
         // check userId
         userId = ui.userIdTextField.getText();
         if (!Pattern.matches(idPatten, userId)) {
-            JOptionPane.showMessageDialog(ui.getFrame(), "User name should not be blank", "Warning", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(ui.getFrame(), "User name should not be blank and the type is 'String'", "Warning", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;

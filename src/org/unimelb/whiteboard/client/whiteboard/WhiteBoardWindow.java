@@ -7,7 +7,6 @@ import org.unimelb.whiteboard.client.user.UserManager;
 import org.unimelb.whiteboard.client.util.WhiteBoardCloseListener;
 
 import javax.swing.*;
-import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -145,7 +144,7 @@ public class WhiteBoardWindow {
         userPanel.add(userControlPanel, BorderLayout.NORTH);
         userControlPanel.setLayout(new BorderLayout(0, 0));
 
-        JLabel peerList = new JLabel("        Peer List");
+        JLabel peerList = new JLabel("       Peer List");
         peerList.setOpaque(true);
         peerList.setBackground(Color.WHITE);
         peerList.setFont(new Font("Arial", 1, 15));
@@ -168,6 +167,7 @@ public class WhiteBoardWindow {
 
         JPanel toolPanel = new JPanel();
         toolPanel.setLayout(new GridLayout(2, 0, 5, 5));
+        toolPanel.setBorder(BorderFactory.createRaisedBevelBorder());
         drawToolPanel.add(toolPanel, BorderLayout.WEST);
 
         // Add tool bar button
@@ -185,6 +185,7 @@ public class WhiteBoardWindow {
         // Create color panel
         JPanel colorPanel = new JPanel();
         drawToolPanel.add(colorPanel, BorderLayout.CENTER);
+        colorPanel.setBorder(BorderFactory.createRaisedBevelBorder());
         colorPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel currentColorPanel = new JPanel();

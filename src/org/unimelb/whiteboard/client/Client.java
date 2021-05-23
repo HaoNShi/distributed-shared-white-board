@@ -25,29 +25,19 @@ import java.util.Map;
 
 public class Client {
     public static final int TIMEOUT = 600;
-    // RoomList
     public Map<Integer, String> roomList = null;
-    // Windows
     private LoginWindow loginWindow = null;
     private LobbyWindow lobbyWindow = null;
-    // User information
     private String ip = "127.0.0.1";
     private String userId = "";
-    // Central server information
     private String serverIp = "";
     private int serverPort = -1;
-    // SharedWhiteBoard
     private SharedWhiteBoard sharedWhiteBoard = null;
-    // RMI
     private int registryPort;
     private Registry registry;
-    // Private Remote interface for user manager.
     private IRemoteApp remoteApp;
-    // before being accept
     private ClientWhiteBoard tempClientWhiteBoard = null;
-    // Use to store the temporary remote door.
     private IRemoteDoor tempRemoteDoor;
-    // Store the current save path.
     private String CurrentSavePath;
 
     public Client() {
@@ -63,31 +53,55 @@ public class Client {
         client.run();
     }
 
+
+    /**
+     * get & set server Ip and Port
+     */
+    public String getServerIp() {
+        return serverIp;
+    }
+
+    public void setServerIp(String serverIp) {
+        this.serverIp = serverIp;
+    }
+
+    public int getServerPort() {
+        return serverPort;
+    }
+
+    public void setServerPort(int port) {
+        this.serverPort = port;
+    }
+
+
+    /**
+     * get & set userId
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+
+
     /**
      * Run the program.
      */
     public void run() {
         loginWindow.getFrame().setVisible(true);
-        System.out.println("App running");
     }
 
-    /**
-     * Get the temporary remote door.
-     */
     public IRemoteDoor getTempRemoteDoor() {
         return tempRemoteDoor;
     }
 
-    /**
-     * Set the temporary remote door.
-     */
     public void setTempRemoteDoor(IRemoteDoor tempRemoteDoor) {
         this.tempRemoteDoor = tempRemoteDoor;
     }
 
-    /**
-     * Get local registry
-     */
     public Registry getRegistry() {
         return registry;
     }
@@ -96,60 +110,15 @@ public class Client {
         return registryPort;
     }
 
-    /**
-     * Get the Host IP address.
-     */
     public String getIp() {
         return ip;
     }
 
-    /**
-     * Get central server's ip.
-     */
-    public String getServerIp() {
-        return serverIp;
-    }
-
-    /**
-     * Set server IP
-     */
-    public void setServerIp(String serverIp) {
-        this.serverIp = serverIp;
-    }
-
-    /**
-     * Get central server's port.
-     */
-    public int getServerPort() {
-        return serverPort;
-    }
-
-    /**
-     * Set port.
-     */
-    public void setServerPort(int port) {
-        this.serverPort = port;
-    }
-
-    /**
-     * Get userId
-     */
-    public String getUserId() {
-        return userId;
-    }
-
-    /**
-     * Set userId
-     */
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     /**
      * When user completes sign in, use this method to switch to Lobby.
      */
-    public void switch2Lobby() {
-        System.out.println("User: " + userId + " enter Lobby.");
+    public void openLobby() {
         if (lobbyWindow == null)
             lobbyWindow = new LobbyWindow(this);
 
@@ -165,8 +134,7 @@ public class Client {
     }
 
     /**
-     * Unbind um paint door, so that next time when user create a whiteboard, they
-     * can be bind.
+     * next time when user create a whiteboard, they can be bind.
      */
     public void unbindAndSetNull() {
         try {
@@ -174,7 +142,6 @@ public class Client {
             registry.unbind("paint");
             registry.unbind("door");
         } catch (NotBoundException e) {
-            // do nothing
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -188,7 +155,7 @@ public class Client {
     }
 
     /**
-     * Switch to whiteBoard.
+     * open whiteBoard.
      */
     public void openWhiteBoard() {
         lobbyWindow.setWaitDialogVisible(false);
@@ -200,7 +167,7 @@ public class Client {
     }
 
     /**
-     * Switch to Login window.
+     * open Login window.
      */
     public void openLogin(Boolean isCentralServerCrush) {
         if (lobbyWindow != null) {
@@ -218,8 +185,9 @@ public class Client {
         }
     }
 
+
     /**
-     * Create a room and register in central server.
+     * Create a room and register in the server.
      */
     public void createRoom(String roomName, String password) {
         JSONObject reqJSON = new JSONObject();
@@ -259,62 +227,30 @@ public class Client {
         // sent request to central server to gain roomList
         JSONObject reqJSON = new JSONObject();
         reqJSON.put("command", StateCode.GET_ROOM_LIST);
-        System.out.println("Request for rooms list...");
         JSONObject resJson = Execute.execute(reqJSON, serverIp, serverPort);
         int state = resJson.getIntValue("state");
         if (state == StateCode.SUCCESS) {
             roomList = (Map<Integer, String>) resJson.get("roomList");
         } else {
-            System.out.println("Can't get rooms list!");
             openLogin(true);
         }
-        System.out.println("Get rooms list!");
     }
 
-    /**
-     * Use to register in the central server, so no one can use a same user name.
-     *
-     * @return isSuccess whether the user can register in the central server or not.
-     */
     public int register() {
         JSONObject reqJSON = new JSONObject();
         reqJSON.put("command", StateCode.ADD_USER);
         reqJSON.put("userId", userId);
         JSONObject resJSON = Execute.execute(reqJSON, serverIp, serverPort);
         int state = resJSON.getIntValue("state");
-        if (state == StateCode.CONNECTION_FAIL) {
-            System.out.println("Connection Fail: " + state);
-        } else {
-            if (state == StateCode.SUCCESS) {
-                System.out.println("Register in the server successfully");
-            } else if (state == StateCode.FAIL) {
-                System.out.println("User name exists");
-            } else {
-                System.out.println("Can't connect to the server.");
-            }
-        }
         return state;
     }
 
-    /**
-     * Delete all the information about the user in the third party. In the central
-     * server, since the user remove, it would auto remove the room of the user.
-     */
     public void removeUser() {
         JSONObject reqJSON = new JSONObject();
         reqJSON.put("command", StateCode.REMOVE_USER);
         reqJSON.put("userId", userId);
         JSONObject resJSON = Execute.execute(reqJSON, serverIp, serverPort);
         int state = resJSON.getIntValue("state");
-        if (state == StateCode.CONNECTION_FAIL) {
-            System.out.println("Connection Fail: " + state);
-        } else {
-            if (state == StateCode.SUCCESS) {
-                System.out.println("Exit from the server successfully");
-            } else {
-                System.out.println("Exit invalidly");
-            }
-        }
     }
 
     public void removeRoom() {
@@ -324,15 +260,6 @@ public class Client {
         reqJSON.put("roomId", roomId);
         JSONObject resJSON = Execute.execute(reqJSON, serverIp, serverPort);
         int state = resJSON.getIntValue("state");
-        if (state == StateCode.CONNECTION_FAIL) {
-            System.out.println("Connection Fail: " + state);
-        } else {
-            if (state == StateCode.SUCCESS) {
-                System.out.println("Remove room from server successfully");
-            } else {
-                System.out.println("Remove room fail");
-            }
-        }
     }
 
     public String getCurrentSavePath() {
@@ -385,15 +312,8 @@ public class Client {
             remoteApp = new RemoteApp(this);
             registry.bind("app", remoteApp);
 
-            printInitialStates();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    private void printInitialStates() {
-        System.out.println("IP address : " + ip);
-        System.out.println("Registry Port = " + registryPort);
-    }
-
 }

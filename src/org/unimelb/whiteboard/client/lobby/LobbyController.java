@@ -46,7 +46,7 @@ public class LobbyController {
             String[] roomInfo = entry.getValue().split(" ");
             String roomName = roomInfo[0];
             String hostName = roomInfo[1];
-            tempBtn.setText("Join "+roomName + " - " + hostName);
+            tempBtn.setText("Room: "+ roomName + " --- Manager: " + hostName);
             tempBtn.addActionListener(new ActionListener() {
                 /**
                  * Try to join a exist room.
@@ -68,7 +68,6 @@ public class LobbyController {
                             tempHostRegisterPort = resJSON.getInteger("port");
                             // When create here, the window's position right.
                             ui.createWaitDialog();
-                            System.out.println("Knock the host's door.");
                             try {
                                 Registry registry = LocateRegistry.getRegistry(tempHostIp, tempHostRegisterPort);
                                 client.setTempRemoteDoor((IRemoteDoor) registry.lookup("door"));
@@ -83,10 +82,10 @@ public class LobbyController {
                                 JOptionPane.showMessageDialog(ui.getFrame(), "Something wrong with the manager");
                             }
                         } else if (state == StateCode.FAIL) {
-                            JOptionPane.showMessageDialog(ui.frame, "Password wrong or the room is removed, please refresh", "Warning",
+                            JOptionPane.showMessageDialog(ui.frame, "The room is removed, please join another room", "Warning",
                                     JOptionPane.WARNING_MESSAGE);
                         } else {
-                            JOptionPane.showMessageDialog(ui.frame, "Can't connect to the server!", "Error",
+                            JOptionPane.showMessageDialog(ui.frame, "Can't connect to the server", "Error",
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     }

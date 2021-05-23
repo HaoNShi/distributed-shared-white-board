@@ -14,7 +14,7 @@ public class NewApplicantWindow extends JDialog {
     private final JButton agreeBtn;
     private final JButton disagreeBtn;
     private final JButton ignoreBtn;
-    private int count = 10;
+    private int count = 20;
 
 
     /**

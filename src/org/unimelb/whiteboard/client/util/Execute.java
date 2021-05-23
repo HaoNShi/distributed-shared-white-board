@@ -13,7 +13,6 @@ public class Execute {
     public static final JSONObject execute(JSONObject reqJSON, String ip, int port) {
         JSONObject resJSON = new JSONObject();
         try {
-            System.out.println("Trying to connect to server...");
             ExecuteThread eThread = new ExecuteThread(ip, port, reqJSON);
             eThread.start();
             eThread.join(1500);

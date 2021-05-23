@@ -60,12 +60,12 @@ public class LoginWindow {
                                 client.setServerPort(validator.port);
                                 int state = client.register();
                                 if (state == StateCode.SUCCESS) {
-                                    client.switch2Lobby();
+                                    client.openLobby();
                                 } else if (state == StateCode.FAIL) {
-                                    JOptionPane.showMessageDialog(frame, "User name exist! Change one!", "Warning",
+                                    JOptionPane.showMessageDialog(frame, "User name exists", "Warning",
                                             JOptionPane.WARNING_MESSAGE);
                                 } else {
-                                    JOptionPane.showMessageDialog(frame, "Can't connect to the server!", "Warning",
+                                    JOptionPane.showMessageDialog(frame, "Please check the address and port", "Warning",
                                             JOptionPane.WARNING_MESSAGE);
                                 }
                             } catch (Exception e) {

@@ -53,7 +53,6 @@ public class ExecuteThread extends Thread {
             reader.close();
             writer.close();
             connectState = StateCode.CONNECTION_SUCCESS;
-            System.out.println("Connect to server successfully.");
         } catch (UnknownHostException e) {
             connectState = StateCode.UNKNOWN_HOST;
             System.out.println("Error: UNKNOWN HOST!");

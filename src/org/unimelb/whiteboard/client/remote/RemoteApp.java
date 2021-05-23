@@ -14,13 +14,12 @@ public class RemoteApp extends UnicastRemoteObject implements IRemoteApp {
 
     @Override
     public void askIn(String hostIp, int chatPort) throws RemoteException {
-        System.out.println("The manager agree.");
         client.joinRoom(hostIp, chatPort);
     }
 
     @Override
     public void askOut() throws RemoteException {
-        client.switch2Lobby();
+        client.openLobby();
         client.getLobbyWindow().createBeKickedDialog();
     }
 }

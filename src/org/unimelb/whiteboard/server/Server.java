@@ -9,13 +9,6 @@ import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Central Server, act as a authentic third party to provide information about
- * users and White Board room.
- * <p>
- * The Central Server's default running port is DEFAULT_PORT
- */
-
 public class Server {
     public static final int DEFAULT_PORT = 8080;
     private final RoomManager rm;
@@ -80,9 +73,6 @@ public class Server {
         }
     }
 
-    /**
-     * Set the port.
-     */
     public void setPort(int port) {
         this.port = port;
     }
@@ -96,16 +86,9 @@ public class Server {
             ui.getLogArea().append(str + '\n');
     }
 
-    /**
-     * Get the room manager.
-     */
     public RoomManager getRoomManager() {
         return rm;
     }
-
-    /**
-     * Get the user list.
-     */
     public Map<String, String> getUserList() {
         return userList;
     }
@@ -121,10 +104,8 @@ public class Server {
     }
 
     private void printInitialStats() throws UnknownHostException {
-        InetAddress ip = InetAddress.getLocalHost();
-        System.out.println("Server start");
-        System.out.println("Current IP address: " + ip.getHostAddress());
+        System.out.println("IP address: " + ip);
         System.out.println("Port: " + port);
-        System.out.println("Waiting for client connection...");
+        System.out.println("Wait for client connection...");
     }
 }
