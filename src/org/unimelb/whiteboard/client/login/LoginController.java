@@ -21,13 +21,13 @@ public class LoginController {
         // check address
         address = ui.addressTextField.getText();
         if (!Pattern.matches(addressPatten, address)) {
-            JOptionPane.showMessageDialog(ui.getFrame(), "Address illegal!", "Warning", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(ui.getFrame(), "Address incorrect", "Warning", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         // check port
         String portStr = ui.portTextField.getText();
         if (!Pattern.matches(portPatten, portStr)) {
-            JOptionPane.showMessageDialog(ui.getFrame(), "Port illegal!", "Warning", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(ui.getFrame(), "Port incorrect", "Warning", JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
             try {
@@ -37,14 +37,14 @@ public class LoginController {
                     return false;
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(ui.getFrame(), "Port illegal!", "Warning", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(ui.getFrame(), "Port incorrect", "Warning", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }
         // check userId
         userId = ui.userIdTextField.getText();
         if (!Pattern.matches(idPatten, userId)) {
-            JOptionPane.showMessageDialog(ui.getFrame(), "User ID contains illegal characters!", "Warning", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(ui.getFrame(), "User name should not be blank", "Warning", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;

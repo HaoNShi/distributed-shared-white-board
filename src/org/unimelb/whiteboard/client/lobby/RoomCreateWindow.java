@@ -23,7 +23,7 @@ public class RoomCreateWindow extends JDialog {
      */
     public RoomCreateWindow(Client client) {
         this.client = client;
-        setTitle("Create Room");
+        setTitle("New Room");
         setResizable(false);
         setBounds(100, 100, 300, 220);
         getContentPane().setLayout(new BorderLayout());
@@ -50,7 +50,7 @@ public class RoomCreateWindow extends JDialog {
         contentPanel.add(PasswordTextField);
 
         JButton createBtn = new JButton("Create");
-        createBtn.setBounds(48, 116, 80, 30);
+        createBtn.setBounds(110, 116, 60, 30);
         createBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 roomName = roomNameTextField.getText();
@@ -65,15 +65,16 @@ public class RoomCreateWindow extends JDialog {
         contentPanel.add(createBtn);
         getRootPane().setDefaultButton(createBtn);
 
-        JButton cancelBtn = new JButton("Cancel");
-        cancelBtn.setBounds(150, 116, 80, 30);
-        cancelBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-        cancelBtn.setActionCommand("Cancel");
-        contentPanel.add(cancelBtn);
+//        JButton cancelBtn = new JButton("Cancel");
+//        cancelBtn.setBounds(150, 116, 80, 30);
+//        cancelBtn.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                dispose();
+//            }
+//        });
+//        cancelBtn.setActionCommand("Cancel");
+//        contentPanel.add(cancelBtn);
+        
     }
 
     public static void showCreateRoomDialog(Frame owner, Component parentComponent, Client client) {

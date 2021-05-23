@@ -88,21 +88,22 @@ public class LobbyWindow {
     private void initialize() {
         frame = new JFrame();
         frame.setResizable(false);
-        frame.setTitle("Lobby");
-        frame.setBounds(100, 100, 260, 510);
+        frame.setTitle("Room");
+        frame.setBounds(100, 100, 300, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addWindowListener(new LobbyCloseListener(client));
         frame.getContentPane().setLayout(null);
+        frame.setLocationRelativeTo(null);
 
         scrollPane = new JScrollPane();
-        scrollPane.setBounds(0, 0, 336, 472);
+        scrollPane.setBounds(0, 0, 300, 400);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         frame.getContentPane().add(scrollPane);
 
         // FirstPanel In RoomList Panel INIT
         firstPanel = new JPanel();
-        firstPanel.setBounds(5, 5, 230, 70);
+        firstPanel.setBounds(0, 0, 300, 50);
         firstPanel.setLayout(new GridLayout(1, 0, 5, 5));
 
         // CREATE_ROOM button INIT
@@ -125,7 +126,7 @@ public class LobbyWindow {
             }
         });
         JButton[] cancelBtnOption = {cancelBtn};
-        waitPane = new JOptionPane("Waiting for permission...", JOptionPane.INFORMATION_MESSAGE,
+        waitPane = new JOptionPane("Wait for manager agreement", JOptionPane.INFORMATION_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, null, cancelBtnOption, cancelBtnOption[0]);
 
         // Use to warn be kicked.
@@ -136,7 +137,7 @@ public class LobbyWindow {
             }
         });
         JButton[] okBtnOption = {okBtn};
-        beKickedPane = new JOptionPane("You have been kicked out.", JOptionPane.INFORMATION_MESSAGE,
+        beKickedPane = new JOptionPane("You get rejected", JOptionPane.INFORMATION_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, null, okBtnOption, okBtnOption[0]);
     }
 }
