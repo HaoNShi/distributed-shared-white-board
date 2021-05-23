@@ -10,7 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class DrawListener extends MouseAdapter implements ActionListener {
-    private final WhiteBoardWindow wbv;
+    private final WhiteBoardWindow window;
     private MyPoint startP, endP;
     private String toolName = "pen";
     private Color color;
@@ -18,18 +18,18 @@ public class DrawListener extends MouseAdapter implements ActionListener {
     private int thickness = 2;
     private MyPen currentFreeDraw;
 
-    DrawListener(WhiteBoardWindow wbv) {
+    DrawListener(WhiteBoardWindow window) {
         currentFreeDraw = null;
-        this.wbv = wbv;
-        color = wbv.getCurrentColor();
-        this.thickness = wbv.getThickness();
+        this.window = window;
+        color = window.getCurrentColor();
+        this.thickness = window.getThickness();
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("")) {
             JButton button = (JButton) e.getSource();
-            color = wbv.getCurrentColor();
-            thickness = wbv.getThickness();
+            color = window.getCurrentColor();
+            thickness = window.getThickness();
         } else {
             JButton button = (JButton) e.getSource();
             toolName = button.getActionCommand();
@@ -37,11 +37,11 @@ public class DrawListener extends MouseAdapter implements ActionListener {
     }
 
     public void mousePressed(MouseEvent e) {
-        color = wbv.getCurrentColor();
-        thickness = wbv.getThickness();
+        color = window.getCurrentColor();
+        thickness = window.getThickness();
         startP = new MyPoint(e.getX(), e.getY());
-        drawBuffer = wbv.getPaintBoardPanel().createImage(wbv.getPaintBoardPanel().getWidth(),
-                wbv.getPaintBoardPanel().getHeight());
+        drawBuffer = window.getPaintBoardPanel().createImage(window.getPaintBoardPanel().getWidth(),
+                window.getPaintBoardPanel().getHeight());
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -74,7 +74,7 @@ public class DrawListener extends MouseAdapter implements ActionListener {
                 break;
             case "eraser":
                 if (currentFreeDraw == null) {
-                    currentFreeDraw = new MyPen(MyPen.ERASER, startP, endP, wbv.getBackgroundColor(), thickness);
+                    currentFreeDraw = new MyPen(MyPen.ERASER, startP, endP, window.getBackgroundColor(), thickness);
                 } else {
                     currentFreeDraw.addPoints(endP);
                 }
@@ -82,17 +82,18 @@ public class DrawListener extends MouseAdapter implements ActionListener {
                 currentFreeDraw = null;
                 break;
             case "text":
-                String text = JOptionPane.showInputDialog(wbv.getFrame(), "Text:");
+                ImageIcon TextIcon = new ImageIcon("images/text_dark.png");
+                String text = (String) JOptionPane.showInputDialog(window.getFrame(), "Text:", "Input", JOptionPane.INFORMATION_MESSAGE, TextIcon, null, null);
                 if (text != null && !text.equals("")) {
                     myShape = new MyText(endP, text, thickness * 10, color);
                 }
                 break;
             default:
-                System.out.println("Error: Unknown Tool Name!");
+                System.err.println("Error: Unknown Tool Name!");
                 break;
         }
-        wbv.getPaintBoardPanel().setBufferShape(null);
-        if (myShape != null) wbv.getPaintManager().addShape(myShape);
+        window.getPaintBoardPanel().setBufferShape(null);
+        if (myShape != null) window.getPaintManager().addShape(myShape);
     }
 
     public void mouseDragged(MouseEvent e) {
@@ -109,7 +110,7 @@ public class DrawListener extends MouseAdapter implements ActionListener {
                 break;
             case "eraser":
                 if (currentFreeDraw == null) {
-                    currentFreeDraw = new MyPen(MyPen.ERASER, startP, endP, wbv.getBackgroundColor(), thickness);
+                    currentFreeDraw = new MyPen(MyPen.ERASER, startP, endP, window.getBackgroundColor(), thickness);
                 } else {
                     currentFreeDraw.addPoints(endP);
                 }
@@ -138,8 +139,8 @@ public class DrawListener extends MouseAdapter implements ActionListener {
                 break;
         }
         // When working on RMI, no need to upload bufferShape. Only show in client window.
-        wbv.getPaintBoardPanel().setBufferShape(bufferShape);
-        wbv.getPaintBoardPanel().repaint();
+        window.getPaintBoardPanel().setBufferShape(bufferShape);
+        window.getPaintBoardPanel().repaint();
     }
 
 }

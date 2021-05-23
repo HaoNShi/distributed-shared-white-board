@@ -17,8 +17,8 @@ import java.rmi.RemoteException;
  */
 public class FileMenu extends JMenu {
 
-    public FileMenu(Client client, WhiteBoardWindow wbv, PaintManager paintManager, UserManager userManager) {
-        super("File(F)");
+    public FileMenu(Client client, WhiteBoardWindow window, PaintManager paintManager, UserManager userManager) {
+        super("File");
         this.setMnemonic(KeyEvent.VK_F);
 
         JMenuItem newMenuItem = new JMenuItem("New", KeyEvent.VK_N);
@@ -33,16 +33,16 @@ public class FileMenu extends JMenu {
 
         JMenuItem openMenuItem = new JMenuItem("Open", KeyEvent.VK_O);
         openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
-        openMenuItem.addActionListener(new FileOpenListener(wbv, client));
+        openMenuItem.addActionListener(new FileOpenListener(window, client));
         this.add(openMenuItem);
 
         JMenuItem saveMenuItem = new JMenuItem("Save", KeyEvent.VK_S);
         saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-        saveMenuItem.addActionListener(new FileSaveListener(wbv, client, "save"));
+        saveMenuItem.addActionListener(new FileSaveListener(window, client, "save"));
         this.add(saveMenuItem);
 
         JMenuItem saveAsMenuItem = new JMenuItem("Save As...");
-        saveAsMenuItem.addActionListener(new FileSaveListener(wbv, client, "saveAs"));
+        saveAsMenuItem.addActionListener(new FileSaveListener(window, client, "saveAs"));
         this.add(saveAsMenuItem);
 
         this.addSeparator();

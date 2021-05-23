@@ -19,10 +19,10 @@ public class ServerWhiteBoard extends SharedWhiteBoard {
         super.initPaintRMI();
         userManager.setManagerPaintManager(paintManager);
         initChat();
-        initView();
+        initWindow();
     }
 
-    public void initView() {
+    public void initWindow() {
         String title = "White Board-" + client.getIp() + ":" + client.getRegistryPort();
         ui = new WhiteBoardWindow(client, this.paintManager, userManager, title);
         ui.setChatPanel(chatServer.getPanel());

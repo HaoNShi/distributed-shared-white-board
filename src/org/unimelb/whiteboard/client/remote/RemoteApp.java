@@ -23,6 +23,6 @@ public class RemoteApp extends UnicastRemoteObject implements IRemoteApp {
     public void askOut() throws RemoteException {
         System.out.println("Be kicked by the host.");
         client.openLobby();
-        client.getLobbyView().createBeKickedDialog();
+        client.getLobbyWindow().createBeKickedDialog();
     }
 }

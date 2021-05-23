@@ -27,7 +27,7 @@ public class Client {
     public static final int TIMEOUT = 600;
     // RoomList
     public Map<Integer, String> roomList = null;
-    // Views
+    // Windows
     private LoginWindow loginWindow = null;
     private LobbyWindow lobbyWindow = null;
     // User information
@@ -180,7 +180,7 @@ public class Client {
         }
 
         if (sharedWhiteBoard != null) {
-            sharedWhiteBoard.getView().getFrame().setVisible(false);
+            sharedWhiteBoard.getWindow().getFrame().setVisible(false);
             sharedWhiteBoard = null;
         }
         tempClientWhiteBoard = null;
@@ -196,7 +196,7 @@ public class Client {
 
         lobbyWindow.getFrame().setVisible(false);
         loginWindow.getFrame().setVisible(false);
-        sharedWhiteBoard.getView().getFrame().setVisible(true);
+        sharedWhiteBoard.getWindow().getFrame().setVisible(true);
     }
 
     /**
@@ -208,7 +208,7 @@ public class Client {
         }
 
         if (sharedWhiteBoard != null) {
-            sharedWhiteBoard.getView().getFrame().setVisible(false);
+            sharedWhiteBoard.getWindow().getFrame().setVisible(false);
         }
 
         loginWindow.getFrame().setVisible(true);
@@ -255,9 +255,9 @@ public class Client {
     }
 
     /**
-     * Get the Lobby view.
+     * Get the Lobby window.
      */
-    public LobbyWindow getLobbyView() {
+    public LobbyWindow getLobbyWindow() {
         return lobbyWindow;
     }
 

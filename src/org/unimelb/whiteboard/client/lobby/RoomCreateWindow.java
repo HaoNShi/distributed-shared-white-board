@@ -13,7 +13,7 @@ public class RoomCreateWindow extends JDialog {
     private static final long serialVersionUID = 1953383401687653792L;
     private final JPanel contentPanel = new JPanel();
     private final JTextField roomNameTextField;
-    private final JTextField PasswordTextField;
+    private final JTextField passwordTextField;
     private final Client client;
     private String roomName = "";
     private String password = "";
@@ -44,17 +44,17 @@ public class RoomCreateWindow extends JDialog {
         roomNameTextField.setColumns(10);
         contentPanel.add(roomNameTextField);
 
-        PasswordTextField = new JTextField();
-        PasswordTextField.setBounds(110, 67, 150, 25);
-        PasswordTextField.setColumns(10);
-        contentPanel.add(PasswordTextField);
+        passwordTextField = new JPasswordField();
+        passwordTextField.setBounds(110, 67, 150, 25);
+        passwordTextField.setColumns(10);
+        contentPanel.add(passwordTextField);
 
         JButton createBtn = new JButton("Create");
         createBtn.setBounds(48, 116, 80, 30);
         createBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 roomName = roomNameTextField.getText();
-                password = PasswordTextField.getText();
+                password = passwordTextField.getText();
                 if (roomInfoCheck()) {
                     client.createRoom(roomName, password);
                     dispose();

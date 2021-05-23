@@ -14,15 +14,15 @@ import java.awt.event.KeyEvent;
  * Edit menu in the menu bar.
  */
 public class EditMenu extends JMenu {
-    private final WhiteBoardWindow wbv;
+    private final WhiteBoardWindow window;
     private final PaintManager paintManager;
     private final JMenuItem redoItem;
     private final JMenuItem undoItem;
 
-    public EditMenu(WhiteBoardWindow wbv) {
-        super("Edit(E)");
-        this.wbv = wbv;
-        paintManager = wbv.getPaintManager();
+    public EditMenu(WhiteBoardWindow window) {
+        super("Edit");
+        this.window = window;
+        paintManager = window.getPaintManager();
         this.setMnemonic(KeyEvent.VK_E);
 
         undoItem = new JMenuItem("Undo", KeyEvent.VK_Z);
@@ -37,7 +37,7 @@ public class EditMenu extends JMenu {
         undoItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (paintManager.getMode() == PaintManager.SERVER_MODE) {
-                    wbv.getPaintManager().undo();
+                    window.getPaintManager().undo();
                     undoItem.setEnabled(paintManager.isUndoAllow());
                 }
             }
@@ -53,7 +53,7 @@ public class EditMenu extends JMenu {
         redoItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (paintManager.getMode() == PaintManager.SERVER_MODE) {
-                    wbv.getPaintManager().redo();
+                    window.getPaintManager().redo();
                     redoItem.setEnabled(paintManager.isRedoAllow());
                 }
             }
@@ -66,7 +66,7 @@ public class EditMenu extends JMenu {
      * Set whether redo is able.
      */
     public void setRedoEnable(Boolean isAble) {
-        if (wbv.getPaintManager().getMode() == PaintManager.SERVER_MODE) {
+        if (window.getPaintManager().getMode() == PaintManager.SERVER_MODE) {
             redoItem.setEnabled(isAble);
         }
     }
@@ -75,7 +75,7 @@ public class EditMenu extends JMenu {
      * Set whether undo is able.
      */
     public void setUndoEnable(Boolean isAble) {
-        if (wbv.getPaintManager().getMode() == PaintManager.SERVER_MODE) {
+        if (window.getPaintManager().getMode() == PaintManager.SERVER_MODE) {
             undoItem.setEnabled(isAble);
         }
     }

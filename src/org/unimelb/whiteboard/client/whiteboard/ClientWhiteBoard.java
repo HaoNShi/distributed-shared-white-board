@@ -12,11 +12,11 @@ public class ClientWhiteBoard extends SharedWhiteBoard {
         initManager(hostId, hostIp, registerPort);
         initUmRMI();
         initPaintRMI();
-        initView();
+        initWindow();
     }
 
-    private void initView() {
-        String title = "Client-" + client.getIp() + ":" + client.getRegistryPort();
+    private void initWindow() {
+        String title = "White Board-" + client.getIp() + ":" + client.getRegistryPort();
         ui = new WhiteBoardWindow(client, this.paintManager, userManager, title);
     }
 

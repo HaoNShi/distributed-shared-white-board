@@ -17,12 +17,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+
+/**
+ * When you need to using the WindowBuilder to design the whiteBoardWindow, annotate the code in PaintBoardPanel.java.
+ */
 public class WhiteBoardWindow {
     // Default color display in the left bottom.
     private static final Color[] COLORS = {Color.BLACK, Color.GRAY, new Color(136, 0, 21), Color.RED, new Color(255, 127, 39), Color.YELLOW, new Color(34, 177, 76), Color.BLUE,
             Color.WHITE, Color.LIGHT_GRAY, new Color(185, 122, 87), Color.PINK, Color.ORANGE, new Color(239, 228, 176), Color.GREEN, new Color(63, 72, 204)};
     // Use to create tool button.
-    private static final String[] TOOLS = {"pen", "line", "circle", "eraser", "rect", "oval", "roundrect", "text"};
+    private static final String[] TOOLS = {"pen", "line", "circle", "oval",
+            "eraser", "rect", "roundrect", "text"};
     private final JColorChooser colorChooser;
     // Title of the window
     private final String title;
@@ -46,7 +51,7 @@ public class WhiteBoardWindow {
     private JTextField thicknessTextField;
 
     /**
-     * Create the view with Paint Manager.
+     * Create the window with Paint Manager.
      */
     public WhiteBoardWindow(Client client, PaintManager paintManager, UserManager userManager, String title) {
         this.title = title;
@@ -114,7 +119,7 @@ public class WhiteBoardWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // When close the window, it should remove its information in the system.
         frame.addWindowListener(new WhiteBoardCloseListener(client, paintManager, userManager));
-        frame.setSize(980, 800);
+        frame.setSize(1090, 800);
         frame.setTitle(title);
         frame.setResizable(true);
 
@@ -168,12 +173,15 @@ public class WhiteBoardWindow {
         drawToolPanel.add(toolPanel, BorderLayout.WEST);
 
         // Add tool bar button
-        JButton btnTools;
+        JButton btnTool;
         for (String s : TOOLS) {
-            btnTools = new JButton(s);
-            btnTools.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            toolPanel.add(btnTools);
-            btnTools.addActionListener(drawListener);
+            btnTool = new JButton(s);
+            btnTool.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            ImageIcon toolIcon = new ImageIcon("images/" + s + ".png");
+            toolIcon.setImage(toolIcon.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+            btnTool.setIcon(toolIcon);
+            toolPanel.add(btnTool);
+            btnTool.addActionListener(drawListener);
         }
 
         // Create color panel

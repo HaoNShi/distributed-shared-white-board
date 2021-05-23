@@ -25,7 +25,7 @@ public class ClientListScrollPanel extends JPanel {
 
     public ClientListScrollPanel(UserManager userManager) {
         this.userManager = userManager;
-        initView();
+        initWindow();
         userManager.setCLSP(this);
         updateUserList();
     }
@@ -54,7 +54,7 @@ public class ClientListScrollPanel extends JPanel {
         userList.setListData(listData);
     }
 
-    private void initView() {
+    private void initWindow() {
         // initialize
         setLayout(new BorderLayout());
         JPanel userListPanel = new JPanel();
