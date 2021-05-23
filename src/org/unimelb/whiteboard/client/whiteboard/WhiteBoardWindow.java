@@ -43,9 +43,9 @@ public class WhiteBoardWindow {
     private PaintBoardPanel paintBoardPanel;
     private JPanel chatRoomControlPanel;
     private JButton btnCurrentColor;
+    private JButton btnEditColor;
     // Color
     private Color currentColor;
-    private Color editColor;
     // Thickness
     private int thickness;
     private JTextField thicknessTextField;
@@ -119,7 +119,7 @@ public class WhiteBoardWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // When close the window, it should remove its information in the system.
         frame.addWindowListener(new WhiteBoardCloseListener(client, paintManager, userManager));
-        frame.setSize(1090, 800);
+        frame.setSize(1105, 800);
         frame.setTitle(title);
         frame.setResizable(true);
 
@@ -162,7 +162,7 @@ public class WhiteBoardWindow {
         JLabel lblChatRoom = new JLabel("Chat Room");
         chatRoomControlPanel.add(lblChatRoom, BorderLayout.NORTH);
 
-        // Add draw tool panel.
+        // Create shape panel
         JPanel drawToolPanel = new JPanel();
         frame.getContentPane().add(drawToolPanel, BorderLayout.NORTH);
         drawToolPanel.setLayout(new BorderLayout(0, 0));
@@ -172,7 +172,7 @@ public class WhiteBoardWindow {
         toolPanel.setLayout(new GridLayout(2, 0, 5, 5));
         drawToolPanel.add(toolPanel, BorderLayout.WEST);
 
-        // Add tool bar button
+        // Add shape buttons
         JButton btnTool;
         for (String s : TOOLS) {
             btnTool = new JButton(s);
@@ -190,19 +190,24 @@ public class WhiteBoardWindow {
         drawToolPanel.add(colorPanel, BorderLayout.CENTER);
         colorPanel.setLayout(new BorderLayout(0, 0));
 
+        // Create a new panel on the west side so that the shape will not be stretched.
+        JPanel fixColorPanel = new JPanel();
+        colorPanel.add(fixColorPanel, BorderLayout.WEST);
+
+        // Current color
         JPanel currentColorPanel = new JPanel();
-        colorPanel.add(currentColorPanel, BorderLayout.WEST);
+        fixColorPanel.add(currentColorPanel, BorderLayout.WEST);
         currentColorPanel.setLayout(new BorderLayout());
 
         JLabel lblCurrentColor = new JLabel("   Current");
         currentColorPanel.add(lblCurrentColor, BorderLayout.SOUTH);
 
-        JPanel marginCC1Panel = new JPanel();
-        marginCC1Panel.setPreferredSize(new Dimension(60, 0));
-        currentColorPanel.add(marginCC1Panel, BorderLayout.CENTER);
+        JPanel currentColorSquarePanel = new JPanel();
+        currentColorSquarePanel.setPreferredSize(new Dimension(60, 60));
+        currentColorPanel.add(currentColorSquarePanel, BorderLayout.CENTER);
 
         btnCurrentColor = new JButton();
-        marginCC1Panel.add(btnCurrentColor);
+        currentColorSquarePanel.add(btnCurrentColor);
         btnCurrentColor.setBorderPainted(false);
         btnCurrentColor.setEnabled(false);
 
@@ -210,42 +215,44 @@ public class WhiteBoardWindow {
         btnCurrentColor.setOpaque(true);
         btnCurrentColor.setPreferredSize(new Dimension(50, 50));
 
-        JPanel defaultColorPanel = new JPanel();
-        colorPanel.add(defaultColorPanel, BorderLayout.CENTER);
-        defaultColorPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        defaultColorPanel.setLayout(new GridLayout(2, 0, 5, 5));
+        // List colors
+        JPanel listColorPanel = new JPanel();
+        fixColorPanel.add(listColorPanel, BorderLayout.CENTER);
+        listColorPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        listColorPanel.setLayout(new GridLayout(2, 0, 5, 5));
 
-        // Add default colors
-        JButton btnDefaultColors;
+        // Add item colors
+        JButton btnItemColor;
         for (Color defaultColor : COLORS) {
-            btnDefaultColors = new JButton();
-            btnDefaultColors.setBorderPainted(false);
-            btnDefaultColors.setBackground(defaultColor);
-            btnDefaultColors.setOpaque(true);
-            btnDefaultColors.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            btnDefaultColors.setPreferredSize(new Dimension(40, 40));
-            btnDefaultColors.addActionListener(new ActionListener() {
+            btnItemColor = new JButton();
+            btnItemColor.setBorderPainted(false);
+            btnItemColor.setBackground(defaultColor);
+            btnItemColor.setOpaque(true);
+            btnItemColor.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            btnItemColor.setPreferredSize(new Dimension(40, 40));
+            btnItemColor.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     currentColor = ((JButton) e.getSource()).getBackground();
                     btnCurrentColor.setBackground(currentColor);
                 }
             });
-            defaultColorPanel.add(btnDefaultColors);
+            listColorPanel.add(btnItemColor);
         }
 
+        // Edit color
         JPanel editColorPanel = new JPanel();
-        colorPanel.add(editColorPanel, BorderLayout.EAST);
+        fixColorPanel.add(editColorPanel, BorderLayout.EAST);
         editColorPanel.setLayout(new BorderLayout());
 
         JLabel lblEditColor = new JLabel("      Edit");
         editColorPanel.add(lblEditColor, BorderLayout.SOUTH);
 
-        JPanel marginCC2Panel = new JPanel();
-        marginCC2Panel.setPreferredSize(new Dimension(60, 0));
-        editColorPanel.add(marginCC2Panel, BorderLayout.CENTER);
+        JPanel editColorSquarePanel = new JPanel();
+        editColorSquarePanel.setPreferredSize(new Dimension(60, 60));
+        editColorPanel.add(editColorSquarePanel, BorderLayout.CENTER);
 
-        JButton btnEditColor = new JButton();
-        marginCC2Panel.add(btnEditColor);
+        btnEditColor = new JButton();
+        editColorSquarePanel.add(btnEditColor);
         btnEditColor.setBorderPainted(false);
         btnEditColor.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnEditColor.addActionListener(new ActionListener() {
@@ -261,6 +268,7 @@ public class WhiteBoardWindow {
         btnEditColor.setOpaque(true);
         btnEditColor.setPreferredSize(new Dimension(50, 50));
 
+        // Create thickness panel
         JPanel thicknessPanel = new JPanel();
         thicknessPanel.setBorder(new TitledBorder(null, "Thickness", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         thicknessPanel.setPreferredSize(new Dimension(80, 0));
