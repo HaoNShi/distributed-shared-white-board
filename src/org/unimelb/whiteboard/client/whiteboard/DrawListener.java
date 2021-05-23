@@ -74,7 +74,8 @@ public class DrawListener extends MouseAdapter implements ActionListener {
             myShape = currentFreeDraw;
             currentFreeDraw = null;
         } else if (toolName.equals("text")) {
-            String text = JOptionPane.showInputDialog(wbv.getFrame(), "Text:");
+        	ImageIcon TextIcon = new ImageIcon("images/Text1.png");
+            String text = (String) JOptionPane.showInputDialog(wbv.getFrame(), "Input your content:", "Text", JOptionPane.INFORMATION_MESSAGE, TextIcon, null, null);
             if (text != null && !text.equals("")) {
                 myShape = new MyText(endP, text, thickness * 10, color);
             }

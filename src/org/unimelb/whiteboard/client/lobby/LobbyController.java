@@ -97,7 +97,7 @@ public class LobbyController {
 
             ui.scrollPane.setPreferredSize(new Dimension(0, (i + 2) * 70));
             JPanel temp = new JPanel();
-            temp.setBounds(5, (i + 1) * 70, 230, 70);
+            temp.setBounds(0, (i + 1) * 50, 300, 50);
             temp.setLayout(new GridLayout(1, 0, 5, 5));
             currentPanel = temp;
             ui.scrollPane.add(temp);
