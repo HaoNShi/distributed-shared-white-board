@@ -15,6 +15,7 @@ public class LobbyWindow {
     protected JTextField hostNameTextField;
 
     protected JButton btnCreateRoom;
+    protected JPanel roomsListPanel;
     protected JPanel firstPanel;
     protected JPanel blankPanel;
     protected JScrollPane scrollPane;
@@ -92,17 +93,21 @@ public class LobbyWindow {
         frame = new JFrame();
         frame.setResizable(false);
         frame.setTitle("Lobby");
-        frame.setBounds(100, 100, 450, 300);
+        frame.setBounds(100, 100, 600, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addWindowListener(new LobbyCloseListener(client));
         frame.setMinimumSize(new Dimension(600, 500));
         frame.getContentPane().setLayout(null);
 
+        roomsListPanel = new JPanel();
         scrollPane = new JScrollPane();
-        scrollPane.setBounds(0, 0, 596, 372);
+        scrollPane.setBounds(0, 0, 583, 370);
+        scrollPane.setPreferredSize(new Dimension(583, 370));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         frame.getContentPane().add(scrollPane);
+        scrollPane.setViewportView(roomsListPanel);
+        roomsListPanel.setLayout(null);
 
         // FirstPanel In RoomList Panel INIT
         firstPanel = new JPanel();

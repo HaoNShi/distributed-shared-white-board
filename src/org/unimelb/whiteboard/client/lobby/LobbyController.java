@@ -97,12 +97,12 @@ public class LobbyController {
             ui.roomsBtnVec.add(tempBtn);
 
             if (i % 2 != 0) {
-                ui.scrollPane.setPreferredSize(new Dimension(0, (i / 2 + 2) * 170));
+                ui.roomsListPanel.setPreferredSize(new Dimension(0, (i / 2 + 2) * 170));
                 JPanel temp = new JPanel();
                 temp.setBounds(5, (i / 2 + 1) * 170, 570, 160);
                 temp.setLayout(new GridLayout(1, 2, 5, 0));
                 currentPanel = temp;
-                ui.scrollPane.add(temp);
+                ui.roomsListPanel.add(temp);
             }
 
             currentPanel.add(tempBtn);
@@ -126,12 +126,12 @@ public class LobbyController {
     }
 
     protected void refreshRoomsListPanel() {
-        ui.scrollPane.removeAll();
-        ui.scrollPane.setPreferredSize(new Dimension(0, 170));
+        ui.roomsListPanel.removeAll();
+        ui.roomsListPanel.setPreferredSize(new Dimension(0, 170));
         ui.firstPanel.removeAll();
-        ui.scrollPane.revalidate();
-        ui.scrollPane.repaint();
-        ui.scrollPane.add(ui.firstPanel);
+        ui.roomsListPanel.revalidate();
+        ui.roomsListPanel.repaint();
+        ui.roomsListPanel.add(ui.firstPanel);
         ui.firstPanel.add(ui.btnCreateRoom);
     }
 
@@ -141,12 +141,12 @@ public class LobbyController {
         int i = 0;
         for (JButton btn : ui.roomsBtnVec) {
             if (i % 2 != 0) {
-                ui.scrollPane.setPreferredSize(new Dimension(0, (i / 2 + 2) * 170));
+                ui.roomsListPanel.setPreferredSize(new Dimension(0, (i / 2 + 2) * 170));
                 JPanel temp = new JPanel();
                 temp.setBounds(5, (i / 2 + 1) * 170, 570, 160);
                 temp.setLayout(new GridLayout(1, 2, 5, 0));
                 currentPanel = temp;
-                ui.scrollPane.add(temp);
+                ui.roomsListPanel.add(temp);
             }
             String[] roomInfo = btn.getText().split(" - ");
             if ((ui.roomNameTextField.getText().equals(roomInfo[1]) || ui.roomNameTextField.getText().equals(""))
