@@ -45,7 +45,6 @@ public class ServerWindow {
 
         addressLabel = new JLabel("<html><body>Address: " + address + "&emsp &emsp &emsp &emsp &emsp &emsp &emsp Port: " + port + "</body></html>");
         addressLabel.setBounds(20, 18, 400, 32);
-        addressLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         frame.getContentPane().add(addressLabel);
 
         logArea = new JTextArea();

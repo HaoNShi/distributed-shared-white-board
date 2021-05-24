@@ -93,12 +93,12 @@ public class LobbyController {
             });
             ui.roomsBtnVec.add(tempBtn);
 
-            ui.scrollPane.setPreferredSize(new Dimension(0, (i + 2) * 70));
+            ui.roomsListPanel.setPreferredSize(new Dimension(0, (i + 2) * 70));
             JPanel temp = new JPanel();
             temp.setBounds(0, (i + 1) * 50, 285, 50);
             temp.setLayout(new GridLayout(1, 0, 5, 5));
             currentPanel = temp;
-            ui.scrollPane.add(temp);
+            ui.roomsListPanel.add(temp);
 
             currentPanel.add(tempBtn);
             i++;
@@ -118,12 +118,12 @@ public class LobbyController {
     }
 
     protected void refreshRoomsListPanel() {
-        ui.scrollPane.removeAll();
-        ui.scrollPane.setPreferredSize(new Dimension(0, 170));
+        ui.roomsListPanel.removeAll();
+        ui.roomsListPanel.setPreferredSize(new Dimension(0, 170));
         ui.firstPanel.removeAll();
-        ui.scrollPane.revalidate();
-        ui.scrollPane.repaint();
-        ui.scrollPane.add(ui.firstPanel);
+        ui.roomsListPanel.revalidate();
+        ui.roomsListPanel.repaint();
+        ui.roomsListPanel.add(ui.firstPanel);
         ui.firstPanel.add(ui.btnCreateRoom);
     }
 

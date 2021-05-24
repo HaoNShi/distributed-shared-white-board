@@ -13,6 +13,7 @@ public class LobbyWindow {
     protected JFrame frame;
 
     protected JButton btnCreateRoom;
+    protected JPanel roomsListPanel;
     protected JPanel firstPanel;
     protected JPanel blankPanel;
     protected JScrollPane scrollPane;
@@ -93,11 +94,14 @@ public class LobbyWindow {
         frame.getContentPane().setLayout(null);
         frame.setLocationRelativeTo(null);
 
+        roomsListPanel = new JPanel();
         scrollPane = new JScrollPane();
         scrollPane.setBounds(0, 0, 285, 400);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         frame.getContentPane().add(scrollPane);
+        scrollPane.setViewportView(roomsListPanel);
+        roomsListPanel.setLayout(null);
 
         // FirstPanel In RoomList Panel INIT
         firstPanel = new JPanel();
