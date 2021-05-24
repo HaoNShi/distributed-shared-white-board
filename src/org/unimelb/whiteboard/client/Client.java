@@ -31,7 +31,7 @@ public class Client {
     private String ip = "127.0.0.1";
     private String userId = "";
     private String serverIp = "";
-    private int serverPort = -1;
+    private int serverPort = 8080;
     private SharedWhiteBoard sharedWhiteBoard = null;
     private int registryPort;
     private Registry registry;
@@ -40,16 +40,30 @@ public class Client {
     private IRemoteDoor tempRemoteDoor;
     private String CurrentSavePath;
 
-    public Client() {
+    public Client(int port) {
         try {
-            init();
+            init(port);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public Client() {
+        this(8080);
+    }
+
     public static void main(String[] args) {
-        Client client = new Client();
+        Client client = null;
+        if (args.length == 1) {
+            if (Integer.parseInt(args[0]) <= 1000 || Integer.parseInt(args[0]) >= 30000) {
+                System.out.println("Port number should be between 1000 and 30000!");
+                System.exit(-1);
+            } else {
+                client = new Client(Integer.parseInt(args[0]));
+            }
+        } else {
+            client = new Client();
+        }
         client.run();
     }
 
@@ -268,8 +282,9 @@ public class Client {
         this.CurrentSavePath = path;
     }
 
-    private void init() {
+    private void init(int port) {
         initRMI();
+        this.serverPort = port;
         loginWindow = new LoginWindow(this);
     }
 

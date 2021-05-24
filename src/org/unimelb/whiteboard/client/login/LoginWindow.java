@@ -96,7 +96,7 @@ public class LoginWindow {
         frame.getContentPane().add(addressTextField);
 
         portTextField = new JTextField();
-        portTextField.setText("8080");
+        portTextField.setText(String.valueOf(client.getServerPort()));
         portTextField.setBounds(108, 60, 180, 26);
         portTextField.setColumns(10);
         frame.getContentPane().add(portTextField);

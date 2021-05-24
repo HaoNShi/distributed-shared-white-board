@@ -43,8 +43,8 @@ public class Server {
         try {
             Server server = null;
             if (args.length == 1) {
-                if (Integer.parseInt(args[0]) <= 1024 || Integer.parseInt(args[0]) >= 49151) {
-                    System.out.println("Invalid Port Number: Port number should be between 1024 and 49151!");
+                if (Integer.parseInt(args[0]) <= 1000 || Integer.parseInt(args[0]) >= 30000) {
+                    System.out.println("Port number should be between 1000 and 30000!");
                     System.exit(-1);
                 } else {
                     server = new Server(Integer.parseInt(args[0]));

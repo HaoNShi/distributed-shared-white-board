@@ -83,7 +83,7 @@ public class ClientListScrollPanel extends JPanel {
 
         // The user list should be create after the control panel.
         userList = new JList<>();
-        userList.setForeground(Color.black);
+        userList.setFont(new Font("Arial", Font.PLAIN, 12));
         userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         // select client(s)
         userList.addListSelectionListener(new ListSelectionListener() {
