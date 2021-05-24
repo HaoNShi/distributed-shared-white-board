@@ -50,7 +50,4 @@ public class FileOpenListener implements ActionListener {
         }
     }
 
-    protected String getImagePath() {
-        return currentPath;
-    }
 }

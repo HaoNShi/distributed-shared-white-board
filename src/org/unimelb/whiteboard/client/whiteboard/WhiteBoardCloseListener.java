@@ -1,8 +1,7 @@
-package org.unimelb.whiteboard.client.util;
+package org.unimelb.whiteboard.client.whiteboard;
 
 import org.unimelb.whiteboard.client.Client;
 import org.unimelb.whiteboard.client.user.UserManager;
-import org.unimelb.whiteboard.client.whiteboard.PaintManager;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

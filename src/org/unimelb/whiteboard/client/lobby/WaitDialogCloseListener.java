@@ -1,6 +1,4 @@
-package org.unimelb.whiteboard.client.util;
-
-import org.unimelb.whiteboard.client.lobby.LobbyController;
+package org.unimelb.whiteboard.client.lobby;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
